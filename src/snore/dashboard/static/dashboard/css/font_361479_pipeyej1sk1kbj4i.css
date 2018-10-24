@@ -1,0 +1,77 @@
+﻿
+@font-face {font-family: "be";
+  src: url('../fonts/font_361479_pipeyej1sk1kbj4i.eot'); /* IE9*/
+  src: url('../fonts/font_361479_pipeyej1sk1kbj4i.eot') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/635a157822974bcbbbe57724d6da0188.woff') format('woff'),
+  url('../fonts/font_361479_pipeyej1sk1kbj4i.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../fonts/font_361479_pipeyej1sk1kbj4i.svg') format('svg'); /* iOS 4.1- */
+}
+
+.be {
+  font-family:"be" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.be-gouwu:before { content: "\e603"; }
+
+.be-marketingfilling:before { content: "\e613"; }
+
+.be-view1:before { content: "\e602"; }
+
+.be-message:before { content: "\eb15"; }
+
+.be-publish:before { content: "\e660"; }
+
+.be-stsina:before { content: "\e638"; }
+
+.be-infographic:before { content: "\e637"; }
+
+.be-pic:before { content: "\e60d"; }
+
+.be-hot1:before { content: "\e619"; }
+
+.be-iconmoban-copy:before { content: "\e612"; }
+
+.be-qq:before { content: "\e624"; }
+
+.be-iconcooperate:before { content: "\e620"; }
+
+.be-community:before { content: "\e601"; }
+
+.be-news:before { content: "\e607"; }
+
+.be-research:before { content: "\e63e"; }
+
+.be-dibulianxiwomen01:before { content: "\e608"; }
+
+.be-manager:before { content: "\e604"; }
+
+.be-tag:before { content: "\e605"; }
+
+.be-ego-blog:before { content: "\e632"; }
+
+.be-view:before { content: "\e6b4"; }
+
+.be-market:before { content: "\e636"; }
+
+.be-menu:before { content: "\e680"; }
+
+.be-caijing:before { content: "\e611"; }
+
+.be-home:before { content: "\e6b7"; }
+
+.be-new:before { content: "\e600"; }
+
+.be-aboutus:before { content: "\e62b"; }
+
+.be-keji:before { content: "\e635"; }
+
+.be-dianshang:before { content: "\e634"; }
+
+.be-beauty:before { content: "\e610"; }
+
+.be-view2:before { content: "\e759"; }
+

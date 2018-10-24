@@ -1,0 +1,16 @@
+{% load fullurl %}
+
+<footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info">
+        <p style="text-align: center; color:#ccc">Copyright © 2016-{{ year }}
+            <a style="color:#ccc" href="{% fullurl 'dashboard:index' %}">微商代理网</a> All Rights Reserved
+            -<a style="color:#ccc" title="map" href="{% fullurl 'django.contrib.sitemaps.views.sitemap' %}"> 网站地图  </a>
+        </p>
+        <p style="text-align: center; color:#ccc">
+            微商代理网为你提供各行业最优质的微商货源大全信息-粤ICP备18112723号-1
+        </p>
+        <p style="text-align: center;">
+            <span style="color: #ccc;">本站货源均来自用户投稿，不代表本站立场，本站不承担任何由内容提供商发布信息所引起的争议和法律责任！</span>。
+        </p>
+    </div><!-- .site-info -->
+</footer><!-- .site-footer -->

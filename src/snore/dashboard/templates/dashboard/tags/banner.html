@@ -1,0 +1,79 @@
+{% load fullurl %}
+<header id="masthead" class="site-header">
+    <div id="header-main" class="header-main">
+        <nav id="top-header">
+            <div class="top-nav">
+                <div id="user-profile">
+                    <div class="user-login"><i class="be be-personoutline"></i>欢迎访问止鼾网</div>
+                    <div class="clear"></div>
+                </div>
+                <div class="menu-%e9%a1%b6%e9%83%a8-container">
+                    <ul id="menu-%e9%a1%b6%e9%83%a8" class="top-menu">
+                        <li id="menu-item-125" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-125"><a href="http://www.qugood.com/aboutus.html"><i class="be be-aboutus"></i><span class="font-text">关于我们</span></a></li>
+                        <li id="menu-item-6691" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6691"><a href="http://www.qugood.com/contactus.html"><i class="be be-dibulianxiwomen01"></i><span class="font-text">联系我们</span></a></li>
+                        <li id="menu-item-3533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3533"><a href="http://www.qugood.com/hezuo.html"><i class="be be-iconcooperate"></i><span class="font-text">商务合作</span></a></li>
+                        <li id="menu-item-1478" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1478"><a href="http://www.qugood.com/baodao.html"><i class="be be-publish"></i><span class="font-text">寻求报道</span></a></li>
+                        <li id="menu-item-126" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-126"><a href="http://www.qugood.com/liuyan.html"><i class="be be-message"></i><span class="font-text">在线留言</span></a></li>
+                        <li id="menu-item-5746" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5746"><a href="http://www.qugood.com/tag.html"><i class="be be-tag"></i><span class="font-text">热门标签</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav><!-- #top-header -->
+        <div id="menu-box">
+            <div id="top-menu">
+                <span class="nav-search"></span>
+                <span class="mobile-login"><a href="#login" id="login-mobile" ><i class="be be-timerauto"></i></a></span>
+                <div class="logo-site">
+                    <h1 class="site-title">
+													<a href="http://www.qugood.com/"><img src="static/picture/logo.png" title="趣果网|品牌营销新媒体。" alt="趣果网|品牌营销新媒体。" rel="home" /><span class="site-name">趣果网|品牌营销新媒体。</span></a>
+											</h1>
+                </div><!-- .logo-site -->
+                <div id="site-nav-wrap">
+                    <div id="sidr-close"><a href="#sidr-close" class="toggle-sidr-close">×</a></div>
+                    <div id="sidr-menu">
+                        <div class="toggle-sidr-menu">MENU</a></div>
+                    </div>
+                    <nav id="site-nav" class="main-nav">
+                        <a href="#sidr-main" id="navigation-toggle" class="bars"><i class="be be-menu"></i></a>
+                        <div class="menu-%e8%b6%a3%e6%9e%9c%e7%bd%91-container">
+                            <ul id="menu-%e8%b6%a3%e6%9e%9c%e7%bd%91" class="down-menu nav-menu">
+                                <li id="menu-item-587"  class="imenu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-home menu-item-587">
+                                    <a href="{% fullurl 'dashboard:index' %}"><i class="be be-home"></i><span class="font-text">首页</span></a>
+                                </li>
+                                {% for category in categorys %}
+                                    <li id="menu-item-{{ category.id }}" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-{{ category.id }}">
+                                      {% if category.link  %}
+                                          <a href="{{ category.link }}" rel=”nofollow” target="_blank">
+                                              <i class="{{ category.icon }}"></i><span class="font-text">{{ category.name }}</span>
+                                          </a>
+                                      {% else %}
+                                          <a href="{% buildfullurl category.get_absolute_url %}">
+                                              <i class="{{ category.icon }}"></i><span class="font-text">{{ category.name }}</span>
+                                          </a>
+                                      {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </nav><!-- #site-nav -->
+                </div><!-- #site-nav-wrap -->
+                <div class="clear"></div>
+            </div><!-- #top-menu -->
+        </div><!-- #menu-box -->
+    </div><!-- #menu-box -->
+</header><!-- #masthead -->
+
+<div id="search-main">
+    <div class="searchbar">
+      {# <form method="get" id="searchform" action="{% fullurl 'haystack_search' %}"> #}
+        <form method="get" id="searchform" action="">
+            <span class="search-input">
+                <input type="text" value="" name="q" id="s" placeholder="输入搜索内容" required />
+                <button type="submit" id="searchsubmit"><i class="be be-search"></i></button>
+            </span>
+        </form>
+    </div>
+    <div class="clear"></div>
+</div>
+
+

@@ -1,7 +1,6 @@
 from django import template
 
-from dashboard.models import Category
-
+from dashboard.models import Category, Article, Tag
 
 register = template.Library()
 
@@ -36,46 +35,27 @@ def load_sidebar_tag():
     '''
     加载侧边栏 标签
     '''
-    # tags = Tag.objects.all()
-    tags = ""
+    tags = Tag.objects.all()
     return {
         'sidebar_tags': tags,
     }
 
-@register.inclusion_tag('dashboard/tags/sidebar_new_goods.html')
-def load_sidebar_flow_info():
+@register.inclusion_tag('dashboard/tags/sidebar_hot.html')
+def load_sidebar_hot():
     '''
-    加载首页侧边栏 最新货源
+    加载首页侧边栏 热门文章
     '''
-    # articles = Article.published\
-    #     .filter(category__is_goods=1, ad_property=0)[:12]
-    articles = ""
     return {
-        'sidebar_flow_info': [{'id': num+1, 'url': info.get_absolute_url, 'title': info.title}
-                              for num, info in enumerate(articles)],
+        'hot_articles': Article.published.filter(ad_property=0).order_by('-views')[:10],
     }
 
-@register.inclusion_tag('dashboard/tags/sidebar_recomm.html')
-def load_sidebar_recomm():
+@register.inclusion_tag('dashboard/tags/sidebar_best_recomm.html')
+def load_sidebar_best_recomm():
     '''
-    加载首页侧边栏 本站推荐
+    加载首页侧边栏 优质推荐
     '''
-    # articles = Article.published.filter(ad_property=3)[:7]
-    articles = ""
     return {
-        'recomms': articles,
-    }
-
-@register.inclusion_tag('dashboard/tags/sidebar_source_goods.html')
-def load_sidebar_source_goods():
-    '''
-    加载首页侧边栏 热门货源
-    '''
-    # articles = Article.published.filter(ad_property=0, category__is_goods=1)\
-    #     .order_by('-views')[:7]
-    articles = ""
-    return {
-        'goods': articles,
+        'best_articles': Article.published.filter(ad_property=4)[:10]
     }
 
 @register.inclusion_tag('dashboard/tags/footer.html')

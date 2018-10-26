@@ -1,4 +1,5 @@
 {% extends 'share_layout/base.html' %}
+{% load dashboard_extras %}
 {% load fullurl %}
 
 {% block header %}
@@ -7,10 +8,6 @@
     <meta name="keywords" content="品牌营销,品牌出海,品牌口号,品牌新闻,品牌策划,网络营销,电商新闻,跨境电商,新零售" />
     <!--
     <link rel='stylesheet' id='BEEPRESSCSS-css' href='static/css/beepress.css' type='text/css' media='screen' />
-    <link rel='stylesheet' id='BEEPRESSIMAGECSS-css' href='static/css/beepress-image.css' type='text/css' media='screen' />
-    <link rel='stylesheet' id='begin-style-css' href='static/css/style.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='fonts-css' href='static/css/fonts.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='iconfontd-css' href='static/css/font_361479_pipeyej1sk1kbj4i.css' type='text/css' media='all' />
     <script type='text/javascript' src='static/js/jquery.min.js'></script>
     <script type='text/javascript' src='static/js/player.js'></script>
     <script type='text/javascript'>
@@ -44,268 +41,55 @@
                 <main id="main" class="site-main" role="main">
                     <div id="slideshow" class="wow fadeInUp" data-wow-delay="0.3s">
                         <ul class="rslides" id="slider">
-                            <li>
-                                <a href="http://www.qugood.com/article/22553.html" target="_blank" rel="external nofollow"><img src="static/picture/googlecloud.png" alt="谷歌云，入华难？" /></a>
-                                <p class="slider-caption">谷歌云，入华难？</p>
-                            </li>
-                            <li>
-                                <a href="http://www.qugood.com/article/22262.html" target="_blank" rel="external nofollow"><img src="static/picture/walmart.jpg" alt="2018年沃尔玛电商平台入驻最全卖家攻略：开户、收费、物流及营销" /></a>
-                                <p class="slider-caption">2018年沃尔玛电商平台入驻最全卖家攻略：开户、收费、物流及营销</p>
-                            </li>
-                            <li>
-                                <a href="http://www.qugood.com/article/21853.html" target="_blank" rel="external nofollow"><img src="static/picture/yimei.jpg" alt="《新氧2018年医美行业白皮书》&#8211;医美将成为00后的日常生活方式" /></a>
-                                <p class="slider-caption">《新氧2018年医美行业白皮书》&#8211;医美将成为00后的日常生活方式</p>
-                            </li>
+                        {% for ad in ad_left_up_round %}
+                            {% if ad.link  %}
+                                <li>
+                                    <a href="{{ ad.link }}" rel=”nofollow” target="_blank" rel="bookmark">
+                                        <img src="{% buildfullurl ad.image_url %}" alt="{{ ad.title }}" />
+                                    </a>
+                                    <p class="slider-caption">{{ ad.title }}</p>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a href="{% buildfullurl ad.get_absolute_url %}" rel="bookmark"><img src="{% buildfullurl ad.image_url %}" alt="{{ ad.title }}" /></a>
+                                    <p class="slider-caption">{{ ad.title }}</p>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
                         </ul>
                     </div>
-                    <div class="cms-news-grid">
-                        <div class="marked-ico wow fadeIn" data-wow-delay="0.9s">推荐阅读</div>
-                        <article id="post-22745" class="wow fadeInUp post-22745 post type-post status-publish format-standard hentry category-internet tag-3106 ghi" data-wow-delay="0.3s">
-                            <figure class="thumbnail">
-                                <a href="http://www.qugood.com/article/22745.html"><img src="static/picture/timthumb.php" alt="联想手机吹响反攻号角，“诺曼底计划”未来要剑指何方？" /></a> </figure>
-                            <header class="entry-header">
-                                <h2 class="entry-title"><a href="http://www.qugood.com/article/22745.html" rel="bookmark">联想手机吹响反攻号角，“诺曼底计划”未来要剑指何方？</a></h2>
-                            </header>
-                            <div class="entry-content">
-                                <div class="archive-content">
-                                    ​ 2018年10月16日，联想在印度新德里举行了“Lenovo Ki... </div>
-                                <span class="entry-meta">
-					<span class="date">10月17日</span><span class="views"><i class="be be-eye"></i> 75</span><span class="comment"><a href="http://www.qugood.com/article/22745.html#respond" rel="external nofollow"><span class="no-comment"><i class="be be-speechbubble"></i> 发表评论</span></a></span> </span>
-                                <div class="clear"></div>
-                            </div>
-                        </article>
-                        <article id="post-22706" class="wow fadeInUp post-22706 post type-post status-publish format-standard hentry category-ai tag-ai ghi" data-wow-delay="0.3s">
-                            <figure class="thumbnail">
-                                <a href="http://www.qugood.com/article/22706.html"><img src="static/picture/timthumb.php" alt="三座大山横亘在前，AI医疗企业何时能盈利？" /></a> </figure>
-                            <header class="entry-header">
-                                <h2 class="entry-title"><a href="http://www.qugood.com/article/22706.html" rel="bookmark">三座大山横亘在前，AI医疗企业何时能盈利？</a></h2>
-                            </header>
-                            <div class="entry-content">
-                                <div class="archive-content">
-                                    ​ 近年来，AI惊动了各个领域，成为一种新的趋势，而且AI的东风早已吹... </div>
-                                <span class="entry-meta">
-					<span class="date">10月15日</span><span class="views"><i class="be be-eye"></i> 73</span><span class="comment"><a href="http://www.qugood.com/article/22706.html#respond" rel="external nofollow"><span class="no-comment"><i class="be be-speechbubble"></i> 发表评论</span></a></span> </span>
-                                <div class="clear"></div>
-                            </div>
-                        </article>
-                        <article id="post-22662" class="wow fadeInUp post-22662 post type-post status-publish format-standard hentry category-xinlingshou tag-3286 ghi" data-wow-delay="0.3s">
-                            <figure class="thumbnail">
-                                <a href="http://www.qugood.com/article/22662.html"><img src="static/picture/timthumb.php" alt="新零售撞上消费降级，该怎么撬开消费者的钱包？" /></a> </figure>
-                            <header class="entry-header">
-                                <h2 class="entry-title"><a href="http://www.qugood.com/article/22662.html" rel="bookmark">新零售撞上消费降级，该怎么撬开消费者的钱包？</a></h2>
-                            </header>
-                            <div class="entry-content">
-                                <div class="archive-content">
-                                    ​ 道家经典著作《文子》有句话说得好：“苟利于民，不必法古；苟周于事，... </div>
-                                <span class="entry-meta">
-					<span class="date">10月10日</span><span class="views"><i class="be be-eye"></i> 111</span><span class="comment"><a href="http://www.qugood.com/article/22662.html#respond" rel="external nofollow"><span class="no-comment"><i class="be be-speechbubble"></i> 发表评论</span></a></span> </span>
-                                <div class="clear"></div>
-                            </div>
-                        </article>
-                        <article id="post-22592" class="wow fadeInUp post-22592 post type-post status-publish format-standard hentry category-xinlingshou tag-3275 ghi" data-wow-delay="0.3s">
-                            <figure class="thumbnail">
-                                <a href="http://www.qugood.com/article/22592.html"><img src="static/picture/timthumb.php" alt="从垂直到多元，聚美的昨日辉煌与今夕衰落" /></a> </figure>
-                            <header class="entry-header">
-                                <h2 class="entry-title"><a href="http://www.qugood.com/article/22592.html" rel="bookmark">从垂直到多元，聚美的昨日辉煌与今夕衰落</a></h2>
-                            </header>
-                            <div class="entry-content">
-                                <div class="archive-content">
-                                    ​ 前不久，聚美优品投资出品的电视剧《温暖的弦》在各大影视剧平台上热播... </div>
-                                <span class="entry-meta">
-					<span class="date">09月30日</span><span class="views"><i class="be be-eye"></i> 254</span><span class="comment"><a href="http://www.qugood.com/article/22592.html#comments" rel="external nofollow"><i class="be be-speechbubble"></i> 2</a></span> </span>
-                                <div class="clear"></div>
-                            </div>
-                        </article>
-                        <div class="clear"></div>
-                    </div>
-                    <article id="post-22797" class="wow fadeInUp post-22797 post type-post status-publish format-standard hentry category-xinlingshou tag-1423 ghi" data-wow-delay="0.3s">
+
+                    {% for article in new_articles %}
+                    <article id="post-{{ article.id }}" class="wow fadeInUp post-{{ article.id }} post type-post status-publish format-standard hentry category-xinlingshou tag-{{ article.id }} ghi" data-wow-delay="0.3s">
                         <figure class="thumbnail">
-                            <a href="http://www.qugood.com/article/22797.html"><img src="static/picture/timthumb.php" alt="社交、本地、移动化，新零售走向SoLoMo还需当心背后陷阱" /></a> <span class="cat"><a href="http://www.qugood.com/ec/xinlingshou/">新零售</a></span>
+                            <a href="{{ article.id }}"><img src="{{ article.image.url }}" alt="{{ article.title }}" /></a>
+                            <span class="cat"><a href="{{ article.get_absolute_url }}">{{ article.category.name }}</a></span>
                         </figure>
                         <header class="entry-header">
-                            <h2 class="entry-title"><a href="http://www.qugood.com/article/22797.html" rel="bookmark">社交、本地、移动化，新零售走向SoLoMo还需当心背后陷阱</a></h2>
+                            <h2 class="entry-title"><a href="{{ article.get_absolute_url }}" rel="bookmark">{{ article.title }}</a></h2>
                         </header><!-- .entry-header -->
                         <div class="entry-content">
-                            <div class="archive-content">
-                                ​ 零售趋于流量，无论是电商还是实体零售，流量多少可以直接影响零售的兴衰。 互联网时代的到来让网络零售红极一时，也是因为互联网拥有着巨大的流量。如今互联网不同往日，线上流量红利已逐渐见顶。从前瞻产业研... </div>
+                            <div class="archive-content">{{ article.content|striptags|slice:'120'|safe }}... </div>
                             <span class="title-l"></span>
                             <span class="new-icon"><i class="be be-new"></i></span>
                             <span class="entry-meta">
-					<span class="date">2小时前</span><span class="views"><i class="be be-eye"></i> 15</span><span class="comment"><a href="http://www.qugood.com/article/22797.html#respond" rel="external nofollow"><span class="no-comment"><i class="be be-speechbubble"></i> 发表评论</span></a></span> </span>
+                                <span class="date"><i class="be be-calendar2"></i> {{ article.update_time|date:"m/j" }}</span>
+                                <span class="views"><i class="be be-eye"></i> {{ article.views }} views</span>
+                            </span>
                             <div class="clear"></div>
                         </div><!-- .entry-content -->
-                        <span class="entry-more"><a href="http://www.qugood.com/article/22797.html" rel="bookmark">阅读全文</a></span>
+                        <span class="entry-more"><a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">阅读全文</a></span>
                     </article><!-- #post -->
-                    <article id="post-22796" class="wow fadeInUp post-22796 post type-post status-publish format-standard hentry category-internet tag-3304 ghi" data-wow-delay="0.3s">
-                        <figure class="thumbnail">
-                            <a href="http://www.qugood.com/article/22796.html"><img src="static/picture/timthumb.php" alt="垂直内容电商通病难消，小红唇们路在何方？" /></a> <span class="cat"><a href="http://www.qugood.com/tech/internet/">互联网</a></span>
-                        </figure>
-                        <header class="entry-header">
-                            <h2 class="entry-title"><a href="http://www.qugood.com/article/22796.html" rel="bookmark">垂直内容电商通病难消，小红唇们路在何方？</a></h2>
-                        </header><!-- .entry-header -->
-                        <div class="entry-content">
-                            <div class="archive-content">
-                                ​ 正所谓爱美之心人皆有之，这句话说的一点都没有错。尤其随着人们生活水平的提高，人们对美的追求日益强烈。在这些爱美群体中，当代女性是主力军。女性消费带来的红利使得很多美妆内容电商开始疯狂滋长，主要代表... </div>
-                            <span class="title-l"></span>
-                            <span class="new-icon"><i class="be be-new"></i></span>
-                            <span class="entry-meta">
-					<span class="date">2小时前</span><span class="views"><i class="be be-eye"></i> 15</span><span class="comment"><a href="http://www.qugood.com/article/22796.html#respond" rel="external nofollow"><span class="no-comment"><i class="be be-speechbubble"></i> 发表评论</span></a></span> </span>
-                            <div class="clear"></div>
-                        </div><!-- .entry-content -->
-                        <span class="entry-more"><a href="http://www.qugood.com/article/22796.html" rel="bookmark">阅读全文</a></span>
-                    </article><!-- #post -->
-                    <div class="wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="ad-pc ad-site">
-                            <script async src="static/js/adsbygoogle.js"></script>
-                            <!-- 728x90, 创建于 10-6-13 -->
-                            <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-7278797641544376" data-ad-slot="7724421490"></ins>
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+                    {% if forloop.counter == 2 %}
+                        <div class="wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="ad-pc ad-site">
+                                 <a href="{{ ad_column.link }}" rel=”nofollow” target="_blank" rel="bookmark">
+                                     <img src="{% buildfullurl ad_column.image_url %}" alt="{{ ad_column.title }}" />
+                                 </a>
+                            </div>
                         </div>
-                    </div>
-                    <article id="post-22795" class="wow fadeInUp post-22795 post type-post status-publish format-standard hentry category-finance tag-918 ghi" data-wow-delay="0.3s">
-                        <figure class="thumbnail">
-                            <a href="http://www.qugood.com/article/22795.html"><img src="static/picture/timthumb.php" alt="宜人贷YEP技术、数据沉淀背后：金融科技迎来开放赋能时代" /></a> <span class="cat"><a href="http://www.qugood.com/finance/">财经热点</a></span>
-                        </figure>
-                        <header class="entry-header">
-                            <h2 class="entry-title"><a href="http://www.qugood.com/article/22795.html" rel="bookmark">宜人贷YEP技术、数据沉淀背后：金融科技迎来开放赋能时代</a></h2>
-                        </header><!-- .entry-header -->
-                        <div class="entry-content">
-                            <div class="archive-content">
-                                日前，“IFPI第十届金融科技决策者大会2018”在上海举办，宜人贷不仅入选了本届大会的“中国Fintech独角兽榜Top50”，推出的YEP共享平台也受到了众多金融机构的关注。从头部平台宜人贷全面开... </div>
-                            <span class="title-l"></span>
-                            <span class="new-icon"><i class="be be-new"></i></span>
-                            <span class="entry-meta">
-					<span class="date">2小时前</span><span class="views"><i class="be be-eye"></i> 12</span><span class="comment"><a href="http://www.qugood.com/article/22795.html#respond" rel="external nofollow"><span class="no-comment"><i class="be be-speechbubble"></i> 发表评论</span></a></span> </span>
-                            <div class="clear"></div>
-                        </div><!-- .entry-content -->
-                        <span class="entry-more"><a href="http://www.qugood.com/article/22795.html" rel="bookmark">阅读全文</a></span>
-                    </article><!-- #post -->
-                    <article id="post-22792" class="wow fadeInUp post-22792 post type-post status-publish format-standard hentry category-internet tag-3168 ghi" data-wow-delay="0.3s">
-                        <figure class="thumbnail">
-                            <a href="http://www.qugood.com/article/22792.html"><img src="static/picture/timthumb.php" alt="马蜂窝被“捅”背后：互联网江湖的原罪和暗战" /></a> <span class="cat"><a href="http://www.qugood.com/tech/internet/">互联网</a></span>
-                        </figure>
-                        <header class="entry-header">
-                            <h2 class="entry-title"><a href="http://www.qugood.com/article/22792.html" rel="bookmark">马蜂窝被“捅”背后：互联网江湖的原罪和暗战</a></h2>
-                        </header><!-- .entry-header -->
-                        <div class="entry-content">
-                            <div class="archive-content">
-                                ​刚刚过去的周末，并不宁静。 起因是微信上有一篇《估值175亿的马蜂窝，竟是一座僵尸和水军构成的鬼城？》迅速爆红，瞬间炸开了锅。这篇文章主要说的是，利用一些技术手段，并进行了详细的评论对比后，发现了马... </div>
-                            <span class="title-l"></span>
-                            <span class="new-icon"><i class="be be-new"></i></span>
-                            <span class="entry-meta">
-					<span class="date">8小时前</span><span class="views"><i class="be be-eye"></i> 18</span><span class="comment"><a href="http://www.qugood.com/article/22792.html#respond" rel="external nofollow"><span class="no-comment"><i class="be be-speechbubble"></i> 发表评论</span></a></span> </span>
-                            <div class="clear"></div>
-                        </div><!-- .entry-content -->
-                        <span class="entry-more"><a href="http://www.qugood.com/article/22792.html" rel="bookmark">阅读全文</a></span>
-                    </article><!-- #post -->
-                    <article id="post-22788" class="wow fadeInUp post-22788 post type-post status-publish format-standard hentry category-internet tag-2695 ghi" data-wow-delay="0.3s">
-                        <figure class="thumbnail">
-                            <a href="http://www.qugood.com/article/22788.html"><img src="static/picture/timthumb.php" alt="手游红海中，TapTap出路在哪里？" /></a> <span class="cat"><a href="http://www.qugood.com/tech/internet/">互联网</a></span>
-                        </figure>
-                        <header class="entry-header">
-                            <h2 class="entry-title"><a href="http://www.qugood.com/article/22788.html" rel="bookmark">手游红海中，TapTap出路在哪里？</a></h2>
-                        </header><!-- .entry-header -->
-                        <div class="entry-content">
-                            <div class="archive-content">
-                                ​ 逆水行舟，不进则退。 业界巨头Valve在近日宣布推行一项全新的政策——Steam站点许可计划，即允许玩家在这些授权的公共场所运行steam，并且可以下载访问自己原有的内容和授权场所提供的内容。业... </div>
-                            <span class="title-l"></span>
-                            <span class="new-icon"><i class="be be-new"></i></span>
-                            <span class="entry-meta">
-					<span class="date">12小时前</span><span class="views"><i class="be be-eye"></i> 20</span><span class="comment"><a href="http://www.qugood.com/article/22788.html#respond" rel="external nofollow"><span class="no-comment"><i class="be be-speechbubble"></i> 发表评论</span></a></span> </span>
-                            <div class="clear"></div>
-                        </div><!-- .entry-content -->
-                        <span class="entry-more"><a href="http://www.qugood.com/article/22788.html" rel="bookmark">阅读全文</a></span>
-                    </article><!-- #post -->
-                    <article id="post-22785" class="wow fadeInUp post-22785 post type-post status-publish format-standard hentry category-internet tag-3303 ghi" data-wow-delay="0.3s">
-                        <figure class="thumbnail">
-                            <a href="http://www.qugood.com/article/22785.html"><img src="static/picture/timthumb.php" alt="校园主战场失利，爱又米该如何服务好年轻人？" /></a> <span class="cat"><a href="http://www.qugood.com/tech/internet/">互联网</a></span>
-                        </figure>
-                        <header class="entry-header">
-                            <h2 class="entry-title"><a href="http://www.qugood.com/article/22785.html" rel="bookmark">校园主战场失利，爱又米该如何服务好年轻人？</a></h2>
-                        </header><!-- .entry-header -->
-                        <div class="entry-content">
-                            <div class="archive-content">
-                                近几年为互联网消费金融领域爆发的时期，《2017年中国消费信贷市场研究》显示，截至2017年10月份，中国居民消费信贷占全国金融机构各项贷款总规模比例约为24.8%，达到了30.6万亿元人民币,并且这... </div>
-                            <span class="title-l"></span>
-                            <span class="new-icon"><i class="be be-new"></i></span>
-                            <span class="entry-meta">
-					<span class="date">24小时前</span><span class="views"><i class="be be-eye"></i> 75</span><span class="comment"><a href="http://www.qugood.com/article/22785.html#respond" rel="external nofollow"><span class="no-comment"><i class="be be-speechbubble"></i> 发表评论</span></a></span> </span>
-                            <div class="clear"></div>
-                        </div><!-- .entry-content -->
-                        <span class="entry-more"><a href="http://www.qugood.com/article/22785.html" rel="bookmark">阅读全文</a></span>
-                    </article><!-- #post -->
-                    <article id="post-22782" class="wow fadeInUp post-22782 post type-post status-publish format-standard hentry category-internet tag-3302 ghi" data-wow-delay="0.3s">
-                        <figure class="thumbnail">
-                            <a href="http://www.qugood.com/article/22782.html"><img src="static/picture/timthumb.php" alt="即将IPO的宝宝树，如何保住自己的城池壁垒？" /></a> <span class="cat"><a href="http://www.qugood.com/tech/internet/">互联网</a></span>
-                        </figure>
-                        <header class="entry-header">
-                            <h2 class="entry-title"><a href="http://www.qugood.com/article/22782.html" rel="bookmark">即将IPO的宝宝树，如何保住自己的城池壁垒？</a></h2>
-                        </header><!-- .entry-header -->
-                        <div class="entry-content">
-                            <div class="archive-content">
-                                ​ 在香港上市制度改革之后，2018年的港股市场迎来了上市热潮，包括小米、美团点评、平安好医生、映客等众多明星企业都选择在港股上市，不久前，我国最大的母婴社区平台宝宝树也传来了即将赴港上市的消息。6月... </div>
-                            <span class="title-l"></span>
-                            <span class="new-icon"><i class="be be-new"></i></span>
-                            <span class="entry-meta">
-					<span class="date">10月22日</span><span class="views"><i class="be be-eye"></i> 22</span><span class="comment"><a href="http://www.qugood.com/article/22782.html#respond" rel="external nofollow"><span class="no-comment"><i class="be be-speechbubble"></i> 发表评论</span></a></span> </span>
-                            <div class="clear"></div>
-                        </div><!-- .entry-content -->
-                        <span class="entry-more"><a href="http://www.qugood.com/article/22782.html" rel="bookmark">阅读全文</a></span>
-                    </article><!-- #post -->
-                    <article id="post-22778" class="wow fadeInUp post-22778 post type-post status-publish format-standard hentry category-retail tag-1165 ghi" data-wow-delay="0.3s">
-                        <figure class="thumbnail">
-                            <a href="http://www.qugood.com/article/22778.html"><img src="static/picture/timthumb.php" alt="用宅购节当前哨战，京东到家为双十一暗中蓄力" /></a> <span class="cat"><a href="http://www.qugood.com/ec/retail/">零售电商</a></span>
-                        </figure>
-                        <header class="entry-header">
-                            <h2 class="entry-title"><a href="http://www.qugood.com/article/22778.html" rel="bookmark">用宅购节当前哨战，京东到家为双十一暗中蓄力</a></h2>
-                        </header><!-- .entry-header -->
-                        <div class="entry-content">
-                            <div class="archive-content">
-                                ​ 谁能想到，中国竟然有近10亿“懒宅人”。 据QuestMobile数据显示，截至2018年8月，“懒经济”用户MAU为1.35亿、“宅经济”用户MAU为8.34亿。 正是因为“懒宅经济”，餐饮外卖... </div>
-                            <span class="title-l"></span>
-                            <span class="new-icon"><i class="be be-new"></i></span>
-                            <span class="entry-meta">
-					<span class="date">10月22日</span><span class="views"><i class="be be-eye"></i> 29</span><span class="comment"><a href="http://www.qugood.com/article/22778.html#respond" rel="external nofollow"><span class="no-comment"><i class="be be-speechbubble"></i> 发表评论</span></a></span> </span>
-                            <div class="clear"></div>
-                        </div><!-- .entry-content -->
-                        <span class="entry-more"><a href="http://www.qugood.com/article/22778.html" rel="bookmark">阅读全文</a></span>
-                    </article><!-- #post -->
-                    <article id="post-22769" class="wow fadeInUp post-22769 post type-post status-publish format-standard hentry category-internet tag-3301 ghi" data-wow-delay="0.3s">
-                        <figure class="thumbnail">
-                            <a href="http://www.qugood.com/article/22769.html"><img src="static/picture/timthumb.php" alt="羽毛未丰，青少年体育培训平台的“成长烦恼”" /></a> <span class="cat"><a href="http://www.qugood.com/tech/internet/">互联网</a></span>
-                        </figure>
-                        <header class="entry-header">
-                            <h2 class="entry-title"><a href="http://www.qugood.com/article/22769.html" rel="bookmark">羽毛未丰，青少年体育培训平台的“成长烦恼”</a></h2>
-                        </header><!-- .entry-header -->
-                        <div class="entry-content">
-                            <div class="archive-content">
-                                ​ 近年来，为了让孩子们加强体育锻炼、培养广泛的兴趣爱好，越来越多的家长寻求于体育培训机构，足球、篮球、游泳、乒乓球等培训项目异常火爆。体育作为教育中不可或缺的一部分，有些地区已经把体育划为中考的重要... </div>
-                            <span class="title-l"></span>
-                            <span class="entry-meta">
-					<span class="date">10月20日</span><span class="views"><i class="be be-eye"></i> 52</span><span class="comment"><a href="http://www.qugood.com/article/22769.html#respond" rel="external nofollow"><span class="no-comment"><i class="be be-speechbubble"></i> 发表评论</span></a></span> </span>
-                            <div class="clear"></div>
-                        </div><!-- .entry-content -->
-                        <span class="entry-more"><a href="http://www.qugood.com/article/22769.html" rel="bookmark">阅读全文</a></span>
-                    </article><!-- #post -->
-                    <article id="post-22768" class="wow fadeInUp post-22768 post type-post status-publish format-standard hentry category-ai tag-ai ghi" data-wow-delay="0.3s">
-                        <figure class="thumbnail">
-                            <a href="http://www.qugood.com/article/22768.html"><img src="static/picture/timthumb.php" alt="信息流时代，AI能否让百度广告焕发第二春？" /></a> <span class="cat"><a href="http://www.qugood.com/tech/ai/">人工智能</a></span>
-                        </figure>
-                        <header class="entry-header">
-                            <h2 class="entry-title"><a href="http://www.qugood.com/article/22768.html" rel="bookmark">信息流时代，AI能否让百度广告焕发第二春？</a></h2>
-                        </header><!-- .entry-header -->
-                        <div class="entry-content">
-                            <div class="archive-content">
-                                ​ 前不久，百度发布了公司第二季度的财报，财报数据显示，百度广告业务第二季度营收达到211亿元，占总营收的81%，公司总营收同比增长了32%，净利润增长率也上涨了45%。这份较为满意的“成绩单”，也让... </div>
-                            <span class="title-l"></span>
-                            <span class="entry-meta">
-					<span class="date">10月20日</span><span class="views"><i class="be be-eye"></i> 69</span><span class="comment"><a href="http://www.qugood.com/article/22768.html#respond" rel="external nofollow"><span class="no-comment"><i class="be be-speechbubble"></i> 发表评论</span></a></span> </span>
-                            <div class="clear"></div>
-                        </div><!-- .entry-content -->
-                        <span class="entry-more"><a href="http://www.qugood.com/article/22768.html" rel="bookmark">阅读全文</a></span>
-                    </article><!-- #post -->
+                    {% endif %}
+                    {% endfor %}
                 </main><!-- .site-main -->
                 <nav id="nav-below">
                     <div class="nav-next"></div>
@@ -327,284 +111,22 @@
 
 {% block sidebar %}
             <div id="sidebar" class="widget-area all-sidebar">
-                <aside id="about-5" class="widget about wow fadeInUp" data-wow-delay="0.3s"><h3 class="widget-title"><span class="title-i"><span class="title-i-t"></span><span class="title-i-b"></span><span class="title-i-b"></span><span class="title-i-t"></span></span>关于本站</h3>
-                    <div id="feed_widget">
-                        <div class="feed-about">
-                            <div class="about-main">
-                                <div class="about-img">
-                                    <img src="static/picture/qrcode_for_gh_8e8256b8a448_430.jpg" alt="name"/>
-			</div>
-                                    <div class="about-name">趣果网</div>
-                                    <div class="about-the">品牌营销新媒体，专注于中国制造品牌升级。
-                                        QQ群：2799-13996</div>
-                                </div>
-                                <div class="clear"></div>
-                                <ul>
-                                    <li class="weixin">
-                                        <span class="tipso_style" id="tip-w" data-tipso='<span class="weixin-qr"><img src="static/picture/qrcode_for_gh_8e8256b8a448_430.jpg" alt=" weixin"/></span>'><a title="微信"><i class="be be-weixin"></i></a></span>
-                                    </li>
-                                    <li class="tqq"><a target=blank rel="external nofollow" href=http://wpa.qq.com/msgrd?V=3&uin=793651188&Site=QQ&Menu=yes title="QQ在线"><i class="be be-qq"></i></a></li>
-                                    <li class="tsina"><a title="" href="http://weibo.com/qugood" target="_blank" rel="external nofollow"><i class="be be-stsina"></i></a></li>
-                                    <li class="feed"><a title="" href="http://www.qugood.com/feed/" target="_blank" rel="external nofollow"><i class="be be-rss"></i></a></li>
-                                </ul>
-                                <div class="about-inf">
-                                    <span class="about-pn">文章 3894</span>
-                                    <span class="about-cn">留言 434</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                </aside>
-                <aside id="cx_tag_cloud-13" class="widget cx_tag_cloud wow fadeInUp" data-wow-delay="0.3s"><h3 class="widget-title"><span class="title-i"><span class="title-i-t"></span><span class="title-i-b"></span><span class="title-i-b"></span><span class="title-i-t"></span></span>热门话题</h3>
-                    <div id="tag_cloud_widget">
-                        <a href="http://www.qugood.com/tag/%e9%98%bf%e9%87%8c%e5%b7%b4%e5%b7%b4/" class="tag-cloud-link tag-link-138 tag-link-position-1" style="font-size: 14px;">阿里巴巴</a>
-                        <a href="http://www.qugood.com/tag/%e5%85%a8%e7%90%83%e5%8c%96/" class="tag-cloud-link tag-link-1014 tag-link-position-2" style="font-size: 14px;">全球化</a>
-                        <a href="http://www.qugood.com/tag/%e4%b8%80%e5%b8%a6%e4%b8%80%e8%b7%af/" class="tag-cloud-link tag-link-286 tag-link-position-3" style="font-size: 14px;">一带一路</a>
-                        <a href="http://www.qugood.com/tag/%e9%bb%84%e9%87%91-%e5%8e%9f%e6%b2%b9-%e5%88%86%e6%9e%90-%e8%a7%a3%e5%a5%97/" class="tag-cloud-link tag-link-2890 tag-link-position-4" style="font-size: 14px;">黄金 原油 分析 解套</a>
-                        <a href="http://www.qugood.com/tag/%e9%80%9f%e5%8d%96%e9%80%9a/" class="tag-cloud-link tag-link-340 tag-link-position-5" style="font-size: 14px;">速卖通</a>
-                        <a href="http://www.qugood.com/tag/ebay/" class="tag-cloud-link tag-link-441 tag-link-position-6" style="font-size: 14px;">eBay</a>
-                        <a href="http://www.qugood.com/tag/b2b/" class="tag-cloud-link tag-link-202 tag-link-position-7" style="font-size: 14px;">B2B</a>
-                        <a href="http://www.qugood.com/tag/%e9%98%bf%e9%87%8c/" class="tag-cloud-link tag-link-165 tag-link-position-8" style="font-size: 14px;">阿里</a>
-                        <a href="http://www.qugood.com/tag/%e8%81%82%e6%98%93%e9%93%ad%ef%bc%8cq1986672225%ef%bc%8cwx17362986452%ef%bc%8c%e7%8e%b0%e8%b4%a7%e9%bb%84%e9%87%91/" class="tag-cloud-link tag-link-2996 tag-link-position-9" style="font-size: 14px;">聂易铭，q1986672225，wx17362986452，现货黄金</a>
-                        <a href="http://www.qugood.com/tag/%e4%ba%9a%e9%a9%ac%e9%80%8a/" class="tag-cloud-link tag-link-188 tag-link-position-10" style="font-size: 14px;">亚马逊</a>
-                        <a href="http://www.qugood.com/tag/%e9%bb%84%e9%87%91%ef%bc%8c%e5%8e%9f%e6%b2%b9/" class="tag-cloud-link tag-link-3002 tag-link-position-11" style="font-size: 14px;">黄金，原油</a>
-                        <a href="http://www.qugood.com/tag/amazon/" class="tag-cloud-link tag-link-1785 tag-link-position-12" style="font-size: 14px;">amazon</a>
-                        <a href="http://www.qugood.com/tag/%e5%9b%bd%e9%99%85%e5%8c%96/" class="tag-cloud-link tag-link-990 tag-link-position-13" style="font-size: 14px;">国际化</a>
-                        <a href="http://www.qugood.com/tag/%e5%88%9b%e4%b8%9a/" class="tag-cloud-link tag-link-116 tag-link-position-14" style="font-size: 14px;">创业</a>
-                        <a href="http://www.qugood.com/tag/%e6%b5%b7%e6%b7%98/" class="tag-cloud-link tag-link-385 tag-link-position-15" style="font-size: 14px;">海淘</a>
-                        <a href="http://www.qugood.com/tag/%e9%bb%84%e9%87%91%ef%bc%8c%e5%8e%9f%e6%b2%b9%ef%bc%8c%e8%a7%a3%e5%a5%97%ef%bc%8c%e6%93%8d%e4%bd%9c%e5%bb%ba%e8%ae%ae/" class="tag-cloud-link tag-link-3062 tag-link-position-16" style="font-size: 14px;">黄金，原油，解套，操作建议</a>
-                        <a href="http://www.qugood.com/tag/kjds/" class="tag-cloud-link tag-link-205 tag-link-position-17" style="font-size: 14px;">跨境电商</a>
-                        <a href="http://www.qugood.com/tag/%e9%bb%84%e9%87%91-%e5%8e%9f%e6%b2%b9-%e7%ad%96%e7%95%a5-%e8%a7%a3%e5%a5%97-%e5%88%86%e6%9e%90/" class="tag-cloud-link tag-link-2993 tag-link-position-18" style="font-size: 14px;">黄金 原油 策略 解套 分析</a>
-                        <a href="http://www.qugood.com/tag/%e4%ba%9a%e9%a9%ac%e9%80%8a%e5%ba%97%e9%93%ba/" class="tag-cloud-link tag-link-1662 tag-link-position-19" style="font-size: 14px;">亚马逊店铺</a>
-                        <a href="http://www.qugood.com/tag/%e6%b5%b7%e5%a4%96%e5%b9%b6%e8%b4%ad/" class="tag-cloud-link tag-link-1198 tag-link-position-20" style="font-size: 14px;">海外并购</a>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="clear"></div>
-                </aside>
-                <aside id="zmtabs-2" class="widget widget_zm_tabs wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="zm-tabs-nav group tab-count-4"><span class="zm-tab tab-recent"><a><i class="be be-file"></i><span>最新文章</span></a></span><span class="zm-tab tab-popular"><a><i class="be be-favoriteoutline"></i><span>热评文章</span></a></span><span class="zm-tab tab-viewe"><a><i class="be be-eye"></i><span>热门文章</span></a></span><span class="zm-tab tab-comments"><a><i class="be be-speechbubble"></i><span>最近留言</span></a></span></div>
-                    <div class="zm-tabs-container">
-                        <div class="new_cat">
-                            <ul id="tab-recent-2" class="zm-tab group thumbs-enabled" style="display:block;">
-                                <h4>最新文章</h4>
-                                <li>
-                                    <span class="thumbnail">
-								<a href="http://www.qugood.com/article/22797.html"><img src="static/picture/timthumb.php" alt="社交、本地、移动化，新零售走向SoLoMo还需当心背后陷阱" /></a>							</span>
-                                    <span class="new-title"><a href="http://www.qugood.com/article/22797.html" rel="bookmark">社交、本地、移动化，新零售走向SoLoMo还需当心背后陷阱</a></span>
-                                    <span class="date">10/23</span>
-                                    <span class="views"><i class="be be-eye"></i> 15</span> </li>
-                                <li>
-                                    <span class="thumbnail">
-								<a href="http://www.qugood.com/article/22796.html"><img src="static/picture/timthumb.php" alt="垂直内容电商通病难消，小红唇们路在何方？" /></a>							</span>
-                                    <span class="new-title"><a href="http://www.qugood.com/article/22796.html" rel="bookmark">垂直内容电商通病难消，小红唇们路在何方？</a></span>
-                                    <span class="date">10/23</span>
-                                    <span class="views"><i class="be be-eye"></i> 15</span> </li>
-                                <li>
-                                    <span class="thumbnail">
-								<a href="http://www.qugood.com/article/22795.html"><img src="static/picture/timthumb.php" alt="宜人贷YEP技术、数据沉淀背后：金融科技迎来开放赋能时代" /></a>							</span>
-                                    <span class="new-title"><a href="http://www.qugood.com/article/22795.html" rel="bookmark">宜人贷YEP技术、数据沉淀背后：金融科技迎来开放赋能时代</a></span>
-                                    <span class="date">10/23</span>
-                                    <span class="views"><i class="be be-eye"></i> 12</span> </li>
-                                <li>
-                                    <span class="thumbnail">
-								<a href="http://www.qugood.com/article/22792.html"><img src="static/picture/timthumb.php" alt="马蜂窝被“捅”背后：互联网江湖的原罪和暗战" /></a>							</span>
-                                    <span class="new-title"><a href="http://www.qugood.com/article/22792.html" rel="bookmark">马蜂窝被“捅”背后：互联网江湖的原罪和暗战</a></span>
-                                    <span class="date">10/23</span>
-                                    <span class="views"><i class="be be-eye"></i> 18</span> </li>
-                                <li>
-                                    <span class="thumbnail">
-								<a href="http://www.qugood.com/article/22788.html"><img src="static/picture/timthumb.php" alt="手游红海中，TapTap出路在哪里？" /></a>							</span>
-                                    <span class="new-title"><a href="http://www.qugood.com/article/22788.html" rel="bookmark">手游红海中，TapTap出路在哪里？</a></span>
-                                    <span class="date">10/23</span>
-                                    <span class="views"><i class="be be-eye"></i> 20</span> </li>
-                            </ul>
-                            <!--/.zm-tab-->
-                        </div>
-                        <div class="new_cat">
-                            <ul id="tab-popular-2" class="zm-tab group thumbs-enabled">
-                                <h4>热评文章</h4>
-                                <li>
-                                    <span class="thumbnail">
-								<a href="http://www.qugood.com/article/11018.html"><img src="static/picture/timthumb.php" alt="后互联网：无聊已死、社交危机、故事崛起" /></a>							</span>
-                                    <span class="new-title"><a href="http://www.qugood.com/article/11018.html" rel="bookmark">后互联网：无聊已死、社交危机、故事崛起</a></span>
-                                    <span class="date">09/06</span>
-                                    <span class="discuss"><i class="be be-speechbubble"></i> 13</span>
-                                </li>
-                                <li>
-                                    <span class="thumbnail">
-								<a href="http://www.qugood.com/article/12336.html"><img src="static/picture/timthumb.php" alt="人均GDP32万元的北欧电商市场报告 你了解么" /></a>							</span>
-                                    <span class="new-title"><a href="http://www.qugood.com/article/12336.html" rel="bookmark">人均GDP32万元的北欧电商市场报告 你了解么</a></span>
-                                    <span class="date">10/13</span>
-                                    <span class="discuss"><i class="be be-speechbubble"></i> 10</span>
-                                </li>
-                                <li>
-                                    <span class="thumbnail">
-								<a href="http://www.qugood.com/article/13187.html"><img src="static/picture/timthumb.php" alt="这个河南企业厉害了，让俄罗斯新型护卫舰用上了“中国芯”" /></a>							</span>
-                                    <span class="new-title"><a href="http://www.qugood.com/article/13187.html" rel="bookmark">这个河南企业厉害了，让俄罗斯新型护卫舰用上了“中国芯”</a></span>
-                                    <span class="date">11/02</span>
-                                    <span class="discuss"><i class="be be-speechbubble"></i> 8</span>
-                                </li>
-                                <li>
-                                    <span class="thumbnail">
-								<a href="http://www.qugood.com/article/14132.html"><img src="static/picture/timthumb.php" alt="新零售，突破“双十一”瓶颈的一剂良药" /></a>							</span>
-                                    <span class="new-title"><a href="http://www.qugood.com/article/14132.html" rel="bookmark">新零售，突破“双十一”瓶颈的一剂良药</a></span>
-                                    <span class="date">11/10</span>
-                                    <span class="discuss"><i class="be be-speechbubble"></i> 7</span>
-                                </li>
-                                <li>
-                                    <span class="thumbnail">
-								<a href="http://www.qugood.com/article/10636.html"><img src="static/picture/timthumb.php" alt="一个工厂老板的独白：保持“愚者”的心态，把跨境生意做到极致" /></a>							</span>
-                                    <span class="new-title"><a href="http://www.qugood.com/article/10636.html" rel="bookmark">一个工厂老板的独白：保持“愚者”的心态，把跨境生意做到极致</a></span>
-                                    <span class="date">08/16</span>
-                                    <span class="discuss"><i class="be be-speechbubble"></i> 5</span>
-                                </li>
-                            </ul>
-                            <!--/.zm-tab-->
-                        </div>
-                        <div class="new_cat">
-                            <ul id="tab-viewe-2" class="zm-tab group">
-                                <h4>热门文章</h4>
-                                <li><span class='thumbnail'><a href="http://www.qugood.com/article/22242.html"><img src="static/picture/timthumb.php" alt="促销套路or营销探索？万和周年庆引发的创新思考" /></a></span><span class="new-title"><a href="http://www.qugood.com/article/22242.html" rel="bookmark">促销套路or营销探索？万和周年庆引发的创新思考</a></span><span class='date'>08/31</span><span class="views"><i class="be be-eye"></i> 2,684</span></li>
-                                <li><span class='thumbnail'><a href="http://www.qugood.com/article/22757.html"><img src="static/picture/timthumb.php" alt="乡村振兴周年记：重大进展的一年，苏宁智慧零售贡献几何？" /></a></span><span class="new-title"><a href="http://www.qugood.com/article/22757.html" rel="bookmark">乡村振兴周年记：重大进展的一年，苏宁智慧零售贡献几何？</a></span><span class='date'>10/19</span><span class="views"><i class="be be-eye"></i> 504</span></li>
-                                <li><span class='thumbnail'><a href="http://www.qugood.com/article/22184.html"><img src="static/picture/timthumb.php" alt="人工智能并非万能，智慧停车怕难解决城市停车难题？" /></a></span><span class="new-title"><a href="http://www.qugood.com/article/22184.html" rel="bookmark">人工智能并非万能，智慧停车怕难解决城市停车难题？</a></span><span class='date'>08/27</span><span class="views"><i class="be be-eye"></i> 426</span></li>
-                                <li><span class='thumbnail'><a href="http://www.qugood.com/article/21853.html"><img src="static/picture/timthumb.php" alt="《新氧2018年医美行业白皮书》--医美将成为00后的日常生活方式" /></a></span><span class="new-title"><a href="http://www.qugood.com/article/21853.html" rel="bookmark">《新氧2018年医美行业白皮书》&#8211;医美将成为00后的日常生活方式</a></span><span class='date'>08/09</span><span class="views"><i class="be be-eye"></i> 390</span></li>
-                                <li><span class='thumbnail'><a href="http://www.qugood.com/article/22697.html"><img src="static/picture/timthumb.php" alt="海底捞、呷哺、小龙坎威风背后痛点不少，餐饮新零售怎么玩转？" /></a></span><span class="new-title"><a href="http://www.qugood.com/article/22697.html" rel="bookmark">海底捞、呷哺、小龙坎威风背后痛点不少，餐饮新零售怎么玩转？</a></span><span class='date'>10/14</span><span class="views"><i class="be be-eye"></i> 383</span></li>
-                            </ul>
-                            <!--/.zm-tab-->
-                        </div>
-                        <div class="message-tab message-widget">
-                            <ul>
-                                <h4>最近留言</h4>
-                                <li>
-                                    <a href="http://www.qugood.com/article/22592.html#anchor-comment-452" title="从垂直到多元，聚美的昨日辉煌与今夕衰落" rel="external nofollow">
-																														<img alt='QuGood' src='static/picture/8a54d735d34240f3abe2983623ce0bb2.gif' class='avatar avatar-96 photo wpfla ' width='96' height='96' />																												<span class="comment_author"><strong>QuGood</strong></span>
-									感谢大胸弟								</a>
-                                </li>
-                                <li>
-                                    <a href="http://www.qugood.com/article/22592.html#anchor-comment-451" title="从垂直到多元，聚美的昨日辉煌与今夕衰落" rel="external nofollow">
-																														<img alt='博客大全' src='static/picture/9d63177ca579487b816a997f217d2d5d.gif' class='avatar avatar-96 photo wpfla ' width='96' height='96' />																												<span class="comment_author"><strong>博客大全</strong></span>
-									过来坐坐 <img src="static/picture/icon_redface.gif" alt=":oops:" class="wp-smiley" style="height: 1em; max-height: 1em;" />								</a>
-                                </li>
-                                <li>
-                                    <a href="http://www.qugood.com/article/22353.html#anchor-comment-450" title="咖啡再热闹，也逃不出巨头的手掌心" rel="external nofollow">
-																														<img alt='头条' src='static/picture/ac71d61a378249b3b41ffe56cb9dc874.gif' class='avatar avatar-96 photo wpfla ' width='96' height='96' />																												<span class="comment_author"><strong>头条</strong></span>
-									文章不错非常喜欢								</a>
-                                </li>
-                                <li>
-                                    <a href="http://www.qugood.com/liuyan.html#anchor-comment-449" title="在线留言" rel="external nofollow">
-																														<img alt='QuGood' src='static/picture/8a54d735d34240f3abe2983623ce0bb2.gif' class='avatar avatar-96 photo wpfla ' width='96' height='96' />																												<span class="comment_author"><strong>QuGood</strong></span>
-									好的，谢谢了。								</a>
-                                </li>
-                                <li>
-                                    <a href="http://www.qugood.com/liuyan.html#anchor-comment-448" title="在线留言" rel="external nofollow">
-																														<img alt='技术宅' src='static/picture/6a70dc8177a449fa82e4f0338c6b7204.gif' class='avatar avatar-96 photo wpfla ' width='96' height='96' />																												<span class="comment_author"><strong>技术宅</strong></span>
-									你好哇。麻烦将技术宅的友链链接更改为 https://jszbug.com/ ，原链接已做好 301 谢谢了								</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="clear"></div>
-                </aside>
-                <aside id="hot_commend-9" class="widget hot_commend wow fadeInUp" data-wow-delay="0.3s"><h3 class="widget-title"><span class="title-i"><span class="title-i-t"></span><span class="title-i-b"></span><span class="title-i-b"></span><span class="title-i-t"></span></span>本站推荐</h3>
-                    <div id="hot" class="hot_commend">
-                        <ul>
-                            <li>
-                                <span class="thumbnail">
-						<a href="http://www.qugood.com/article/21130.html"><img src="static/picture/timthumb.php" alt="同城货运主导全新商流体系：智慧物流成胜负关键？" /></a>					</span>
-                                <span class="hot-title"><a href="http://www.qugood.com/article/21130.html" rel="bookmark">同城货运主导全新商流体系：智慧物流成胜负关键？</a></span>
-                                <span class="views"><i class="be be-eye"></i> 263</span> <i class="be be-thumbs-up-o">&nbsp;0</i>
-                            </li>
-                            <li>
-                                <span class="thumbnail">
-						<a href="http://www.qugood.com/article/21100.html"><img src="static/picture/timthumb.php" alt="无人零售2.0时代，果小美映射出的行业转型问题" /></a>					</span>
-                                <span class="hot-title"><a href="http://www.qugood.com/article/21100.html" rel="bookmark">无人零售2.0时代，果小美映射出的行业转型问题</a></span>
-                                <span class="views"><i class="be be-eye"></i> 265</span> <i class="be be-thumbs-up-o">&nbsp;0</i>
-                            </li>
-                            <li>
-                                <span class="thumbnail">
-						<a href="http://www.qugood.com/article/21075.html"><img src="static/picture/timthumb.php" alt="纸媒已死，图文衰退，未来是“抖音们”的天下？" /></a>					</span>
-                                <span class="hot-title"><a href="http://www.qugood.com/article/21075.html" rel="bookmark">纸媒已死，图文衰退，未来是“抖音们”的天下？</a></span>
-                                <span class="views"><i class="be be-eye"></i> 285</span> <i class="be be-thumbs-up-o">&nbsp;0</i>
-                            </li>
-                            <li>
-                                <span class="thumbnail">
-						<a href="http://www.qugood.com/article/20889.html"><img src="static/picture/timthumb.php" alt="新零售的下半场在同城速递中燃起，闪送恐难挑起重担？" /></a>					</span>
-                                <span class="hot-title"><a href="http://www.qugood.com/article/20889.html" rel="bookmark">新零售的下半场在同城速递中燃起，闪送恐难挑起重担？</a></span>
-                                <span class="views"><i class="be be-eye"></i> 286</span> <i class="be be-thumbs-up-o">&nbsp;0</i>
-                            </li>
-                            <li>
-                                <span class="thumbnail">
-						<a href="http://www.qugood.com/article/18470.html"><img src="static/picture/timthumb.php" alt="斗鱼高估值遭质疑，修炼内功或是破局良方" /></a>					</span>
-                                <span class="hot-title"><a href="http://www.qugood.com/article/18470.html" rel="bookmark">斗鱼高估值遭质疑，修炼内功或是破局良方</a></span>
-                                <span class="views"><i class="be be-eye"></i> 11,126</span> <i class="be be-thumbs-up-o">&nbsp;0</i>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="clear"></div>
-                </aside>
+                {% load_sidebar_hot %}
+                {% load_sidebar_best_recomm %}
+                {% load_sidebar_tag %}
             </div>
 {% endblock %}
 
+
 {% block links-box %}
-        <div class="links-box">
-            <div id="links">
-                <ul class="lx7">
-                    <li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://www.qugood.com/" target="_blank">趣果咨询</a></li>
-                </ul>
-                <ul class="lx7">
-                    <li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://www.lusongsong.com" target="_blank">卢松松博客</a></li>
-                </ul>
-                <ul class="lx7">
-                    <li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="https://jszbug.com/" target="_blank">技术宅</a></li>
-                </ul>
-                <ul class="lx7">
-                    <li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://zmingcx.com/" target="_blank">知更鸟</a></li>
-                </ul>
-                <ul class="lx7">
-                    <li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://www.xiewenyin.com/" target="_blank">书法绘画</a></li>
-                </ul>
-                <ul class="lx7">
-                    <li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://www.euweb.cn" target="_blank">艺优网络</a></li>
-                </ul>
-                <ul class="lx7">
-                    <li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://shengbao.org/" target="_blank">生保博客</a></li>
-                </ul>
-                <ul class="lx7">
-                    <li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://www.4pnt.com" title="仓库管理系统" target="_blank">仓库管理系统</a></li>
-                </ul>
-                <ul class="lx7">
-                    <li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://www.9yy.net" target="_blank">丫丫头条</a></li>
-                </ul>
-                <ul class="lx7">
-                    <li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://www.lz16.cn/" target="_blank">励志语录网</a></li>
-                </ul>
-                <ul class="lx7">
-                    <li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://www.boke112.com" target="_blank">博客导航</a></li>
-                </ul>
-                <ul class="lx7">
-                    <li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://zgchdh.cn" target="_blank">中国出海导航</a></li>
-                </ul>
-                <ul class="lx7">
-                    <li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://www.zgchdh.cn/" target="_blank">蓝船出海</a></li>
-                </ul>
-                <ul class="lx7">
-                    <li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://www.pinpaiguan.org/" target="_blank">品牌馆</a></li>
-                </ul>
-                <ul class="lx7">
-                    <li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://www.rrkp.com" target="_blank">撩妹技巧</a></li>
-                </ul>
-                <ul class="lx7">
-                    <li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://www.cifnews.com/aliexpress" target="_blank">速卖通大学</a></li>
-                </ul>
-                <ul class="lx7">
-                    <li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="http://www.sellerwant.com/detail?id=1" target="_blank">正规UPC码</a></li>
-                </ul>
-                <ul class="lx7">
-                    <li class="link-f wow fadeInUp" data-wow-delay="0.3s"><a href="http://www.qugood.com/links.html" target="_blank" title="全部链接">更多链接<i class="icon-li"></i></a></li>
-                </ul>
-                <div class="clear"></div>
-            </div>
+    <div class="links-box">
+        <div id="links">
+            {% for link in links %}
+                <ul class="lx7"><li class="link-f link-name wow fadeInUp" data-wow-delay="0.3s"><a href="{{ link.url }}">{{ link.name }}</a></li></ul>
+      	    {% endfor %}
+            <div class="clear"></div>
         </div>
+    </div>
 {% endblock %}
 
     <!--

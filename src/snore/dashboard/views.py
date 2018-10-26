@@ -35,14 +35,14 @@ class ArticleDetailView(DetailView):
         return obj
 
     def get_context_data(self, **kwargs):
-        article_comments = self.object.comment_list()
+        # article_comments = self.object.comment_list()
         # site_settings = SiteSettings.objects.get()
 
         # kwargs['commentForm'] = CommentForm()
-        kwargs['article_comments'] = article_comments
+        # kwargs['article_comments'] = article_comments
         kwargs['articles'] = Article.published.filter(ad_property=5)[:4]
-        kwargs['sim_articles'] = Article.published.filter(category=kwargs['object'].category, ad_property=0)[:5]
-        kwargs['best_articles'] = Article.published.filter(ad_property=0, category__is_goods=1).order_by('-views')[:5]
+        # kwargs['sim_articles'] = Article.published.filter(category=kwargs['object'].category, ad_property=0)[:5]
+        # kwargs['best_articles'] = Article.published.filter(ad_property=0, category__is_goods=1).order_by('-views')[:5]
         # kwargs['wechat_pay_code'] = site_settings.wechat_pay_code
         # kwargs['alipay_code'] = site_settings.alipay_code
         context = super().get_context_data(**kwargs)

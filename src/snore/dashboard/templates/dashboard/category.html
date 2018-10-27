@@ -77,22 +77,27 @@
         </main><!-- .site-main -->
 
                 <div class="pagenav-clear">
-                    <nav id="nav-below">
-                        <div class="nav-next"></div>
-                        <div class="nav-previous"><a href="http://www.qugood.com/news/page/2/"></a></div>
-                    </nav>
+                <nav class="navigation pagination" role="navigation">
+                    <h2 class="screen-reader-text">文章导航</h2>
+                    <div class="nav-links">
+                        {% if articles.has_previous %}
+                        <a class="prev page-numbers" href="?page={{ articles.previous_page_number }}"><i class="be be-arrowleft"></i></a>
+                        {% endif %}
+                        {% for p in page_range %}
+                            {% ifequal p articles.number %}
+                                <span aria-current='page' class='page-numbers current'><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></span>
+                            {% else %}
+                                <a class="page-numbers" href="?page={{ p }}"><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></a>
+                            {% endifequal %}
+                        {% endfor %}
+                        {% if articles.has_next %}
+                            <span class="page-numbers dots">…</span>
+                            <a class="page-numbers" href="?page={{ articles.paginator.num_pages}}"><span class="screen-reader-text">第 </span>{{ articles.paginator.num_pages}}<span class="screen-reader-text"> 页</span></a>
+                            <a class="next page-numbers" href="?page={{ articles.next_page_number }}"><i class="be be-arrowright"></i></a>
+                        {% endif %}
+                    </div>
+                </nav>
 
-                    <nav class="navigation pagination" role="navigation">
-                        <h2 class="screen-reader-text">文章导航</h2>
-                        <div class="nav-links"><span aria-current='page' class='page-numbers current'><span class="screen-reader-text">第 </span>1<span class="screen-reader-text"> 页</span></span>
-                            <a class='page-numbers' href='http://www.qugood.com/news/page/2/'><span class="screen-reader-text">第 </span>2<span class="screen-reader-text"> 页</span></a>
-                            <a class='page-numbers' href='http://www.qugood.com/news/page/3/'><span class="screen-reader-text">第 </span>3<span class="screen-reader-text"> 页</span></a>
-                            <a class='page-numbers' href='http://www.qugood.com/news/page/4/'><span class="screen-reader-text">第 </span>4<span class="screen-reader-text"> 页</span></a>
-                            <a class='page-numbers' href='http://www.qugood.com/news/page/5/'><span class="screen-reader-text">第 </span>5<span class="screen-reader-text"> 页</span></a>
-                            <span class="page-numbers dots">&hellip;</span>
-                            <a class='page-numbers' href='http://www.qugood.com/news/page/39/'><span class="screen-reader-text">第 </span>39<span class="screen-reader-text"> 页</span></a>
-                            <a class="next page-numbers" href="http://www.qugood.com/news/page/2/"><i class="be be-arrowright"></i></a></div>
-                    </nav>
                 </div>
 
     </section><!-- .content-area -->

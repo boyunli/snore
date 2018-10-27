@@ -59,7 +59,7 @@
                         </ul>
                     </div>
 
-                    {% for article in new_articles %}
+                    {% for article in articles %}
                     <article id="post-{{ article.id }}" class="wow fadeInUp post-{{ article.id }} post type-post status-publish format-standard hentry category-xinlingshou tag-{{ article.id }} ghi" data-wow-delay="0.3s">
                         <figure class="thumbnail">
                             <a href="{{ article.id }}"><img src="{{ article.image.url }}" alt="{{ article.title }}" /></a>
@@ -91,20 +91,25 @@
                     {% endif %}
                     {% endfor %}
                 </main><!-- .site-main -->
-                <nav id="nav-below">
-                    <div class="nav-next"></div>
-                    <div class="nav-previous"><a href="http://www.qugood.com/page/2/" ></a></div>
-                </nav>
                 <nav class="navigation pagination" role="navigation">
                     <h2 class="screen-reader-text">文章导航</h2>
-                    <div class="nav-links"><span aria-current='page' class='page-numbers current'><span class="screen-reader-text">第 </span>1<span class="screen-reader-text"> 页</span></span>
-                        <a class='page-numbers' href='http://www.qugood.com/page/2/'><span class="screen-reader-text">第 </span>2<span class="screen-reader-text"> 页</span></a>
-                        <a class='page-numbers' href='http://www.qugood.com/page/3/'><span class="screen-reader-text">第 </span>3<span class="screen-reader-text"> 页</span></a>
-                        <a class='page-numbers' href='http://www.qugood.com/page/4/'><span class="screen-reader-text">第 </span>4<span class="screen-reader-text"> 页</span></a>
-                        <a class='page-numbers' href='http://www.qugood.com/page/5/'><span class="screen-reader-text">第 </span>5<span class="screen-reader-text"> 页</span></a>
-                        <span class="page-numbers dots">&hellip;</span>
-                        <a class='page-numbers' href='http://www.qugood.com/page/382/'><span class="screen-reader-text">第 </span>382<span class="screen-reader-text"> 页</span></a>
-                        <a class="next page-numbers" href="http://www.qugood.com/page/2/"><i class="be be-arrowright"></i></a></div>
+                    <div class="nav-links">
+                        {% if articles.has_previous %}
+                        <a class="prev page-numbers" href="?page={{ articles.previous_page_number }}"><i class="be be-arrowleft"></i></a>
+                        {% endif %}
+                        {% for p in page_range %}
+                            {% ifequal p articles.number %}
+                                <span aria-current='page' class='page-numbers current'><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></span>
+                            {% else %}
+                                <a class="page-numbers" href="?page={{ p }}"><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></a>
+                            {% endifequal %}
+                        {% endfor %}
+                        {% if articles.has_next %}
+                            <span class="page-numbers dots">…</span>
+                            <a class="page-numbers" href="?page={{ articles.paginator.num_pages}}"><span class="screen-reader-text">第 </span>{{ articles.paginator.num_pages}}<span class="screen-reader-text"> 页</span></a>
+                            <a class="next page-numbers" href="?page={{ articles.next_page_number }}"><i class="be be-arrowright"></i></a>
+                        {% endif %}
+                    </div>
                 </nav>
             </div><!-- .content-area -->
 {% endblock %}
@@ -129,22 +134,15 @@
     </div>
 {% endblock %}
 
-    <!--
-    <script type='text/javascript' src='static/js/beepress-pro.js'></script>
-    <script type='text/javascript' src='static/js/slides.js'></script>
-    <script type='text/javascript' src='static/js/jquery.qrcode.min.js'></script>
-    <script type='text/javascript' src='static/js/wow.js'></script>
-    <script type='text/javascript' src='static/js/sticky.js'></script>
-    <script type='text/javascript' src='static/js/jquery-ias.js'></script>
-    <script type='text/javascript' src='static/js/jquery.lazyload.js'></script>
-    <script type='text/javascript' src='static/js/tipso.js'></script>
-    <script type='text/javascript' src='static/js/script.js'></script>
-    <script type='text/javascript' src='static/js/flexisel.js'></script>
-    <script type='text/javascript' src='static/js/superfish.js'></script>
-    <script type='text/javascript' src='static/js/gb2big5.js'></script>
-    <script type='text/javascript' src='static/js/carousel.min.js'></script>
-    <script type='text/javascript' src='static/js/wpzm.js'></script>
-    <script type='text/javascript' src='static/js/3dtag.js'></script>
+{% block js-script %}
+<script type='text/javascript' src="{% fullstatic 'dashboard/js/beepress-pro.js' %}"></script>
+<script type='text/javascript' src="{% fullstatic 'dashboard/js/slides.js' %}"></script>
+<script type='text/javascript' src="{% fullstatic 'dashboard/js/jquery.qrcode.min.js' %}"></script>
+<script type='text/javascript' src="{% fullstatic 'dashboard/js/wow.js' %}"></script>
+<script type='text/javascript' src="{% fullstatic 'dashboard/js/sticky.js' %}"></script>
+<script type='text/javascript' src="{% fullstatic 'dashboard/js/jquery-ias.js' %}"></script>
+<script type='text/javascript' src="{% fullstatic 'dashboard/js/carousel.min.js' %}"></script>
+<script type='text/javascript' src="{% fullstatic 'dashboard/js/wpzm.js' %}"></script>
     <script type="text/javascript">
     var ias = $.ias({ container: "#main", item: "article", pagination: "#nav-below", next: "#nav-below .nav-previous a", });
     ias.extension(new IASTriggerExtension({ text: '<i class="be be-circledown"></i>更多', offset: 2, }));
@@ -152,4 +150,4 @@
     ias.extension(new IASNoneLeftExtension({ text: '已是最后', }));
     ias.on('rendered', function(items) { $("img").lazyload({ effect: "fadeIn", failure_limit: 70 }); })
     </script>
-    -->
+{% endblock %}

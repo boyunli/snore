@@ -2,8 +2,25 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, InvalidPage, PageNotAnInteger
 
 from .models import Category, Article, Tag, Link
+
+def paging(page, items, display_amount=15,
+            after_range_num=5, bevor_range_num=4):
+    paginator = Paginator(items, display_amount)
+    try:
+        items = paginator.page(page)
+    except EmptyPage:
+        items = paginator.page(paginator.num_pages)
+    except (InvalidPage, PageNotAnInteger):
+        items = paginator.page(1)
+    if page >= after_range_num:
+        page_range = paginator.page_range[page-after_range_num:page+bevor_range_num]
+    else:
+        page_range = paginator.page_range[0:page+bevor_range_num]
+    return items, page_range
+
 
 class IndexView(TemplateView):
     template_class = 'dashboard/index.html'
@@ -12,9 +29,14 @@ class IndexView(TemplateView):
         ads = Article.published.filter(~Q(ad_property=0))
         articles = Article.published.filter(ad_property=0)
         # import pdb;pdb.set_trace()
+
+        page = int(request.GET.get('page', 1))
+        particles, page_range = paging(page, articles)
+
         context = {
             'ad_left_up_round': ads.filter(ad_property=1)[:6],
-            'new_articles': articles[:10],
+            'articles': particles,
+            'page_range': page_range,
             'ad_column': ads.filter(ad_property=2)[0],
             'links': Link.objects.values('url', 'name'),
         }
@@ -63,7 +85,6 @@ class ArticleListView(ListView):
 
 class ArchiveView(ArticleListView):
     page_type = '帖文分类归档'
-    paginate_by = 20
 
     def get_queryset_data(self):
         slug = self.kwargs['category']
@@ -83,6 +104,11 @@ class ArchiveView(ArticleListView):
         kwargs['head_desc'] = category.head_desc
         kwargs['head_keywords'] = category.head_keywords
         kwargs['ad_column'] = Article.published.filter(ad_property=2)[0]
+
+        page = int(self.request.GET.get('page', 1))
+        particles, page_range = paging(page, self.object_list)
+        kwargs['articles'] =  particles
+        kwargs['page_range'] =  page_range
         return super(ArchiveView, self).get_context_data(**kwargs)
 
 

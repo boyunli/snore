@@ -146,17 +146,17 @@
 
 
                     <nav class="nav-single wow fadeInUp" data-wow-delay="0.3s">
-                        <a href="http://www.qugood.com/article/21083.html" rel="prev"><span class="meta-nav"><span class="post-nav"><i class="be be-arrowleft"></i> 上一篇</span><br />人人乐再现亏损危机，传统商超已被时代抛弃？</span></a><a href="http://www.qugood.com/article/21147.html" rel="next"><span class="meta-nav"><span class="post-nav">下一篇 <i class="be be-arrowright"></i></span><br />无人酒店究竟是一场革新还是作秀？</span></a>
+                        {% if prev_article %}
+                            <a href="{{ prev_article.get_absolute_url }}" rel="prev"><span class="meta-nav"><span class="post-nav"><i class="be be-arrowleft"></i> 上一篇</span><br />{{ prev_article.title }}</span></a>
+                        {% else %}
+                            <a href="" rel="prev"><span class="meta-nav"><span class="post-nav"><i class="be be-arrowleft"></i> 上一篇</span><br />第一篇</span></a>
+                        {% endif %}
+                        {% if next_article %}
+                            <a href="{{ next_article.get_absolute_url }}" rel="next"><span class="meta-nav"><span class="post-nav">下一篇 <i class="be be-arrowright"></i></span><br />{{ next_article.title }}</span></a>
+                        {% else %}
+                            <a href="" rel="next"><span class="meta-nav"><span class="post-nav">下一篇 <i class="be be-arrowright"></i></span><br />最后一篇</span></a>
+                        {% endif %}
                         <div class="clear"></div>
-                    </nav>
-
-
-                    <nav class="navigation post-navigation" role="navigation">
-                        <h2 class="screen-reader-text">文章导航</h2>
-                        <div class="nav-links">
-                            <div class="nav-previous"><a href="http://www.qugood.com/article/21129.html" rel="prev"><span class="meta-nav-r" aria-hidden="true"><i class="be be-arrowleft"></i></span></a></div>
-                            <div class="nav-next"><a href="http://www.qugood.com/article/21138.html" rel="next"><span class="meta-nav-l" aria-hidden="true"><i class="be be-arrowright"></i></span></a></div>
-                        </div>
                     </nav>
 
                     <!-- 引用 -->
@@ -165,116 +165,7 @@
                     <div class="scroll-comments"></div>
 
                     <div id="comments" class="comments-area">
-
-
-                        <div id="respond" class="comment-respond wow fadeInUp" data-wow-delay="0.3s">
-                            <h3 id="reply-title" class="comment-reply-title"><span>发表评论</span><small><a rel="nofollow" id="cancel-comment-reply-link" href="/article/21130.html#respond" style="display:none;">取消回复</a></small></h3>
-
-
-                            <form action="http://www.qugood.com/wp-comments-post.php" method="post" id="commentform">
-
-                                <p class="emoji-box">
-                                    <script type="text/javascript">
-                                        /* <![CDATA[ */
-                                        function grin(tag) {
-                                            var myField;
-                                            tag = ' ' + tag + ' ';
-                                            if (document.getElementById('comment') && document.getElementById('comment').type == 'textarea') {
-                                                myField = document.getElementById('comment');
-                                            } else {
-                                                return false;
-                                            }
-                                            if (document.selection) {
-                                                myField.focus();
-                                                sel = document.selection.createRange();
-                                                sel.text = tag;
-                                                myField.focus();
-                                            } else if (myField.selectionStart || myField.selectionStart == '0') {
-                                                var startPos = myField.selectionStart;
-                                                var endPos = myField.selectionEnd;
-                                                var cursorPos = endPos;
-                                                myField.value = myField.value.substring(0, startPos) +
-                                                    tag +
-                                                    myField.value.substring(endPos, myField.value.length);
-                                                cursorPos += tag.length;
-                                                myField.focus();
-                                                myField.selectionStart = cursorPos;
-                                                myField.selectionEnd = cursorPos;
-                                            } else {
-                                                myField.value += tag;
-                                                myField.focus();
-                                            }
-                                        }
-                                        /* ]]> */
-                                    </script>
-
-                                    <a href="javascript:grin(':?:')"><img src="static/picture/icon_question_1.gif" alt=":?:" title="疑问" /></a>
-                                    <a href="javascript:grin(':razz:')"><img src="static/picture/icon_razz_1.gif" alt=":razz:" title="调皮" /></a>
-                                    <a href="javascript:grin(':sad:')"><img src="static/picture/icon_sad_1.gif" alt=":sad:" title="难过" /></a>
-                                    <a href="javascript:grin(':evil:')"><img src="static/picture/icon_evil_1.gif" alt=":evil:" title="抠鼻" /></a>
-                                    <a href="javascript:grin(':!:')"><img src="static/picture/icon_exclaim_1.gif" alt=":!:" title="吓" /></a>
-                                    <a href="javascript:grin(':smile:')"><img src="static/picture/icon_smile_1.gif" alt=":smile:" title="微笑" /></a>
-                                    <a href="javascript:grin(':oops:')"><img src="static/picture/icon_redface_1.gif" alt=":oops:" title="憨笑" /></a>
-                                    <a href="javascript:grin(':grin:')"><img src="static/picture/icon_biggrin_1.gif" alt=":grin:" title="坏笑" /></a>
-                                    <a href="javascript:grin(':eek:')"><img src="static/picture/icon_surprised_1.gif" alt=":eek:" title="惊讶" /></a>
-                                    <a href="javascript:grin(':shock:')"><img src="static/picture/icon_eek_1.gif" alt=":shock:" title="发呆" /></a>
-                                    <a href="javascript:grin(':???:')"><img src="static/picture/icon_confused_1.gif" alt=":???:" title="撇嘴" /></a>
-                                    <a href="javascript:grin(':cool:')"><img src="static/picture/icon_cool_1.gif" alt=":cool:" title="大兵" /></a>
-                                    <a href="javascript:grin(':lol:')"><img src="static/picture/icon_lol_1.gif" alt=":lol:" title="偷笑" /></a>
-                                    <a href="javascript:grin(':mad:')"><img src="static/picture/icon_mad_1.gif" alt=":mad:" title="咒骂" /></a>
-                                    <a href="javascript:grin(':twisted:')"><img src="static/picture/icon_twisted_1.gif" alt=":twisted:" title="发怒" /></a>
-                                    <a href="javascript:grin(':roll:')"><img src="static/picture/icon_rolleyes_1.gif" alt=":roll:" title="白眼" /></a>
-                                    <a href="javascript:grin(':wink:')"><img src="static/picture/icon_wink_1.gif" alt=":wink:" title="鼓掌" /></a>
-                                    <a href="javascript:grin(':idea:')"><img src="static/picture/icon_idea_1.gif" alt=":idea:" title="酷" /></a>
-                                    <a href="javascript:grin(':arrow:')"><img src="static/picture/icon_arrow_1.gif" alt=":arrow:" title="擦汗" /></a>
-                                    <a href="javascript:grin(':neutral:')"><img src="static/picture/icon_neutral_1.gif" alt=":neutral:" title="亲亲" /></a>
-                                    <a href="javascript:grin(':cry:')"><img src="static/picture/icon_cry_1.gif" alt=":cry:" title="大哭" /></a>
-                                    <a href="javascript:grin(':mrgreen:')"><img src="static/picture/icon_mrgreen_1.gif" alt=":mrgreen:" title="呲牙" /></a>
-                                    <br />
-                                </p>
-                                <p class="comment-form-comment"><textarea id="comment" name="comment" rows="4" tabindex="1"></textarea></p>
-
-                                <p class="comment-tool">
-                                    <a class="tool-img" href='javascript:embedImage();' title="插入图片"><i class="icon-img"></i><i class="be be-picture"></i></a>
-                                    <a class="emoji" href="" title="插入表情"><i class="be be-insertemoticon"></i></a>
-                                </p>
-
-
-                                <div id="comment-author-info">
-                                    <p class="comment-form-author">
-                                        <label for="author">昵称<span class="required">*</span></label>
-                                        <input type="text" name="author" id="author" class="commenttext" value="" tabindex="2" />
-                                    </p>
-                                    <p class="comment-form-email">
-                                        <label for="email">邮箱<span class="required">*</span></label>
-                                        <input type="text" name="email" id="email" class="commenttext" value="" tabindex="3" />
-                                    </p>
-                                    <p class="comment-form-url">
-                                        <label for="url">网址</label>
-                                        <input type="text" name="url" id="url" class="commenttext" value="" tabindex="4" />
-                                    </p>
-                                    <p class="comment-form-qq">
-                                        <label for="qq">QQ</label>
-                                        <input id="qq" name="qq" type="text" value="" size="30" placeholder="输入QQ号码可以快速填写" />
-                                        <span id="loging"></span>
-                                    </p>
-                                </div>
-
-                                <div class="qaptcha"></div>
-
-                                <div class="clear"></div>
-                                <p class="form-submit">
-                                    <input id="submit" name="submit" type="submit" tabindex="5" value="提交评论" />
-                                    <input type='hidden' name='comment_post_ID' value='21130' id='comment_post_ID' />
-                                    <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
-                                </p>
-                            </form>
-
-                        </div>
-
-
-
-                    </div>
+                    {% include 'comments/comments.html' %}
                     <!-- #comments -->
 
                 </main><!-- .site-main -->
@@ -315,7 +206,7 @@
     <script type='text/javascript' src='static/js/script_1.js'></script>
     <script type='text/javascript' src='static/js/flexisel_1.js'></script>
     <script type='text/javascript' src='static/js/fancybox_1.js'></script>
-    <script type='text/javascript' src='static/js/comments-ajax-qt_1.js'></script>
+    <script type='text/javascript' src='{% fullstatic "dashboard/js/comments-ajax-qt.js" %}'></script>
     <script type='text/javascript' src='static/js/superfish_1.js'></script>
     <script type='text/javascript' src='static/js/gb2big5_1.js'></script>
     <script type='text/javascript' src='static/js/carousel.min_1.js'></script>

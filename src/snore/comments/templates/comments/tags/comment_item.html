@@ -1,0 +1,35 @@
+        <li class="comments-anchor">
+          <ul id="anchor-comment-{{ comment_item.pk }}"></ul>
+        </li>
+<li class="comment byuser bypostauthor odd alt depth-{{ depth }} wow fadeInUp" id="comment-{{ comment_item.pk }}">
+    <div id="div-comment-{{ comment_item.pk }}" class="comment-body">
+        <div class="comment-author vcard">
+          <img class="avatar" src="{{ comment_item.account.get_portrait_url }}" alt="avatar" data-original="{{ comment_item.account.get_portrait_url}}" style="display: block;">
+            <strong>{{ comment_item.account.username }} </strong>
+            <span class="author-admin">Admin</span> <span class="comment-meta commentmetadata">
+                <a href=""></a><br>
+                <span class="comment-aux">
+                  <span class="reply">
+                    <a rel="nofollow" class="comment-reply-link" href="{{ comment_item.article.get_absolute_url }}?replytocom={{ comment_item.pk }}#respond" onclick="return addComment.moveForm( "div-comment-{{ comment_item.pk }}", "{{ comment_item.pk }}", "respond", "{{ comment_item.article.pk }}" )" aria-label="回复给菩提子">回复</a>
+                  </span>
+                    {{ comment_item.update_time }} <span class="floor">
+                        &nbsp;1层 </span>
+                </span>
+            </span>
+        </div>
+        <p><span class="at">@<a href="#comment-{{ comment_item.pk }}">{{ comment_item.article.account.username }}</a></span> {{ comment_item.content }}</p>
+    </div>
+</li><!-- #comment-## -->
+
+        {% query article_comments parent_comment=None as parent_comments %}
+        {% for comment in parent_comments %}
+          {% show_comment_item comment False %}
+          {% parse_commenttree article_comments comment as childcomments %}
+          {% if childcomments %}
+          <ul class="children">
+              {% for child in childcomments %}
+                  {% show_comment_item child True %}
+              {% endfor %}
+          </ul><!-- .children -->
+          {% endif %}
+        {% endfor %}

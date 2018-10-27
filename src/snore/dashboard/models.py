@@ -6,6 +6,7 @@ from PIL import ImageOps, Image as Img
 
 
 from django.db import models
+from django.core.cache import cache
 from django.utils import timezone
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -193,19 +194,19 @@ class Article(models.Model):
         '''
         增加阅读数
         '''
-        self.views +=1
+        self.views += 1
         # update_fields 只更新数据库中的views
         self.save(update_fields=['views'], is_update_views=True)
 
-    # # def comment_list(self):
-    # #     cache_key = 'article_comments_{id}'.format(id=self.id)
-    # #     value = cache.get(cache_key)
-    # #     if value:
-    # #         return value
-    # #     else:
-    # #         comments = self.comment_set.filter(is_enable=True)
-    # #         cache.set(cache_key, comments)
-    # #     return comments
+    def comment_list(self):
+        cache_key = 'article_comments_{id}'.format(id=self.id)
+        value = cache.get(cache_key)
+        if value:
+            return value
+        else:
+            comments = self.comment_set.filter(is_enable=True)
+            cache.set(cache_key, comments)
+        return comments
 
     # @property
     # def first_para(self):

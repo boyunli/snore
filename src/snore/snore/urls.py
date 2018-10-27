@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'ckeditor/', include('ckeditor_uploader.urls')),
     path(r'', include('dashboard.urls', namespace='dashboard')),
+    path('', include('comments.urls', namespace='comments')),
     path(r'sitemap\.xml', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
 ]

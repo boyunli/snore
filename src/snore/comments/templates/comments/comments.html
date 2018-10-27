@@ -1,0 +1,120 @@
+{% load dashboard_extras %}
+{% load comments_tags %}
+{% load fullurl %}
+<div id="comments" class="comments-area">
+
+    <div id="respond" class="comment-respond wow fadeInUp" data-wow-delay="0.3s">
+
+        <h3 id="reply-title" class="comment-reply-title"><span>发表评论</span>
+            <small>
+                <a rel="nofollow" id="cancel-comment-reply-link" href="/{{ article.pk }}.html#respond" style="display:none;">取消回复</a>
+            </small>
+        </h3>
+
+            <form action="{% fullurl 'comments:postcomment' article.pk %}" method="post" id="commentform">
+              {% csrf_token %}
+
+                <p class="comment-form-comment">
+                    {{ commentForm.content }}
+                    {{ commentForm.content.errors }}
+                    <div id="loading" style="display: none;"><i class="be be-loader"></i>正在提交, 请稍候...</div>
+                    <div id="error" style="display: none;">#</div>
+                </p>
+                <div id="comment-author-info">
+						<p class="comment-form-author">
+							<label for="author">昵称<span class="required">*</span></label>
+                            {{ commentForm.username }}
+                            {{ commentForm.username.errors }}
+						</p>
+						<p class="comment-form-email">
+							<label for="qq">QQ<span class="required">*</span></label>
+                            {{ commentForm.qq }}
+                            {{ commentForm.qq.errors }}
+						</p>
+				</div>
+                {{ commentForm.parent_comment_id }}
+
+                <div class="clear"></div>
+                <p class="form-submit">
+                    <input id="submit" name="submit" type="submit" tabindex="5" value="提交评论">
+                    <small class="cancel-comment" id="cancel_comment" style="display: none">
+                        <a rel="nofollow" id="cancel-comment-reply-link" style="display:none;">取消回复</a>
+                    </small>
+                </p>
+            </form>
+
+    </div>
+
+
+    {% if article_comments %}
+    <ol class="comment-list">
+
+      {% query article_comments parent_comment=None as parent_comments %}
+      {% for comment in parent_comments %}
+        <li class="comments-anchor">
+            <ul id="anchor-comment-{{ comment.pk }}"></ul>
+        </li>
+        <li class="comment even thread-even depth-1 parent" id="comment-{{ comment.pk }}">
+          <div id="div-comment-{{ comment.pk }}" class="comment-body">
+                <div class="comment-author vcard">
+                  <img class="avatar" src="{% buildfullurl comment.account.get_portrait_url %}" style="display: block;">
+                    <!--<cite class="fn">匿名</cite> <span class="says">:</span>-->
+                    <strong>{{ comment.username }} </strong>
+                    <a class="vip vip0" title="评论达人 VIP.0"><i class="be be-favoriteoutline"></i><span class="lv">0</span></a> <span class="comment-meta commentmetadata">
+                      <a href="{% buildfullurl comment.article.get_absolute_url %}/#comment-{{ comment.pk }}"></a><br>
+                        <span class="comment-aux">
+                             <span class="reply">
+                               <a rel="nofollow" class="comment-reply-link" href="javascript:void(0)"
+                                    onclick="do_reply({{ comment.pk }})" aria-label="回复给{{ comment.username}}">回复
+                               </a>
+                             </span>
+                             {{ comment.create_time }} <span class="floor">
+                                &nbsp;沙发 </span>
+                        </span>
+                    </span>
+                </div>
+                <p>{{ comment.content }}</p>
+            </div>
+            {% parse_commenttree article_comments comment as childcomments %}
+            {% if childcomments %}
+            <ul class="children">
+                {% for child in childcomments %}
+
+                <li class="comments-anchor">
+                  <ul id="anchor-comment-{{ child.pk }}"></ul>
+                </li>
+                <li class="comment byuser bypostauthor odd alt depth-2 wow fadeInUp" id="comment-{{ child.pk }}">
+                  <div id="div-comment-{{ child.pk }}" class="comment-body">
+                        <div class="comment-author vcard">
+                            <img class="avatar" src="{% buildfullurl child.account.get_portrait_url %}" alt="avatar" data-original="{% buildfullurl child.account.get_portrait_url %}" style="display: block;">
+                            <strong>  {{ child.username }} </strong>
+                            <span class="author-admin">Admin</span> <span class="comment-meta commentmetadata">
+                              <a href="{% buildfullurl child.article.get_absolute_url %}/#comment-{{ child.pk }}"></a><br>
+                                <span class="comment-aux">
+                                  <span class="reply">
+                                    <a rel="nofollow" class="comment-reply-link" href="javascript:void(0)"
+                                        onclick="do_reply({{ child.pk }})" aria-label="回复给{{ child.username }}">回复
+                                    </a>
+                                  </span>
+                                  {{ child.create_time }}<span class="floor">
+                                        &nbsp;1层 </span>
+                                </span>
+                            </span>
+                        </div>
+                        <p><span class="at">@<a href="#comment-{{ comment.pk }}">{{ comment.username }}</a></span> {{ child.content }}</p>
+                    </div>
+                </li><!-- #comment-## -->
+                {% endfor %}
+
+            </ul><!-- .children -->
+            {% endif %}
+        </li><!-- #comment-## -->
+        {% endfor %}
+
+
+    </ol><!-- .comment-list -->
+    {% endif %}
+
+
+
+</div>

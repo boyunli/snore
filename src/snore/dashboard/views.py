@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, InvalidPage, PageNotAnInteger
 
 from .models import Category, Article, Tag, Link
+from comments.forms import CommentForm
 
 def paging(page, items, display_amount=15,
             after_range_num=5, bevor_range_num=4):
@@ -27,8 +28,7 @@ class IndexView(TemplateView):
 
     def get(self, request):
         ads = Article.published.filter(~Q(ad_property=0))
-        articles = Article.published.filter(ad_property=0)
-        # import pdb;pdb.set_trace()
+        articles = Article.published.filter(ad_property=0, is_product=False)
 
         page = int(request.GET.get('page', 1))
         particles, page_range = paging(page, articles)
@@ -57,14 +57,19 @@ class ArticleDetailView(DetailView):
         return obj
 
     def get_context_data(self, **kwargs):
-        # article_comments = self.object.comment_list()
+        article_comments = self.object.comment_list()
         # site_settings = SiteSettings.objects.get()
 
-        # kwargs['commentForm'] = CommentForm()
-        # kwargs['article_comments'] = article_comments
+        kwargs['commentForm'] = CommentForm()
+        kwargs['article_comments'] = article_comments
+        # import pdb;pdb.set_trace()
         kwargs['articles'] = Article.published.filter(ad_property=5)[:4]
-        # kwargs['sim_articles'] = Article.published.filter(category=kwargs['object'].category, ad_property=0)[:5]
-        # kwargs['best_articles'] = Article.published.filter(ad_property=0, category__is_goods=1).order_by('-views')[:5]
+
+        aprev = Article.published.filter(id__lt=self.object.id, is_product=False).order_by('-id')
+        kwargs['prev_article'] = aprev[0]  if aprev else ''
+        anext = Article.published.filter(id__gt=self.object.id, is_product=False).order_by('id')
+        kwargs['next_article'] = anext[0] if anext else ''
+
         # kwargs['wechat_pay_code'] = site_settings.wechat_pay_code
         # kwargs['alipay_code'] = site_settings.alipay_code
         context = super().get_context_data(**kwargs)

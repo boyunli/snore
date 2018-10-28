@@ -3247,7 +3247,7 @@ img.alignleft {
 .widget ul li {
 	width: 99%;
 	line-height: 28px;
-	white-space: nowrap;
+	white-space: wrap;
 	word-wrap: normal;
 	text-overflow: ellipsis;
 	overflow: hidden;

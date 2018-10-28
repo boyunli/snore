@@ -71,7 +71,7 @@ def load_scroll():
     加载 咨询栏
     '''
     return {
-        # 'settings': SiteSettings.objects.get()
+        'settings': settings
     }
 
 @register.simple_tag

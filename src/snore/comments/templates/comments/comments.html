@@ -57,7 +57,7 @@
         <li class="comment even thread-even depth-1 parent" id="comment-{{ comment.pk }}">
           <div id="div-comment-{{ comment.pk }}" class="comment-body">
                 <div class="comment-author vcard">
-                  <img class="avatar" src="{% buildfullurl comment.account.get_portrait_url %}" style="display: block;">
+                  <img class="avatar" src="{% buildfullurl settings.portrait.url %}" style="display: block;">
                     <!--<cite class="fn">匿名</cite> <span class="says">:</span>-->
                     <strong>{{ comment.username }} </strong>
                     <a class="vip vip0" title="评论达人 VIP.0"><i class="be be-favoriteoutline"></i><span class="lv">0</span></a> <span class="comment-meta commentmetadata">
@@ -86,9 +86,9 @@
                 <li class="comment byuser bypostauthor odd alt depth-2 wow fadeInUp" id="comment-{{ child.pk }}">
                   <div id="div-comment-{{ child.pk }}" class="comment-body">
                         <div class="comment-author vcard">
-                            <img class="avatar" src="{% buildfullurl child.account.get_portrait_url %}" alt="avatar" data-original="{% buildfullurl child.account.get_portrait_url %}" style="display: block;">
+                            <img class="avatar" src="{% buildfullurl settings.portrait.url %}" alt="avatar" data-original="{% buildfullurl  settings.portrait.url %}" style="display: block;">
                             <strong>  {{ child.username }} </strong>
-                            <span class="author-admin">Admin</span> <span class="comment-meta commentmetadata">
+                            <span class="author-admin">追光者</span> <span class="comment-meta commentmetadata">
                               <a href="{% buildfullurl child.article.get_absolute_url %}/#comment-{{ child.pk }}"></a><br>
                                 <span class="comment-aux">
                                   <span class="reply">

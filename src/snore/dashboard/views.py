@@ -62,8 +62,8 @@ class ArticleDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         article_comments = self.object.comment_list()
-        # site_settings = SiteSettings.objects.get()
 
+        kwargs['settings'] = settings
         kwargs['commentForm'] = CommentForm()
         kwargs['article_comments'] = article_comments
         # import pdb;pdb.set_trace()
@@ -74,8 +74,6 @@ class ArticleDetailView(DetailView):
         anext = Article.published.filter(id__gt=self.object.id, is_product=False).order_by('id')
         kwargs['next_article'] = anext[0] if anext else ''
 
-        # kwargs['wechat_pay_code'] = site_settings.wechat_pay_code
-        # kwargs['alipay_code'] = site_settings.alipay_code
         context = super().get_context_data(**kwargs)
         return context
 
@@ -91,6 +89,16 @@ class ArticleListView(ListView):
         articles = self.get_queryset_data()
         return articles
 
+    def get_context_data(self, **kwargs):
+        kwargs['tag_name'] = self.name
+
+        kwargs['ad_column'] = Article.published.filter(ad_property=2)[0]
+        page = int(self.request.GET.get('page', 1))
+        particles, page_range = paging(page, self.object_list)
+        kwargs['articles'] =  particles
+        kwargs['page_range'] =  page_range
+        return super(ArticleListView, self).get_context_data(**kwargs)
+
 
 class ArchiveView(ArticleListView):
     page_type = '帖文分类归档'
@@ -98,47 +106,34 @@ class ArchiveView(ArticleListView):
     def get_queryset_data(self):
         slug = self.kwargs['category']
         category = get_object_or_404(Category, slug=slug)
-        category_name = category.name
-        self.name = category_name
-        articles = Article.published.filter(category__name=category_name)
+        self.name = category.name
+        articles = Article.published.filter(category__name=category.name)
         return articles
 
     def get_context_data(self, **kwargs):
-        category_name = self.name
         kwargs['page_type'] = ArchiveView.page_type
-        kwargs['tag_name'] = category_name
 
-        category = Category.objects.get(name=category_name)
+        category = Category.objects.get(name=self.name)
         kwargs['head_title'] = category.head_title
         kwargs['head_desc'] = category.head_desc
         kwargs['head_keywords'] = category.head_keywords
-        kwargs['ad_column'] = Article.published.filter(ad_property=2)[0]
-
-        page = int(self.request.GET.get('page', 1))
-        particles, page_range = paging(page, self.object_list)
-        kwargs['articles'] =  particles
-        kwargs['page_range'] =  page_range
         return super(ArchiveView, self).get_context_data(**kwargs)
 
 
 class TagDetailView(ArticleListView):
     page_type = '标签归档'
-    paginate_by = 20
 
     def get_queryset_data(self):
         slug = self.kwargs['tag']
         tag = get_object_or_404(Tag, slug=slug)
-        tag_name = tag.name
-        self.name = tag_name
-        article_list = Article.published.filter(tags__name=tag_name, ad_property=0)
+        self.name = tag.name
+        article_list = Article.published.filter(tags__name=tag.name, ad_property=0)
         return article_list
 
     def get_context_data(self, **kwargs):
-        tag_name = self.name
         kwargs['page_type'] = TagDetailView.page_type
-        kwargs['tag_name'] = tag_name
 
-        tag = Tag.objects.get(name=tag_name)
+        tag = Tag.objects.get(name=self.name)
         kwargs['head_title'] = tag.head_title
         kwargs['head_desc'] = tag.head_desc
         kwargs['head_keywords'] = tag.head_keywords,

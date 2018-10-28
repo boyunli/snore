@@ -9,14 +9,10 @@
     <meta property="og:description" content="{{ article.title }}">
     <meta property="og:type" content="acticle">
     <meta property="og:locale" content="zh-CN" />
-    <meta property="og:site_name" content="微商代理网">
+    <meta property="og:site_name" content="{{ settings.sitename }}">
     <meta property="og:title" content="{{ article.title }}">
     <meta property="og:url" content="{% buildfullurl article.get_absolute_url %}" />
     <meta property="og:image" content="{% buildfullurl article.image.url %}">
-    <!--
-    <link rel='stylesheet' id='highlight-css' href='static/css/highlight_1.css' type='text/css' media='all' />
-    <script type='text/javascript' src='static/js/no-right-click_1.js'></script>
-    -->
 {% endblock %}
 
 {% block breadcrumb %}
@@ -68,12 +64,12 @@
 	                        				<span id=&quot;shang&quot;>
 	                        					<span class=&quot;shang-main&quot;>
 	                        						<h4><i class=&quot;be be-favorite&quot; aria-hidden=&quot;true&quot;></i> 您可以选择一种方式赞助本站</h4>															<span class=&quot;shang-img&quot;>
-                                                    <img src=&quot;{% buildfullurl alipay_code.url %}&quot; alt=&quot;alipay&quot;/>
+                                                    <img src=&quot;{% buildfullurl settings.alipay_code.url %}&quot; alt=&quot;alipay&quot;/>
 	                        					    <h4>支付宝扫一扫赞助</h4>
                                                 </span>
 
 	                        					<span class=&quot;shang-img&quot;>
-                                                    <img src=&quot;{% buildfullurl wechat_pay_code.url %}&quot; alt=&quot;weixin&quot;/>
+                                                    <img src=&quot;{% buildfullurl settings.wechat_pay_code.url %}&quot; alt=&quot;weixin&quot;/>
 	                        						<h4>微信钱包扫描赞助</h4>
                                                 </span>
 
@@ -116,13 +112,13 @@
                         </ul>
                     </div>
                     <div class="authorbio wow fadeInUp" data-wow-delay="0.3s">
-                        <img alt='{{ article.account.nickname }}' src='{% buildfullurl article.account.portrait.url %}' class='avatar avatar-64 wpfla' height='64' width='64' />
+                        <img alt='{{ settings.sitename }}' src='{% buildfullurl settings.portrait.url %}' class='avatar avatar-64 wpfla' height='64' width='64' />
                         <ul class="spostinfo">
                             <li>
-                                <li><strong>版权声明：</strong>文章源于投稿或网络，于{{ article.update_time }}，由 <b>{{ article.account.nickname }}</b> 发表，共 {{ article.content|length}} 字。</li>
+                                <li><strong>版权声明：</strong>文章源于投稿或网络，于{{ article.update_time }}，共 {{ article.content|length}} 字。</li>
                                 <li class="reprinted">
                                     <strong>转载请注明：</strong>
-                                    <a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark" title="{{ article.title }}">{{ article.title }} | 微商代理网</a>
+                                    <a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark" title="{{ article.title }}">{{ article.title }} | {{ settings.sitename }}</a>
                                 </li>
                         </ul>
                         <div class="clear"></div>
@@ -179,59 +175,5 @@
 {% endblock %}
 
 {% block js-script %}
-    <script type="text/javascript" src="static/js/jquery-ui.min_1.js"></script>
-    <script type="text/javascript" src="static/js/qaptcha.jquery_1.js"></script>
-    <script type="text/javascript">
-        var QaptchaJqueryPage = "http://www.qugood.com/wp-content/themes/begin/inc/qaptcha.jquery.php"
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.qaptcha').QapTcha();
-        });
-    </script>
-    <script type='text/javascript' src='static/js/beepress-pro_1.js'></script>
-    <script type='text/javascript' src='static/js/getqqinfo_1.js'></script>
-    <script type='text/javascript' src='static/js/slides_1.js'></script>
-    <script type='text/javascript' src='static/js/jquery.qrcode.min_1.js'></script>
-    <script type='text/javascript' src='static/js/wow_1.js'></script>
-    <script type='text/javascript' src='static/js/sticky_1.js'></script>
-    <script type='text/javascript' src='static/js/jquery-ias_1.js'></script>
-    <script type='text/javascript' src='static/js/jquery.lazyload_1.js'></script>
-    <script type='text/javascript' src='static/js/tipso_1.js'></script>
-    <script type='text/javascript'>
-        /* <![CDATA[ */
-        var wpl_ajax_url = "http:\/\/www.qugood.com\/wp-content\/themes\/begin\/inc\/admin-ajax.php";
-        /* ]]> */
-    </script>
-    <script type='text/javascript' src='static/js/script_1.js'></script>
-    <script type='text/javascript' src='static/js/flexisel_1.js'></script>
-    <script type='text/javascript' src='static/js/fancybox_1.js'></script>
     <script type='text/javascript' src='{% fullstatic "dashboard/js/comments-ajax-qt.js" %}'></script>
-    <script type='text/javascript' src='static/js/superfish_1.js'></script>
-    <script type='text/javascript' src='static/js/gb2big5_1.js'></script>
-    <script type='text/javascript' src='static/js/carousel.min_1.js'></script>
-    <script type='text/javascript' src='static/js/bd-share_1.js'></script>
-    <script type='text/javascript' src='static/js/wpzm_1.js'></script>
-    <script type="text/javascript">
-        var ias = $.ias({
-            container: "#comments",
-            item: ".comment-list",
-            pagination: ".scroll-links",
-            next: ".scroll-links .nav-previous a",
-        });
-        ias.extension(new IASTriggerExtension({
-            text: '<i class="be be-circledown"></i>更多',
-            offset: 0,
-        }));
-        ias.extension(new IASSpinnerExtension());
-        ias.extension(new IASNoneLeftExtension({
-            text: '已是最后',
-        }));
-        ias.on('rendered', function(items) {
-            $("img").lazyload({
-                effect: "fadeIn",
-                failure_limit: 10
-            });
-        });
-    </script>
 {% endblock %}

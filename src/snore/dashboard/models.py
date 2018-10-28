@@ -282,6 +282,7 @@ class SiteSettings(models.Model):
     portrait = models.ImageField(_('头像'), upload_to='site/portrait', help_text=_('图片大小35*35'))
 
     qq_bar_code = models.ImageField(_('QQ二维码'), upload_to='site/qq')
+    wechat_code = models.ImageField(_('微信二维码'), upload_to='site/wechat')
     qq = models.CharField(_("QQ"), max_length=20)
 
     wechat_pay_code = models.ImageField(_('微信支付维码'), upload_to='site/wechat')

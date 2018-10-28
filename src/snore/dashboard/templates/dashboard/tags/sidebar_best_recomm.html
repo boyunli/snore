@@ -16,7 +16,7 @@
                                 <span class="thumbnail">
                                     <a href="{% buildfullurl article.get_absolute_url %}"><img src="{% buildfullurl article.image.url %}" alt="{{ article.title }}" /></a>
                                 </span>
-                                <span class="hot-title"><a href="{{ article.get_absolute_url }}" rel="bookmark">{{ article.title }}</a></span>
+                                <span class="hot-title"><a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">{{ article.title }}</a></span>
                                 <span class="views">
                                     <i class="be be-calendar2"></i> {{ article.update_time|date:"m/j" }}
                                 </span> 

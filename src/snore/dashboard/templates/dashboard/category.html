@@ -7,19 +7,6 @@
     <title> {{ category.head_title }}-微商代理网</title>
     <meta name="description" content="{{ category.head_desc }}" />
     <meta name="keywords" content="{{ head_keywords }}" />
-    <!--
-    <script type='text/javascript' src='static/js/player_1.js'></script>
-    <script type='text/javascript'>
-        /* <![CDATA[ */
-        var IwNRCargs = {
-            "rightclick": "Y",
-            "draganddrop": "Y"
-        };
-        /* ]]> */
-    </script>
-    <script type='text/javascript' src='static/js/no-right-click_1.js'></script>
-    <style>.single-content img{margin: 0 auto;}</style>
-    -->
 {% endblock %}
 
 {% block breadcrumb %}
@@ -76,29 +63,29 @@
 
         </main><!-- .site-main -->
 
-                <div class="pagenav-clear">
-                <nav class="navigation pagination" role="navigation">
-                    <h2 class="screen-reader-text">文章导航</h2>
-                    <div class="nav-links">
-                        {% if articles.has_previous %}
-                        <a class="prev page-numbers" href="?page={{ articles.previous_page_number }}"><i class="be be-arrowleft"></i></a>
-                        {% endif %}
-                        {% for p in page_range %}
-                            {% ifequal p articles.number %}
-                                <span aria-current='page' class='page-numbers current'><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></span>
-                            {% else %}
-                                <a class="page-numbers" href="?page={{ p }}"><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></a>
-                            {% endifequal %}
-                        {% endfor %}
-                        {% if articles.has_next %}
-                            <span class="page-numbers dots">…</span>
-                            <a class="page-numbers" href="?page={{ articles.paginator.num_pages}}"><span class="screen-reader-text">第 </span>{{ articles.paginator.num_pages}}<span class="screen-reader-text"> 页</span></a>
-                            <a class="next page-numbers" href="?page={{ articles.next_page_number }}"><i class="be be-arrowright"></i></a>
-                        {% endif %}
-                    </div>
-                </nav>
-
+         <div class="pagenav-clear">
+            <nav class="navigation pagination" role="navigation">
+                <h2 class="screen-reader-text">文章导航</h2>
+                <div class="nav-links">
+                    {% if articles.has_previous %}
+                    <a class="prev page-numbers" href="?page={{ articles.previous_page_number }}"><i class="be be-arrowleft"></i></a>
+                    {% endif %}
+                    {% for p in page_range %}
+                        {% ifequal p articles.number %}
+                            <span aria-current='page' class='page-numbers current'><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></span>
+                        {% else %}
+                            <a class="page-numbers" href="?page={{ p }}"><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></a>
+                        {% endifequal %}
+                    {% endfor %}
+                    {% if articles.has_next %}
+                        <span class="page-numbers dots">…</span>
+                        <a class="page-numbers" href="?page={{ articles.paginator.num_pages}}"><span class="screen-reader-text">第 </span>{{ articles.paginator.num_pages}}<span class="screen-reader-text"> 页</span></a>
+                        <a class="next page-numbers" href="?page={{ articles.next_page_number }}"><i class="be be-arrowright"></i></a>
+                    {% endif %}
                 </div>
+            </nav>
+
+         </div>
 
     </section><!-- .content-area -->
 

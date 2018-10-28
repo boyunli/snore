@@ -88,7 +88,7 @@ class LinksAdmin(admin.ModelAdmin):
 class SiteSettingsAdmin(admin.ModelAdmin):
     list_display = ('sitename', 'filing_number')
 
-    def has_delete_permission(self, request):
+    def has_delete_permission(self, request, obj=None):
         '''
         禁止admin 删除
         '''

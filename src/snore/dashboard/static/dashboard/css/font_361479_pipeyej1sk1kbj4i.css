@@ -1,8 +1,7 @@
-﻿
+
 @font-face {font-family: "be";
   src: url('../fonts/font_361479_pipeyej1sk1kbj4i.eot'); /* IE9*/
   src: url('../fonts/font_361479_pipeyej1sk1kbj4i.eot') format('embedded-opentype'), /* IE6-IE8 */
-  url('../fonts/635a157822974bcbbbe57724d6da0188.woff') format('woff'),
   url('../fonts/font_361479_pipeyej1sk1kbj4i.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
   url('../fonts/font_361479_pipeyej1sk1kbj4i.svg') format('svg'); /* iOS 4.1- */
 }

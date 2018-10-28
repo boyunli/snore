@@ -146,13 +146,13 @@ class Article(models.Model):
     tags = models.ManyToManyField(Tag, verbose_name='标签', blank=True)
     views = models.PositiveIntegerField(_('阅读量'), default=0)
     ad_property = models.IntegerField(_('广告属性'), choices=POSITION_CHOICES, default=POSITION0)
+    is_product = models.BooleanField(_('Is Product'), choices=BOOLEAN_CHOICES, default=False)
     link = models.URLField(_('外链'), help_text=_('若设置了产品页，请提供链接!'), null=True, blank=True)
-    create_time = models.DateTimeField(_('创建时间'), default=timezone.now)
-    update_time = models.DateTimeField(_('更新时间'), default=timezone.now)
 
     is_broadcast = models.BooleanField(_('是否广播'), choices=BOOLEAN_CHOICES, default=False)
-    is_product = models.BooleanField(_('Is Product'), choices=BOOLEAN_CHOICES, default=False)
     is_published = models.BooleanField(_('是否发布'), choices=BOOLEAN_CHOICES, default=False)
+    create_time = models.DateTimeField(_('创建时间'), default=timezone.now)
+    update_time = models.DateTimeField(_('更新时间'), default=timezone.now)
 
     objects = models.Manager()
     published = PublishedManager()
@@ -206,14 +206,6 @@ class Article(models.Model):
             comments = self.comment_set.filter(is_enable=True)
             cache.set(cache_key, comments)
         return comments
-
-    # @property
-    # def first_para(self):
-    #     return re.sub('[\r\s\t\n]', '', self.content[:100])
-
-    # @property
-    # def comment_count(self):
-    #     return self.comment_set.all().count()
 
     def _resize_img(self, image, is_ad=False):
         image_path = BytesIO(image.read())
@@ -279,6 +271,7 @@ class SiteSettings(models.Model):
     head_desc = models.TextField(_("首页描述"))
     head_keywords = models.TextField(_("首页关键字"))
     site_code = models.ImageField(_('网站图标'), upload_to='site/site', help_text=_('图片大小220*50'))
+    favicon = models.ImageField(_('Favicon'), upload_to='site/favicon')
     portrait = models.ImageField(_('头像'), upload_to='site/portrait', help_text=_('图片大小35*35'))
 
     qq_bar_code = models.ImageField(_('QQ二维码'), upload_to='site/qq')

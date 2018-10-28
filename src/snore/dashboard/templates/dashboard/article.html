@@ -1,10 +1,11 @@
 {% extends 'share_layout/base.html' %}
 {% load dashboard_extras %}
 {% load fullurl %}
+{% load cache %}
 
 {% block header %}
-    <title>{{ article.title }}-微商代理网</title>
-    <meta name="description" content="{{ article.first_para }}" />
+    <title>{{ article.title }}-{{ settings.sitename }}</title>
+    <meta name="description" content="{{ article.content|striptags|slice:'80'|safe }}" />
     <meta name="keywords" content="{% for tag in article.tags.all %}{{ tag.name}}{% if not forloop.last %},{% endif %}{% endfor %}" />
     <meta property="og:description" content="{{ article.title }}">
     <meta property="og:type" content="acticle">
@@ -23,149 +24,150 @@
     </nav>
 {% endblock %}
 
-
 {% block primary %}
-            <div id="primary" class="content-area">
-                <main id="main" class="site-main" role="main">
+<div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
 
-                    <article id="post-{{ article.id }}" class="post-{{ article.id }} post type-post status-publish format-standard hentry category-internet tag-3178 ghi">
-                        <header class="entry-header">
-                            <h1 class="entry-title">{{ article.title }}</h1>
-                        </header><!-- .entry-header -->
+        <article id="post-{{ article.id }}" class="post-{{ article.id }} post type-post status-publish format-standard hentry category-internet tag-3178 ghi">
+            <header class="entry-header">
+                <h1 class="entry-title">{{ article.title }}</h1>
+            </header><!-- .entry-header -->
 
-                        <div class="entry-content">
+            <div class="entry-content">
 
-                            <ul class="single-meta">
-                                <li class="comment"><a href="{% buildfullurl article.get_absolute_url %}#comments" rel="external nofollow"><i class="be be-speechbubble"></i> 发表评论</a></li>
-                                <li class="r-hide"><a href="#"><span class="off-side"></span></a></li>
-                            </ul>
-                            <ul id="fontsize">
-                                <li>A+</li>
-                            </ul>
-                            <div class="single-cat-tag">
-                                <div class="single-cat">所属分类：<a href="{% buildfullurl article.category.get_absolute_url %}" rel="category tag">{{ article.category.name }}</a></div>
-                            </div>
-                            <div class="single-content">
-                                {{ article.content|safe }}
-                            </div>
+                <ul class="single-meta">
+                    <li class="comment"><a href="{% buildfullurl article.get_absolute_url %}#comments" rel="external nofollow"><i class="be be-speechbubble"></i> 发表评论</a></li>
+                    <li class="r-hide"><a href="#"><span class="off-side"></span></a></li>
+                </ul>
+                <ul id="fontsize">
+                    <li>A+</li>
+                </ul>
+                <div class="single-cat-tag">
+                    <div class="single-cat">所属分类：<a href="{% buildfullurl article.category.get_absolute_url %}" rel="category tag">{{ article.category.name }}</a></div>
+                </div>
+                <div class="single-content">
+                    {{ article.content|safe }}
+                </div>
 
 
-                            <div class="clear"></div>
-                            <div id="social">
-                                <div class="social-main">
-                                    <span class="like">
-                                        <a href="javascript:;" title="阅读">
-                                            <i class="be be-eye"></i>{{ article.views }}
-                                        </a>
+                <div class="clear"></div>
+                <div id="social">
+                    <div class="social-main">
+                        <span class="like">
+                            <a href="javascript:;" title="阅读">
+                                <i class="be be-eye"></i>{{ article.views }}
+                            </a>
+                        </span>
+                        <div class="shang-p">
+                            <div class="shang-empty"><span></span></div>
+                            <span class="tipso_style" id="tip-p" data-tipso="
+              				<span id=&quot;shang&quot;>
+              					<span class=&quot;shang-main&quot;>
+              						<h4><i class=&quot;be be-favorite&quot; aria-hidden=&quot;true&quot;></i> 您可以选择一种方式赞助本站</h4>															<span class=&quot;shang-img&quot;>
+                                        <img src=&quot;{% buildfullurl settings.alipay_code.url %}&quot; alt=&quot;alipay&quot;/>
+              					    <h4>支付宝扫一扫赞助</h4>
                                     </span>
-                                    <div class="shang-p">
-                                        <div class="shang-empty"><span></span></div>
-                                        <span class="tipso_style" id="tip-p" data-tipso="
-	                        				<span id=&quot;shang&quot;>
-	                        					<span class=&quot;shang-main&quot;>
-	                        						<h4><i class=&quot;be be-favorite&quot; aria-hidden=&quot;true&quot;></i> 您可以选择一种方式赞助本站</h4>															<span class=&quot;shang-img&quot;>
-                                                    <img src=&quot;{% buildfullurl settings.alipay_code.url %}&quot; alt=&quot;alipay&quot;/>
-	                        					    <h4>支付宝扫一扫赞助</h4>
-                                                </span>
 
-	                        					<span class=&quot;shang-img&quot;>
-                                                    <img src=&quot;{% buildfullurl settings.wechat_pay_code.url %}&quot; alt=&quot;weixin&quot;/>
-	                        						<h4>微信钱包扫描赞助</h4>
-                                                </span>
+              					<span class=&quot;shang-img&quot;>
+                                        <img src=&quot;{% buildfullurl settings.wechat_pay_code.url %}&quot; alt=&quot;weixin&quot;/>
+              						<h4>微信钱包扫描赞助</h4>
+                                    </span>
 
-                                                <span class=&quot;clear&quot;></span>
-	                        				</span>
-	                        				</span>">
-                                            <span class="shang-s"><a title="赞助本站">赏</a></span>
-                                        </span>
-                                    </div>
-                                    <div class="share-sd">
-                                        <span class="share-s"><a href="javascript:void(0)" id="share-s" title="分享"><i class="be be-share"></i>分享</a></span>
-                                        <div id="share" style="display: none;">
-                                            <ul class="bdsharebuttonbox bdshare-button-style1-16" data-bd-bind="1532001266207">
-                                                <li><a title="更多" class="bds_more be be-addbox" data-cmd="more" onclick="return false;" href="#"></a></li>
-                                                <li><a title="分享到QQ空间" class="be be-qzone" data-cmd="qzone" onclick="return false;" href="#"></a></li>
-                                                <li><a title="分享到新浪微博" class="be be-stsina" data-cmd="tsina" onclick="return false;" href="#"></a></li>
-                                                <li><a title="分享到腾讯微博" class="be be-tqq" data-cmd="tqq" onclick="return false;" href="#"></a></li>
-                                                <li><a title="分享到人人网" class="be be-renren" data-cmd="renren" onclick="return false;" href="#"></a></li>
-                                                <li><a title="分享到微信" class="be be-weixin" data-cmd="weixin" onclick="return false;" href="#"></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="clear"></div>
-                                </div>
-                            </div>
-
-                            <footer class="single-footer">
-                            </footer><!-- .entry-footer -->
-
-                            <div class="clear"></div>
-                        </div><!-- .entry-content -->
-
-                    </article><!-- #post -->
-
-                    <div class="single-tag">
-                        <ul class="wow fadeInUp" data-wow-delay="0.3s">
-                            {% for tag in article.tags.all %}
-                            <li><a href="{% buildfullurl tag.get_absolute_url %}" rel="tag">{{ tag.name}}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <div class="authorbio wow fadeInUp" data-wow-delay="0.3s">
-                        <img alt='{{ settings.sitename }}' src='{% buildfullurl settings.portrait.url %}' class='avatar avatar-64 wpfla' height='64' width='64' />
-                        <ul class="spostinfo">
-                            <li>
-                                <li><strong>版权声明：</strong>文章源于投稿或网络，于{{ article.update_time }}，共 {{ article.content|length}} 字。</li>
-                                <li class="reprinted">
-                                    <strong>转载请注明：</strong>
-                                    <a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark" title="{{ article.title }}">{{ article.title }} | {{ settings.sitename }}</a>
-                                </li>
-                        </ul>
-                        <div class="clear"></div>
-                    </div>
-
-                    <div id="related-img" class="wow fadeInUp" data-wow-delay="0.3s">
-
-                        {% for sim in articles %}
-                        <div class="r4">
-                            <div class="related-site">
-                                <figure class="related-site-img">
-                                    <span class="load"><a href="{% buildfullurl sim.get_absolute_url %}"><img src="{% buildfullurl sim.image.url %}" alt="{{ sim.title }}" /></a></span>
-                                </figure>
-                                <div class="related-title"><a href="{% buildfullurl sim.get_absolute_url %}">{{ sim.title }}</a></div>
+                                    <span class=&quot;clear&quot;></span>
+              				</span>
+              				</span>">
+                                <span class="shang-s"><a title="赞助本站">赏</a></span>
+                            </span>
+                        </div>
+                        <div class="share-sd">
+                            <span class="share-s"><a href="javascript:void(0)" id="share-s" title="分享"><i class="be be-share"></i>分享</a></span>
+                            <div id="share" style="display: none;">
+                                <ul class="bdsharebuttonbox bdshare-button-style1-16" data-bd-bind="1532001266207">
+                                    <li><a title="更多" class="bds_more be be-addbox" data-cmd="more" onclick="return false;" href="#"></a></li>
+                                    <li><a title="分享到QQ空间" class="be be-qzone" data-cmd="qzone" onclick="return false;" href="#"></a></li>
+                                    <li><a title="分享到新浪微博" class="be be-stsina" data-cmd="tsina" onclick="return false;" href="#"></a></li>
+                                    <li><a title="分享到腾讯微博" class="be be-tqq" data-cmd="tqq" onclick="return false;" href="#"></a></li>
+                                    <li><a title="分享到人人网" class="be be-renren" data-cmd="renren" onclick="return false;" href="#"></a></li>
+                                    <li><a title="分享到微信" class="be be-weixin" data-cmd="weixin" onclick="return false;" href="#"></a></li>
+                                </ul>
                             </div>
                         </div>
-                        {% endfor %}
-
                         <div class="clear"></div>
                     </div>
+                </div>
+
+                <footer class="single-footer">
+                </footer><!-- .entry-footer -->
+
+                <div class="clear"></div>
+            </div><!-- .entry-content -->
+
+        </article><!-- #post -->
+
+        <div class="single-tag">
+            <ul class="wow fadeInUp" data-wow-delay="0.3s">
+                {% for tag in article.tags.all %}
+                <li><a href="{% buildfullurl tag.get_absolute_url %}" rel="tag">{{ tag.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="authorbio wow fadeInUp" data-wow-delay="0.3s">
+            <img alt='{{ settings.sitename }}' src='{% buildfullurl settings.portrait.url %}' class='avatar avatar-64 wpfla' height='64' width='64' />
+            <ul class="spostinfo">
+                <li>
+                    <li><strong>版权声明：</strong>文章源于投稿或网络，于{{ article.update_time }}，共 {{ article.content|length }} 字。</li>
+                    <li class="reprinted">
+                        <strong>转载请注明：</strong>
+                        <a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark" title="{{ article.title }}">{{ article.title }} | {{ settings.sitename }}</a>
+                    </li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+
+        <div id="related-img" class="wow fadeInUp" data-wow-delay="0.3s">
+
+            {% for sim in articles %}
+            <div class="r4">
+                <div class="related-site">
+                    <figure class="related-site-img">
+                        <span class="load"><a href="{% buildfullurl sim.get_absolute_url %}"><img src="{% buildfullurl sim.image.url %}" alt="{{ sim.title }}" /></a></span>
+                    </figure>
+                    <div class="related-title"><a href="{% buildfullurl sim.get_absolute_url %}">{{ sim.title }}</a></div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="clear"></div>
+        </div>
 
 
-                    <nav class="nav-single wow fadeInUp" data-wow-delay="0.3s">
-                        {% if prev_article %}
-                            <a href="{{ prev_article.get_absolute_url }}" rel="prev"><span class="meta-nav"><span class="post-nav"><i class="be be-arrowleft"></i> 上一篇</span><br />{{ prev_article.title }}</span></a>
-                        {% else %}
-                            <a href="" rel="prev"><span class="meta-nav"><span class="post-nav"><i class="be be-arrowleft"></i> 上一篇</span><br />第一篇</span></a>
-                        {% endif %}
-                        {% if next_article %}
-                            <a href="{{ next_article.get_absolute_url }}" rel="next"><span class="meta-nav"><span class="post-nav">下一篇 <i class="be be-arrowright"></i></span><br />{{ next_article.title }}</span></a>
-                        {% else %}
-                            <a href="" rel="next"><span class="meta-nav"><span class="post-nav">下一篇 <i class="be be-arrowright"></i></span><br />最后一篇</span></a>
-                        {% endif %}
-                        <div class="clear"></div>
-                    </nav>
+        <nav class="nav-single wow fadeInUp" data-wow-delay="0.3s">
+            {% if prev_article %}
+                <a href="{{ prev_article.get_absolute_url }}" rel="prev"><span class="meta-nav"><span class="post-nav"><i class="be be-arrowleft"></i> 上一篇</span><br />{{ prev_article.title }}</span></a>
+            {% else %}
+                <a href="" rel="prev"><span class="meta-nav"><span class="post-nav"><i class="be be-arrowleft"></i> 上一篇</span><br />第一篇</span></a>
+            {% endif %}
+            {% if next_article %}
+                <a href="{{ next_article.get_absolute_url }}" rel="next"><span class="meta-nav"><span class="post-nav">下一篇 <i class="be be-arrowright"></i></span><br />{{ next_article.title }}</span></a>
+            {% else %}
+                <a href="" rel="next"><span class="meta-nav"><span class="post-nav">下一篇 <i class="be be-arrowright"></i></span><br />最后一篇</span></a>
+            {% endif %}
+            <div class="clear"></div>
+        </nav>
 
-                    <!-- 引用 -->
+        <!-- 引用 -->
 
 
-                    <div class="scroll-comments"></div>
+        <div class="scroll-comments"></div>
 
-                    <div id="comments" class="comments-area">
-                    {% include 'comments/comments.html' %}
-                    <!-- #comments -->
+        <div id="comments" class="comments-area">
+        {% cache 86400 comment %}
+            {% include 'comments/comments.html' %}
+        {% endcache %}
+        <!-- #comments -->
 
-                </main><!-- .site-main -->
-            </div><!-- .content-area -->
+    </main><!-- .site-main -->
+</div><!-- .content-area -->
 {% endblock %}
 
 {% block sidebar %}
@@ -176,4 +178,6 @@
 
 {% block js-script %}
     <script type='text/javascript' src='{% fullstatic "dashboard/js/comments-ajax-qt.js" %}'></script>
+    <!-- 分享更多 -->
+    <script type='text/javascript' src="{% fullstatic 'dashboard/js/bd-share.js' %}"></script>
 {% endblock %}

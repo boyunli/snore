@@ -19,14 +19,14 @@
                     <nav id="site-nav" class="main-nav">
                         <a href="#sidr-main" id="navigation-toggle" class="bars"><i class="be be-menu"></i></a>
                         <div class="menu-%e8%b6%a3%e6%9e%9c%e7%bd%91-container">
-                            <ul id="menu-%e8%b6%a3%e6%9e%9c%e7%bd%91" class="down-menu nav-menu">
+                            <ul id="menu-category" class="down-menu nav-menu">
                                 <li id="menu-item-587"  class="imenu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-home menu-item-587">
                                     <a href="{% fullurl 'dashboard:index' %}"><i class="be be-home"></i><span class="font-text">首页</span></a>
                                 </li>
                                 {% for category in categorys %}
                                     <li id="menu-item-{{ category.id }}" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-{{ category.id }}">
                                       {% if category.link  %}
-                                          <a href="{{ category.link }}" rel=”nofollow” target="_blank">
+                                          <a href="{{ category.link }}" rel="external nofollow" target="_blank">
                                               <i class="{{ category.icon }}"></i><span class="font-text">{{ category.name }}</span>
                                           </a>
                                       {% else %}

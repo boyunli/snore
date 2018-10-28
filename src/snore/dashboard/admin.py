@@ -38,6 +38,8 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'ad_property',
                     'is_product', 'link', 'is_published', 'preview')
     list_editable = ['ad_property', 'is_published']
+    list_filter = ('is_published', 'update_time', 'category',
+                   'is_product', 'is_broadcast')
 
     fieldsets = (
         ('base info', {'fields': ['title', 'category', 'ad_image',

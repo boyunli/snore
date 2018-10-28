@@ -1,27 +1,27 @@
 {% load fullurl %}
-                <aside id="hot_commend-9" class="widget hot_commend wow fadeInUp" data-wow-delay="0.3s">
-                    <h3 class="widget-title">
-                        <span class="title-i">
-                            <span class="title-i-t"></span>
-                            <span class="title-i-b"></span>
-                            <span class="title-i-b"></span>
-                            <span class="title-i-t"></span>
-                        </span>热门文章
-                    </h3>
-                    <div id="hot" class="hot_commend">
-                        <ul>
-                        {% for article in hot_articles %}
-                            <li>
-                                <span class="thumbnail">
-                                    <a href="{% buildfullurl article.get_absolute_url %}"><img src="{% buildfullurl article.image.url %}" alt="{{ article.title }}" /></a>
-                                </span>
-                                <span class="hot-title"><a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">{{ article.title }}</a></span>
-                                <span class="views">
-                                <i class="be be-calendar2"></i> {{ article.update_time|date:"m/j" }}
-                                </span> 
-                            </li>
-                        {% endfor %}
-                        </ul>
-                    </div>
-                    <div class="clear"></div>
-                </aside>
+ <aside id="hot_commend-9" class="widget hot_commend wow fadeInUp" data-wow-delay="0.3s">
+     <h3 class="widget-title">
+         <span class="title-i">
+             <span class="title-i-t"></span>
+             <span class="title-i-b"></span>
+             <span class="title-i-b"></span>
+             <span class="title-i-t"></span>
+         </span>热门文章
+     </h3>
+     <div id="hot" class="hot_commend">
+         <ul>
+         {% for article in hot_articles %}
+             <li>
+                 <span class="thumbnail">
+                     <a href="{% buildfullurl article.get_absolute_url %}"><img src="{% buildfullurl article.image.url %}" alt="{{ article.title }}" /></a>
+                 </span>
+                 <span class="hot-title"><a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">{{ article.title }}</a></span>
+                 <span class="views">
+                 <i class="be be-calendar2"></i> {{ article.update_time|date:"m/j" }}
+                 </span> 
+             </li>
+         {% endfor %}
+         </ul>
+     </div>
+     <div class="clear"></div>
+ </aside>

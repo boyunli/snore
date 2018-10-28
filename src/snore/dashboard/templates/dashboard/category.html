@@ -50,13 +50,15 @@
 
             </article><!-- #post -->
                 {% if forloop.counter == 2 %}
+                {% if ad_column %}
                     <div class="wow fadeInUp" data-wow-delay="0.3s">
                         <div class="ad-pc ad-site">
-                             <a href="{{ ad_column.link }}" rel=”nofollow” target="_blank" rel="bookmark">
+                             <a href="{{ ad_column.link }}" rel="external nofollow" target="_blank" rel="bookmark">
                                  <img src="{% buildfullurl ad_column.image_url %}" alt="{{ ad_column.title }}" />
                              </a>
                         </div>
                     </div>
+                {% endif %}
                 {% endif %}
             {% endfor %}
 

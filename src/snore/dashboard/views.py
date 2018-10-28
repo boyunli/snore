@@ -35,13 +35,14 @@ class IndexView(TemplateView):
         page = int(request.GET.get('page', 1))
         particles, page_range = paging(page, articles)
 
+        ad_column =  Article.published.filter(ad_property=2)
         context = {
             'settings': settings,
             'bd_articles': Article.published.filter(is_broadcast=True),
             'ad_left_up_round': ads.filter(ad_property=1)[:6],
             'articles': particles,
             'page_range': page_range,
-            'ad_column': ads.filter(ad_property=2)[0],
+            'ad_column': ad_column[0] if ad_column else None,
             'links': Link.objects.values('url', 'name'),
         }
         return render(request, self.template_class, context)
@@ -92,7 +93,9 @@ class ArticleListView(ListView):
     def get_context_data(self, **kwargs):
         kwargs['tag_name'] = self.name
 
-        kwargs['ad_column'] = Article.published.filter(ad_property=2)[0]
+        ad_column =  Article.published.filter(ad_property=3)
+        if ad_column:
+            kwargs['ad_column'] = ad_column[0]
         page = int(self.request.GET.get('page', 1))
         particles, page_range = paging(page, self.object_list)
         kwargs['articles'] =  particles

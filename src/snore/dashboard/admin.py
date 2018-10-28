@@ -6,7 +6,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 
 from snore.settings import MEDIA_ROOT
-from .models import Category, Article, Tag, Link #, SiteSettings
+from .models import Category, Article, Tag, Link, SiteSettings
 
 admin.site.site_header = '止鼾网'
 admin.site.site_title = '止鼾网'
@@ -83,4 +83,14 @@ class LinksAdmin(admin.ModelAdmin):
     exclude = ('slug', 'create_time', 'update_time')
     list_display = ('name', 'url')
 
+
+@admin.register(SiteSettings)
+class SiteSettingsAdmin(admin.ModelAdmin):
+    list_display = ('sitename', 'filing_number')
+
+    def has_delete_permission(self, request):
+        '''
+        禁止admin 删除
+        '''
+        return False
 

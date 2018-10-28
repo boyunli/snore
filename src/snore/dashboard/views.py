@@ -4,8 +4,10 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, InvalidPage, PageNotAnInteger
 
-from .models import Category, Article, Tag, Link
+from .models import Category, Article, Tag, Link, SiteSettings
 from comments.forms import CommentForm
+
+settings = SiteSettings.load()
 
 def paging(page, items, display_amount=15,
             after_range_num=5, bevor_range_num=4):
@@ -34,6 +36,8 @@ class IndexView(TemplateView):
         particles, page_range = paging(page, articles)
 
         context = {
+            'settings': settings,
+            'bd_articles': Article.published.filter(is_broadcast=True),
             'ad_left_up_round': ads.filter(ad_property=1)[:6],
             'articles': particles,
             'page_range': page_range,

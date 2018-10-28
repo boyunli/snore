@@ -17,14 +17,23 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
 
-sitemaps = {}
+from snore.sitemap import StaticViewSitemap, ArticleSiteMap, \
+    CategorySiteMap, TagSiteMap
+
+sitemaps = {
+    'static': StaticViewSitemap,
+    'articles': ArticleSiteMap,
+    'Category': CategorySiteMap,
+    'Tag': TagSiteMap
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'ckeditor/', include('ckeditor_uploader.urls')),
     path(r'', include('dashboard.urls', namespace='dashboard')),
     path('', include('comments.urls', namespace='comments')),
-    path(r'sitemap\.xml', sitemap, {'sitemaps': sitemaps},
+    path(r'search/', include('haystack.urls')),
+    path(r'sitemap.xml', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
 ]
 

@@ -3,9 +3,9 @@
 {% load fullurl %}
 
 {% block header %}
-    <title>趣果网—品牌营销新媒体 - 专注中国制造品牌升级。</title>
-    <meta name="description" content="趣果网（www.qugood.com）——品牌营销新媒体。" />
-    <meta name="keywords" content="品牌营销,品牌出海,品牌口号,品牌新闻,品牌策划,网络营销,电商新闻,跨境电商,新零售" />
+    <title>{{ settings.sitename }}—{{ settings.head_title}}</title>
+    <meta name="description" content="{{ settings.head_desc }}" />
+    <meta name="keywords" content="{{ settings.head_keywords }}" />
     <!--
     <link rel='stylesheet' id='BEEPRESSCSS-css' href='static/css/beepress.css' type='text/css' media='screen' />
     <script type='text/javascript' src='static/js/jquery.min.js'></script>
@@ -26,7 +26,9 @@
             <div id="scrolldiv">
                 <div class="scrolltext">
                     <ul>
-                        <li class="scrolltext-title"><a href="http://www.qugood.com/article/bulletin/tougao/" rel="bookmark">给我投稿，趣果哥帮您上头条号、搜狐号等知名自媒体</a></li>
+                        {% for article in bd_articles %}
+      		              	  <li class="scrolltext-title"><a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">{{ article.title }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>

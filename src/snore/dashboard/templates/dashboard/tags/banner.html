@@ -6,7 +6,9 @@
                 <span class="mobile-login"><a href="#login" id="login-mobile" ><i class="be be-timerauto"></i></a></span>
                 <div class="logo-site">
                     <h1 class="site-title">
-													<a href="http://www.qugood.com/"><img src="static/picture/logo.png" title="趣果网|品牌营销新媒体。" alt="趣果网|品牌营销新媒体。" rel="home" /><span class="site-name">趣果网|品牌营销新媒体。</span></a>
+                      <a href="{% fullurl 'dashboard:index' %}"><img src="{% buildfullurl settings.site_code.url %}" title="{{ settings.sitename }}|{{ settings.head_title }}" alt="{{ settings.sitename }}|{{ settings.head_title }}" rel="home" />
+                            <span class="site-name">{{ settings.sitename }}|{{ settings.head_title }}</span>
+                          </a>
 											</h1>
                 </div><!-- .logo-site -->
                 <div id="site-nav-wrap">
@@ -46,8 +48,7 @@
 
 <div id="search-main">
     <div class="searchbar">
-      {# <form method="get" id="searchform" action="{% fullurl 'haystack_search' %}"> #}
-        <form method="get" id="searchform" action="">
+        <form method="get" id="searchform" action="{% fullurl 'haystack_search' %}">
             <span class="search-input">
                 <input type="text" value="" name="q" id="s" placeholder="输入搜索内容" required />
                 <button type="submit" id="searchsubmit"><i class="be be-search"></i></button>

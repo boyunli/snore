@@ -4,9 +4,7 @@ from io import BytesIO
 
 from PIL import ImageOps, Image as Img
 
-
 from django.db import models
-from django.core.cache import cache
 from django.utils import timezone
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -17,6 +15,7 @@ from uuslug import slugify
 
 from ckeditor_uploader.fields import RichTextUploadingField
 from snore.settings import MEDIA_ROOT
+from snore.utils import cache
 
 import logging
 logger = logging.getLogger('snore')
@@ -254,7 +253,6 @@ class Article(models.Model):
         super(Article, self).save(*args, **kwargs)
 
 
-
 class Link(BaseModel):
     '''
     友情链接
@@ -272,45 +270,50 @@ class Link(BaseModel):
         verbose_name = verbose_name_plural = _('友情链接')
 
 
+class SiteSettings(models.Model):
+    '''
+    站点设置: 单例模式
+    '''
+    sitename = models.CharField(_("网站名称"), max_length=100)
+    head_title = models.TextField(_("首页标题"))
+    head_desc = models.TextField(_("首页描述"))
+    head_keywords = models.TextField(_("首页关键字"))
+    site_code = models.ImageField(_('网站图标'), upload_to='site/site', help_text=_('图片大小220*50'))
+    portrait = models.ImageField(_('头像'), upload_to='site/portrait', help_text=_('图片大小35*35'))
 
-#
-# class SiteSettings(models.Model):
-#     '''
-#     站点设置
-#     '''
-#     sitename = models.CharField("网站名称", max_length=100, null=False, blank=False, default='')
-#     head_title = models.TextField("首页标题", max_length=1000, null=False, blank=False, default='')
-#     head_desc = models.TextField("首页描述", max_length=1000, null=False, blank=False, default='')
-#     head_keywords = models.TextField("首页关键字", max_length=1000, null=False, blank=False, default='')
-#     article_sub_length = models.IntegerField("文章摘要长度", default=300)
-#     sidebar_flow_info_count = models.IntegerField("侧边栏信息流数目", default=10)
-#     sidebar_recomm_count = models.IntegerField("侧边栏推荐帖文数目", default=5)
-#
-#     qq_bar_code = models.ImageField(_('QQ二维码'), upload_to='site/qq')
-#     qq = models.CharField(_("QQ"), max_length=20)
-#
-#     wechat_pay_code = models.ImageField(_('微信支付维码'), upload_to='site/wechat')
-#     alipay_code = models.ImageField(_('支付宝二维码'), upload_to='site/alipay')
-#     phone = models.CharField('手机', max_length=11)
-#
-#     beiancode = models.CharField('备案号', max_length=2000, null=True, blank=True, default='')
-#     analyticscode = models.TextField("网站统计代码", max_length=1000, null=False, blank=False, default='')
-#     show_gongan_code = models.BooleanField('是否显示公安备案号', default=False, null=False)
-#     gongan_beiancode = models.TextField('公安备案号', max_length=2000, null=True, blank=True, default='')
-#
-#     class Meta:
-#         db_table = 'dashboard_settings'
-#         verbose_name = '网站配置'
-#         verbose_name_plural = verbose_name
-#
-#     def __str__(self):
-#         return self.sitename
-#
-#     def clean(self):
-#         if SiteSettings.objects.exclude(id=self.id).count():
-#             raise ValidationError(_('只能有一个配置'))
-#
-#     def save(self, *args, **kwargs):
-#         super().save(*args, **kwargs)
-#         from weishangdl.utils import cache
-#         cache.clear()
+    qq_bar_code = models.ImageField(_('QQ二维码'), upload_to='site/qq')
+    qq = models.CharField(_("QQ"), max_length=20)
+
+    wechat_pay_code = models.ImageField(_('微信支付维码'), upload_to='site/wechat')
+    alipay_code = models.ImageField(_('支付宝二维码'), upload_to='site/alipay')
+    phone = models.CharField(_('手机'), max_length=11)
+
+    filing_number = models.CharField(_('备案号'), max_length=200)
+    analytics = models.TextField(_('网站统计代码'))
+
+    class Meta:
+        db_table = 'dashboard_setting'
+        verbose_name = '网站配置'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.sitename
+
+    def clean(self):
+        if SiteSettings.objects.exclude(id=self.id).count():
+            raise ValidationError(_('只能有一个配置'))
+
+    def set_cache(self):
+        cache.set(self.__class__.__name__, self)
+
+    @classmethod
+    def load(cls):
+        if cache.get(cls.__name__) is None:
+            obj, created = cls.objects.get_or_create(pk=1)
+            if not created:
+                obj.set_cache()
+        return cache.get(cls.__name__)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.set_cache()

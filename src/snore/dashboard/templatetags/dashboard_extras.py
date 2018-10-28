@@ -1,6 +1,7 @@
 from django import template
 
 from dashboard.models import Category, Article, Tag
+from dashboard.views import settings
 
 register = template.Library()
 
@@ -15,12 +16,6 @@ def change_color(value):
 def display_humantime(value):
     return value.strftime('%m-%d')
 
-@register.inclusion_tag('dashboard/tags/login_pop.html')
-def load_login_pop():
-    # form = LoginForm()
-    # return {'form': form}
-    pass
-
 @register.inclusion_tag('dashboard/tags/banner.html')
 def load_banner():
     '''
@@ -28,6 +23,7 @@ def load_banner():
     '''
     return {
         'categorys': Category.objects.all(),
+        'settings': settings
     }
 
 @register.inclusion_tag('dashboard/tags/sidebar_tag.html')
@@ -64,7 +60,10 @@ def load_footer():
     加载 footer
     '''
     from django.utils import timezone
-    return {'year': timezone.now().year}
+    return {
+        'year': timezone.now().year,
+        'settings': settings
+    }
 
 @register.inclusion_tag('dashboard/tags/scroll.html')
 def load_scroll():

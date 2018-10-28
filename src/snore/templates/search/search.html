@@ -1,0 +1,104 @@
+﻿{% load dashboard_extras %}
+{% load highlight %}
+{% load fullurl %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>搜索结果 - 趣果网|品牌营销新媒体。</title>
+    <link rel="shortcut icon" href="{% fullstatic 'dashboard/images/favicon.jpg' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% fullstatic 'dashboard/images/favicon.jpg' %}" />
+
+    <link rel='stylesheet' id='bbp-default-css'  href="{% fullstatic 'dashboard/css/bbpress.css' %}" type='text/css' media='screen' />
+    <link rel='stylesheet' id='BEEPRESSIMAGECSS-css' href="{% fullstatic 'dashboard/css/beepress-image.css' %}" type='text/css' media='screen' />
+    <link rel='stylesheet' id='begin-style-css'  href="{% fullstatic 'dashboard/css/style.css' %}" type='text/css' media='all' />
+    <link rel='stylesheet' id='fonts-css'  href="{% fullstatic 'dashboard/css/fonts.css' %}" type='text/css' media='all' />
+    <!-- font icon -->
+    <link rel='stylesheet' id='iconfontd-css' href="{% fullstatic 'dashboard/css/font_361479_pipeyej1sk1kbj4i.css' %}" type='text/css' media='all' />
+    <script type='text/javascript' src="{% fullstatic 'dashboard/js/jquery.min.js' %}"></script>
+</head>
+<body class="search search-results" style="">
+    <div id="page" class="hfeed site">
+
+        {% load_banner %}
+
+        <nav class="breadcrumb">
+            <a class="crumbs" href="{% fullurl 'dashboard:index' %}">
+                <i class="be be-home"></i>首页
+            </a>
+            <i class="be be-arrowright"></i>搜索 <i class="be be-arrowright"></i>{{ query }}
+		</nav>
+
+        <div id="content" class="site-content">
+            {% if query %}
+            <section id="primary" class="content-area">
+                <main id="main" class="site-main" role="main">
+                    <ul class="search-page">
+                        {% for result in page.object_list %}
+                            <li class="search-inf">{{ result.object.update_time }}</li>
+                            <li class="entry-title"><a href="{% buildfullurl result.object.get_absolute_url %}" rel="bookmark">{% highlight result.object.title with query %}</a></li>
+                        {% empty %}
+                            <section class="no-results not-found">
+
+                                <div class="post">
+
+
+                                    <header class="entry-header">
+                                        <h1 class="page-title">没有您要找的文章！</h1>
+                                    </header><!-- .page-header -->
+
+                                    <p>可以尝试使用下面的搜索功能，查找您喜欢的文章！</p>
+                                    <div class="searchbar">
+                                        <form method="get" id="searchform" action="{% fullurl 'haystack_search' %}">
+                                            <span class="search-input">
+                                                <input type="text" value="{{ query }}" name="q" id="s" placeholder="输入搜索内容" required="True">
+                                                <button type="submit" id="searchsubmit"><i class="be be-search"></i></button>
+                                            </span>
+                                        </form>
+                                    </div> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+                                </div><!-- .page-content -->
+                            </section>
+                            <!-- .no-results -->
+                        {% endfor %}
+                    </ul>
+
+                </main><!-- .site-main -->
+
+                <nav class="navigation pagination" role="navigation">
+                    <h2 class="screen-reader-text">文章导航</h2>
+                    <div class="nav-links">
+                        {% if page.has_previous %}
+                            <a class="prev page-numbers" href="?q={{ query }}&amp;page={{ page.previous_page_number }}"><i class="be be-arrowleft"></i></a>
+                        {% endif %}
+                        {% for p in page.paginator.page_range %}
+                            {% ifequal p page.number %}
+                                <span aria-current="page" class="page-numbers current"><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></span>
+                            {% else %}
+                                <a class="page-numbers" href="?q={{ query }}&amp;page={{ p }}"><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></a>
+                            {% endifequal %}
+                        {% endfor %}
+                        {% if page.has_next %}
+                            <a class="next page-numbers" href="?q={{ query }}&amp;page={{ page.next_page_number }}"><i class="be be-arrowright"></i></a>
+                        {% endif %}
+                     </div>
+                </nav>
+            </section><!-- .content-area -->
+            {% endif %}
+
+
+        </div><!-- .site-content -->
+        <div class="clear"></div>
+        {% load_footer %}
+        {% load_scroll %}
+    </div><!-- .site -->
+    <!-- 侧边上下滑动 -->
+    <script type='text/javascript' src="{% fullstatic 'dashboard/js/script.js' %}"></script>
+</body>
+
+
+
+</html>

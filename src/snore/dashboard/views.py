@@ -62,11 +62,9 @@ class ArticleDetailView(DetailView):
         return obj
 
     def get_context_data(self, **kwargs):
-        article_comments = self.object.comment_list()
-
         kwargs['settings'] = settings
         kwargs['commentForm'] = CommentForm()
-        kwargs['article_comments'] = article_comments
+        kwargs['article_comments'] = self.object.comment_list()
         # import pdb;pdb.set_trace()
         kwargs['articles'] = Article.published.filter(ad_property=5)[:4]
 
@@ -100,6 +98,7 @@ class ArticleListView(ListView):
         particles, page_range = paging(page, self.object_list)
         kwargs['articles'] =  particles
         kwargs['page_range'] =  page_range
+        kwargs['settings'] = settings
         return super(ArticleListView, self).get_context_data(**kwargs)
 
 

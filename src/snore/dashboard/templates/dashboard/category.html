@@ -4,8 +4,8 @@
 {% load fullurl %}
 
 {% block header %}
-    <title> {{ category.head_title }}-微商代理网</title>
-    <meta name="description" content="{{ category.head_desc }}" />
+    <title> {{ head_title }}-{{ settings.sitename }}</title>
+    <meta name="description" content="{{ head_desc }}" />
     <meta name="keywords" content="{{ head_keywords }}" />
 {% endblock %}
 
@@ -28,7 +28,7 @@
                         <a href="{% buildfullurl article.get_absolute_url %}">
                             <img src="{% buildfullurl article.image.url %}" alt="{{ article.title }}" />
                         </a>
-                    <span class="cat"><a href="{% buildfullurl article.tag.get_absolute_url %}">{{ tag_name }}</a></span>
+                        <span class="cat"><a href="{% buildfullurl article.tag.get_absolute_url %}">{{ tag_name }}</a></span>
 	              </figure>
 
                 <header class="entry-header">
@@ -39,9 +39,9 @@
                     <div class="archive-content">{{ article.content|striptags|slice:'150'|safe }}... </div>
                     <span class="title-l"></span>
                     <span class="entry-meta-no">
-                      <span class="date"><i class="be be-calendar2"></i> {{ article.update_time|date:"m/j" }}</span>
-                      <span class="format-cat"><i class="be be-folder"></i> <a href="{% buildfullurl article.tag.get_absolute_url %}">{{ tag_name }}</a></span>
-                      <span class="views"><i class="be be-eye"></i> {{ article.views }} views</span>
+                        <span class="date"><i class="be be-calendar2"></i> {{ article.update_time|date:"m/j" }}</span>
+                        <span class="format-cat"><i class="be be-folder"></i> <a href="{% buildfullurl article.tag.get_absolute_url %}">{{ tag_name }}</a></span>
+                        <span class="views"><i class="be be-eye"></i> {{ article.views }} views</span>
                     </span>
                     <div class="clear"></div>
                 </div><!-- .entry-content -->

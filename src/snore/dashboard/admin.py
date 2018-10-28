@@ -7,19 +7,20 @@ from django.utils.html import format_html
 
 from snore.settings import MEDIA_ROOT
 from .models import Category, Article, Tag, Link, SiteSettings
+from .views import settings
 
-admin.site.site_header = '止鼾网'
-admin.site.site_title = '止鼾网'
+admin.site.site_header = settings.sitename
+admin.site.site_title = settings.sitename
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     exclude = ('create_time', 'update_time')
-    list_display = ('id', 'name', 'is_link', 'sequence', 'icon', 'href')
+    list_display = ('name', 'slug', 'is_link', 'sequence', 'icon', 'href')
     list_editable = ['is_link', 'sequence', 'icon']
 
     fieldsets = (
-        ('base info', {'fields': ['name', 'icon', 'is_link',
+        ('base info', {'fields': ['name', 'slug', 'icon', 'is_link',
                                   'link', 'sequence']}),
         ("Content", {'fields':['head_desc', 'head_title', 'head_keywords']})
     )
@@ -72,12 +73,13 @@ class ArticleAdmin(admin.ModelAdmin):
     def preview(self, obj):
         return format_html('<a href="{}" target="_blank">{}</a>',
                                obj.get_absolute_url(), obj.pk)
+    preview.short_description = "预览"
 
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     exclude = ('create_time', 'update_time')
-    list_display = ('id', 'name', 'slug')
+    list_display = ('name', 'slug')
 
 
 @admin.register(Link)

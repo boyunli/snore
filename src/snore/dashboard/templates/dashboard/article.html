@@ -49,7 +49,6 @@
                     {{ article.content|safe }}
                 </div>
 
-
                 <div class="clear"></div>
                 <div id="social">
                     <div class="social-main">
@@ -177,6 +176,13 @@
 {% endblock %}
 
 {% block js-script %}
+	<script>
+        $(".single-content p img").addClass("aligncenter");
+        var origin = window.location.origin;
+        $(".single-content p img").each(function(){
+          $(this).attr('src', origin + $(this).attr('src'));
+        });
+    </script>
     <script type='text/javascript' src='{% fullstatic "dashboard/js/comments-ajax-qt.js" %}'></script>
     <!-- 分享更多 -->
     <script type='text/javascript' src="{% fullstatic 'dashboard/js/bd-share.js' %}"></script>

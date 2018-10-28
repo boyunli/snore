@@ -17,7 +17,7 @@ class Comment(models.Model):
     qq = models.CharField(_('QQ'), max_length=20)
     parent_comment = models.ForeignKey('self', verbose_name="上级评论", blank=True, null=True, on_delete=models.CASCADE)
     content = models.TextField(_('正文'), max_length=500)
-    is_enable = models.BooleanField(_('是否显示'), default=True, choices=BOOLEAN_CHOICES)
+    is_enable = models.BooleanField(_('是否显示'), default=False, choices=BOOLEAN_CHOICES)
     create_time = models.DateTimeField(_('创建时间'), default=now)
     update_time = models.DateTimeField(_('更新时间'), default=now)
 

@@ -53,16 +53,7 @@ class Category(BaseModel):
         (True, '是'),
     )
 
-    NEWS = '打鼾产品'
-    ACADEMY = '打鼾2'
-    CHUANGYE = '打鼾3'
-    CATEGORY_CHOICES = (
-        (NEWS, NEWS),
-        (ACADEMY, ACADEMY),
-        (CHUANGYE, CHUANGYE),
-    )
-    name = models.CharField(_('类别'), choices=CATEGORY_CHOICES, default=NEWS,
-                                max_length=20, unique=True)
+    name = models.CharField(_('类别'), max_length=20, unique=True)
     sequence = models.IntegerField(_('排序'), unique=True, help_text=_('数字从小到大排列分类位置.'))
     is_link = models.BooleanField(_('是否外链'), choices=LINK_CHOICES, default=False)
     link = models.URLField(_('链接'), help_text=_('若设置外链，请提供链接!'), null=True, blank=True)
@@ -74,7 +65,7 @@ class Category(BaseModel):
     class Meta:
         ordering = ['sequence']
         db_table = 'dashboard_category'
-        verbose_name = verbose_name_plural = _('类别')
+        verbose_name = verbose_name_plural = _('栏目分类')
 
     def get_absolute_url(self):
         return reverse('dashboard:category', kwargs={'category': self.slug})
@@ -139,15 +130,15 @@ class Article(models.Model):
     category = models.ForeignKey(Category, verbose_name='类别', on_delete=models.CASCADE)
     content = RichTextUploadingField(_('内容'), config_name='default', null=True, blank=True)
     ad_image = models.ImageField(_('广告图'),
-                              help_text=(_('注：广告轮播图尺寸为:宽800*长300; 普通广告图尺寸为：宽280*长210')),
+                              help_text=(_('注：广告轮播图尺寸为:宽780*长370; 普通广告图尺寸为：宽280*长210')),
                               upload_to=datetime.datetime.now().strftime('article/ad/%Y/%m/%d'), null=True, blank=True)
     image = models.ImageField(_('首图'),
                               upload_to=datetime.datetime.now().strftime('article/%Y/%m/%d'), null=True, blank=True)
     tags = models.ManyToManyField(Tag, verbose_name='标签', blank=True)
     views = models.PositiveIntegerField(_('阅读量'), default=0)
     ad_property = models.IntegerField(_('广告属性'), choices=POSITION_CHOICES, default=POSITION0)
-    is_product = models.BooleanField(_('Is Product'), choices=BOOLEAN_CHOICES, default=False)
-    link = models.URLField(_('外链'), help_text=_('若设置了产品页，请提供链接!'), null=True, blank=True)
+    is_product = models.BooleanField(_('是否外链'), choices=BOOLEAN_CHOICES, default=False)
+    link = models.URLField(_('外链'), help_text=_('若设置成外链，请提供链接!'), null=True, blank=True)
 
     is_broadcast = models.BooleanField(_('是否广播'), choices=BOOLEAN_CHOICES, default=False)
     is_published = models.BooleanField(_('是否发布'), choices=BOOLEAN_CHOICES, default=False)
@@ -165,7 +156,7 @@ class Article(models.Model):
     class Meta:
         ordering = ['-update_time']
         db_table = 'dashboard_article'
-        verbose_name = verbose_name_plural = '文章'
+        verbose_name = verbose_name_plural = '文章列表'
 
 
     def clean(self):

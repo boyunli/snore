@@ -201,6 +201,8 @@ class Article(models.Model):
     def _resize_img(self, image, is_ad=False):
         image_path = BytesIO(image.read())
         img = Img.open(image_path)
+        if img.mode != 'RGB':
+            img = img.convert('RGB')
         if is_ad:
             # 除了大的轮播广告图片为800*300， 其他分类展示图片大小为 宽/长 = 280/210
             if self.ad_property == self.POSITION1:

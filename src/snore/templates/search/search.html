@@ -1,5 +1,4 @@
 ﻿{% load dashboard_extras %}
-{% load highlight %}
 {% load fullurl %}
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -8,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Cache-Control" content="no-transform">
     <meta http-equiv="Cache-Control" content="no-siteapp">
-    <title>搜索结果 - 趣果网|品牌营销新媒体。</title>
+    <title>搜索结果 - {{ settings.head_title }}|{{ settings.head_desc }}</title>
     <link rel="shortcut icon" href="{% fullstatic 'dashboard/images/favicon.jpg' %}">
     <link rel="apple-touch-icon" sizes="114x114" href="{% fullstatic 'dashboard/images/favicon.jpg' %}" />
 
@@ -33,60 +32,54 @@
 		</nav>
 
         <div id="content" class="site-content">
-            {% if query %}
-            <section id="primary" class="content-area">
-                <main id="main" class="site-main" role="main">
-                    <ul class="search-page">
-                        {% for result in page.object_list %}
-                            <li class="search-inf">{{ result.object.update_time }}</li>
-                            <li class="entry-title"><a href="{% buildfullurl result.object.get_absolute_url %}" rel="bookmark">{% highlight result.object.title with query %}</a></li>
-                        {% empty %}
-                            <section class="no-results not-found">
+            {% if articles %}
+                <section id="primary" class="content-area">
+                    <main id="main" class="site-main" role="main">
+                        <ul class="search-page">
+                            {% for result in articles %}
+                                <li class="search-inf">{{ result.update_time }}</li>
+                                <li class="entry-title"><a href="{% buildfullurl result.get_absolute_url %}" rel="bookmark">{% highlight_query result.title query %}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </main><!-- .site-main -->
 
-                                <div class="post">
-
-
-                                    <header class="entry-header">
-                                        <h1 class="page-title">没有您要找的文章！</h1>
-                                    </header><!-- .page-header -->
-
-                                    <p>可以尝试使用下面的搜索功能，查找您喜欢的文章！</p>
-                                    <div class="searchbar">
-                                        <form method="get" id="searchform" action="{% fullurl 'haystack_search' %}">
-                                            <span class="search-input">
-                                                <input type="text" value="{{ query }}" name="q" id="s" placeholder="输入搜索内容" required="True">
-                                                <button type="submit" id="searchsubmit"><i class="be be-search"></i></button>
-                                            </span>
-                                        </form>
-                                    </div> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-                                </div><!-- .page-content -->
-                            </section>
-                            <!-- .no-results -->
-                        {% endfor %}
-                    </ul>
-
-                </main><!-- .site-main -->
-
-                <nav class="navigation pagination" role="navigation">
-                    <h2 class="screen-reader-text">文章导航</h2>
-                    <div class="nav-links">
-                        {% if page.has_previous %}
-                            <a class="prev page-numbers" href="?q={{ query }}&amp;page={{ page.previous_page_number }}"><i class="be be-arrowleft"></i></a>
-                        {% endif %}
-                        {% for p in page.paginator.page_range %}
-                            {% ifequal p page.number %}
-                                <span aria-current="page" class="page-numbers current"><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></span>
-                            {% else %}
-                                <a class="page-numbers" href="?q={{ query }}&amp;page={{ p }}"><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></a>
-                            {% endifequal %}
-                        {% endfor %}
-                        {% if page.has_next %}
-                            <a class="next page-numbers" href="?q={{ query }}&amp;page={{ page.next_page_number }}"><i class="be be-arrowright"></i></a>
-                        {% endif %}
-                     </div>
-                </nav>
-            </section><!-- .content-area -->
+                    <nav class="navigation pagination" role="navigation">
+                        <h2 class="screen-reader-text">文章导航</h2>
+                        <div class="nav-links">
+                            {% if articles.has_previous %}
+                                <a class="prev page-numbers" href="?q={{ query }}&amp;page={{ articles.previous_page_number }}"><i class="be be-arrowleft"></i></a>
+                            {% endif %}
+                            {% for p in page_range %}
+                                {% ifequal p articles.number %}
+                                    <span aria-current="page" class="page-numbers current"><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></span>
+                                {% else %}
+                                    <a class="page-numbers" href="?q={{ query }}&amp;page={{ p }}"><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></a>
+                                {% endifequal %}
+                            {% endfor %}
+                            {% if articles.has_next %}
+                                <a class="next page-numbers" href="?q={{ query }}&amp;page={{ articles.next_page_number }}"><i class="be be-arrowright"></i></a>
+                            {% endif %}
+                         </div>
+                    </nav>
+                </section><!-- .content-area -->
+            {% else %}
+                <section class="no-results not-found">
+                    <div class="post">
+                        <header class="entry-header">
+                            <h1 class="page-title">没有您要找的文章！</h1>
+                        </header><!-- .page-header -->
+                        <p>可以尝试使用下面的搜索功能，查找您喜欢的文章！</p>
+                        <div class="searchbar">
+                            <form method="get" id="searchform" action="{% fullurl 'dashboard:search' %}">
+                                <span class="search-input">
+                                    <input type="text" value="{{ query }}" name="q" id="s" placeholder="输入搜索内容" required="True">
+                                    <button type="submit" id="searchsubmit"><i class="be be-search"></i></button>
+                                </span>
+                            </form>
+                        </div> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    </div><!-- .page-content -->
+                </section>
+                <!-- .no-results -->
             {% endif %}
 
 

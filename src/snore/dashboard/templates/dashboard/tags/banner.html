@@ -49,7 +49,7 @@
 
 <div id="search-main">
     <div class="searchbar">
-        <form method="get" id="searchform" action="{% fullurl 'haystack_search' %}">
+        <form method="get" id="searchform" action="{% fullurl 'dashboard:search' %}">
             <span class="search-input">
                 <input type="text" value="" name="q" id="s" placeholder="输入搜索内容" required />
                 <button type="submit" id="searchsubmit"><i class="be be-search"></i></button>

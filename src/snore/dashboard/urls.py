@@ -10,4 +10,6 @@ urlpatterns = [
     path(r'tag/<slug:tag>.html', views.TagDetailView.as_view(), name='tag'),
     path(r'article/<int:article_id>.html',
          views.ArticleDetailView.as_view(), name='article'),
+    path(r'search/', views.SearchView.as_view(), name='search'),
+
 ]

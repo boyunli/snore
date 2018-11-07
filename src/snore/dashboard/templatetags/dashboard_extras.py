@@ -2,15 +2,13 @@ from django import template
 
 from dashboard.models import Category, Article, Tag
 from dashboard.views import settings
+from django.utils.html import format_html
 
 register = template.Library()
 
-@register.filter
-def change_color(value):
-    if value%2 == 0:
-        return True
-    else:
-        return False
+@register.simple_tag
+def highlight_query(title, query):
+    return format_html(title.replace(query,'<span class="highlighted">{}</span>'), query)
 
 @register.filter
 def display_humantime(value):

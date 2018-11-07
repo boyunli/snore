@@ -9,7 +9,7 @@ from comments.forms import CommentForm
 
 settings = SiteSettings.load()
 
-def paging(page, items, display_amount=15,
+def paging(page, items, display_amount=1,
             after_range_num=5, bevor_range_num=4):
     paginator = Paginator(items, display_amount)
     try:
@@ -23,6 +23,25 @@ def paging(page, items, display_amount=15,
     else:
         page_range = paginator.page_range[0:page+bevor_range_num]
     return items, page_range
+
+
+class SearchView(TemplateView):
+    template_class = 'search/search.html'
+
+    def get(self, request):
+        query = request.GET.get('q')
+        articles = Article.published.filter(Q(title__icontains=query))
+
+        page = int(self.request.GET.get('page', 1))
+        particles, page_range = paging(page, articles)
+        context = {
+            'articles': particles,
+            'page_range': page_range,
+            "query": query,
+            'settings': settings,
+
+        }
+        return render(request, self.template_class, context)
 
 
 class IndexView(TemplateView):

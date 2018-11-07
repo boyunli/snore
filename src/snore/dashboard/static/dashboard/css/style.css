@@ -10648,3 +10648,8 @@ li.search-inf {
 }
 #commentform textarea {background-image:url(../images/foot.png);background-repeat:no-repeat;background-position:center;
 }
+
+span.highlighted {
+  color: red;
+}
+

@@ -22,7 +22,7 @@ class CategoryAdmin(admin.ModelAdmin):
     fieldsets = (
         ('base info', {'fields': ['name', 'slug', 'icon', 'is_link',
                                   'link', 'sequence']}),
-        ("Content", {'fields':['head_desc', 'head_title', 'head_keywords']})
+        ("Content", {'fields':['head_title', 'head_desc', 'head_keywords']})
     )
 
     def href(self, obj):
@@ -43,7 +43,7 @@ class ArticleAdmin(admin.ModelAdmin):
                    'is_product', 'is_broadcast')
 
     fieldsets = (
-        ('base info', {'fields': ['title', 'category', 'ad_image',
+        ('base info', {'fields': ['title', 'category',
                                   'image', 'ad_property',
                                   'is_broadcast', 'is_product',
                                   'link']}),
@@ -81,11 +81,16 @@ class TagAdmin(admin.ModelAdmin):
     exclude = ('create_time', 'update_time')
     list_display = ('name', 'slug')
 
+    fieldsets = (
+        ('base info', {'fields': ['name', 'slug']}),
+        ("Content", {'fields':['head_title', 'head_desc', 'head_keywords']})
+    )
+
 
 @admin.register(Link)
 class LinksAdmin(admin.ModelAdmin):
-    exclude = ('slug', 'create_time', 'update_time')
-    list_display = ('name', 'url')
+    list_display = ('name', 'url', 'sequence')
+    list_editable = ['sequence']
 
 
 @admin.register(SiteSettings)

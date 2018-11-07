@@ -53,10 +53,22 @@
              <article id="post-{{ article.id }}" class="wow fadeInUp post-{{ article.id }} post type-post status-publish format-standard hentry category-xinlingshou tag-{{ article.id }} ghi" data-wow-delay="0.3s">
                  <figure class="thumbnail">
                      <a href="{{ article.id }}"><img src="{% buildfullurl article.image.url %}" alt="{{ article.title }}" /></a>
-                     <span class="cat"><a href="{% buildfullurl article.get_absolute_url %}">{{ article.category.name }}</a></span>
+                     <span class="cat">
+                         {% if article.is_product %}
+                             <a href="{{ article.link }}" rel="external nofollow" target="_blank">{{ article.category.name }}</a>
+                         {% else %}
+                             <a href="{% buildfullurl article.get_absolute_url %}">{{ article.category.name }}</a>
+                         {% endif %}
+                     </span>
                  </figure>
                  <header class="entry-header">
-                     <h2 class="entry-title"><a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">{{ article.title }}</a></h2>
+                     <h2 class="entry-title">
+                         {% if article.is_product %}
+                            <a href="{{ article.link }}" rel="bookmark" target="_blank">{{ article.title }}</a>
+                         {% else %}
+                            <a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">{{ article.title }}</a>
+                         {% endif %}
+                     </h2>
                  </header><!-- .entry-header -->
                  <div class="entry-content">
                      <div class="archive-content">{{ article.content|striptags|slice:'120'|safe }}... </div>
@@ -68,14 +80,20 @@
                      </span>
                      <div class="clear"></div>
                  </div><!-- .entry-content -->
-                 <span class="entry-more"><a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">阅读全文</a></span>
+                 <span class="entry-more">
+                    {% if article.is_product %}
+                        <a href="{{ article.link }}" rel="bookmark" target="_blank">阅读全文</a>
+                    {% else %}
+                        <a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">阅读全文</a>
+                    {% endif %}
+                 </span>
              </article><!-- #post -->
              {% if forloop.counter == 2 %}
                 {% if ad_column %}
                     <div class="wow fadeInUp" data-wow-delay="0.3s">
                         <div class="ad-pc ad-site">
                              <a href="{{ ad_column.link }}" rel=”nofollow” target="_blank" rel="bookmark">
-                                 <img src="{% buildfullurl ad_column.image_url %}" alt="{{ ad_column.title }}" />
+                                 <img src="{% buildfullurl ad_column.image.url %}" alt="{{ ad_column.title }}" />
                              </a>
                         </div>
                     </div>

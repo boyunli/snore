@@ -129,16 +129,14 @@ class Article(models.Model):
     title = models.CharField(max_length=150, verbose_name='标题', unique=True)
     category = models.ForeignKey(Category, verbose_name='类别', on_delete=models.CASCADE)
     content = RichTextUploadingField(_('内容'), config_name='default', null=True, blank=True)
-    ad_image = models.ImageField(_('广告图'),
-                              help_text=(_('注：广告轮播图尺寸为:宽780*长370; 普通广告图尺寸为：宽280*长210')),
-                              upload_to=datetime.datetime.now().strftime('article/ad/%Y/%m/%d'), null=True, blank=True)
-    image = models.ImageField(_('首图'),
-                              upload_to=datetime.datetime.now().strftime('article/%Y/%m/%d'), null=True, blank=True)
+    image = models.ImageField(_('广告图'),
+                              help_text=(_('注：首页轮播图尺寸为:宽780*长370;广告栏图片尺寸为:宽728*长90; 其他图片尺寸为：宽280*长210')),
+                              upload_to=datetime.datetime.now().strftime('article/ad/%Y/%m/%d'))
     tags = models.ManyToManyField(Tag, verbose_name='标签', blank=True)
     views = models.PositiveIntegerField(_('阅读量'), default=0)
     ad_property = models.IntegerField(_('广告属性'), choices=POSITION_CHOICES, default=POSITION0)
-    is_product = models.BooleanField(_('是否外链'), choices=BOOLEAN_CHOICES, default=False)
-    link = models.URLField(_('外链'), help_text=_('若设置成外链，请提供链接!'), null=True, blank=True)
+    is_product = models.BooleanField(_('是否产品'), choices=BOOLEAN_CHOICES, default=False)
+    link = models.URLField(_('外链'), help_text=_('若设置成产品，请提供外链!'), null=True, blank=True)
 
     is_broadcast = models.BooleanField(_('是否广播'), choices=BOOLEAN_CHOICES, default=False)
     is_published = models.BooleanField(_('是否发布'), choices=BOOLEAN_CHOICES, default=False)
@@ -148,7 +146,6 @@ class Article(models.Model):
     objects = models.Manager()
     published = PublishedManager()
     __original_image = None
-    __original_ad_image = None
 
     def __str__(self):
         return "{}".format(self.title)
@@ -167,13 +164,6 @@ class Article(models.Model):
     def __init__(self, *args, **kwargs):
         super(Article, self).__init__(*args, **kwargs)
         self.__original_image = self.image
-        self.__original_ad_image = self.ad_image
-
-    def image_url(self):
-        if self.ad_image:
-            return self.ad_image.url
-        else:
-            return self.image.url
 
     def get_absolute_url(self):
         return reverse('dashboard:article', kwargs={
@@ -198,47 +188,37 @@ class Article(models.Model):
             cache.set(cache_key, comments)
         return comments
 
-    def _resize_img(self, image, is_ad=False):
+    def _resize_img(self, image):
         image_path = BytesIO(image.read())
         img = Img.open(image_path)
         if img.mode != 'RGB':
             img = img.convert('RGB')
-        if is_ad:
-            # 除了大的轮播广告图片为800*300， 其他分类展示图片大小为 宽/长 = 280/210
-            if self.ad_property == self.POSITION1:
-                img = ImageOps.fit(img, (800,300), Img.ANTIALIAS)
-            elif self.ad_property in (self.POSITION2, self.POSITION3):
-                img = ImageOps.fit(img, (728,90), Img.ANTIALIAS)
-            else:
-                img = ImageOps.fit(img, (280,210), Img.ANTIALIAS)
-            output= BytesIO()
-            img.save(output, format='JPEG', optimize=True, quality=70)
-            self.ad_image= InMemoryUploadedFile(output, 'ImageField', image.name,
-                                             'image/jpeg', output.getbuffer().nbytes, None)
+
+        if self.ad_property == self.POSITION1:
+            img = ImageOps.fit(img, (800,300), Img.ANTIALIAS)
+        elif self.ad_property in (self.POSITION2, self.POSITION3):
+            img = ImageOps.fit(img, (728,90), Img.ANTIALIAS)
         else:
             img = ImageOps.fit(img, (280,210), Img.ANTIALIAS)
-            output= BytesIO()
-            img.save(output, format='JPEG', optimize=True, quality=70)
-            self.image= InMemoryUploadedFile(output, 'ImageField', image.name,
+        output= BytesIO()
+        img.save(output, format='JPEG', optimize=True, quality=70)
+        self.image= InMemoryUploadedFile(output, 'ImageField', image.name,
                                              'image/jpeg', output.getbuffer().nbytes, None)
-            # 因为重写图片时会重新生成一张图片，所以删除原图以节约磁盘
-            image_path = os.path.join(MEDIA_ROOT, image.name)
-            if os.path.exists(image_path):
-                os.remove(image_path)
+        # 因为重写图片时会重新生成一张图片，所以删除原图以节约磁盘
+        image_path = os.path.join(MEDIA_ROOT, image.name)
+        if os.path.exists(image_path):
+            os.remove(image_path)
 
     def save(self, is_update_views=False, *args,  **kwargs):
         # import pdb;pdb.set_trace()
         if not is_update_views:
-            if self.ad_image and self.ad_image != self.__original_ad_image:
-                self._resize_img(self.ad_image, is_ad=True)
-                self.__original_ad_image = self.ad_image
             if self.image and self.image != self.__original_image:
                 self._resize_img(self.image)
                 self.__original_image = self.image
         super(Article, self).save(*args, **kwargs)
 
 
-class Link(BaseModel):
+class Link(models.Model):
     '''
     友情链接
     '''

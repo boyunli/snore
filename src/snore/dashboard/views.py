@@ -30,12 +30,12 @@ class IndexView(TemplateView):
 
     def get(self, request):
         ads = Article.published.filter(~Q(ad_property=0))
-        articles = Article.published.filter(ad_property=0, is_product=False)
+        articles = Article.published.exclude(ad_property__in=[2,3])
 
         page = int(request.GET.get('page', 1))
         particles, page_range = paging(page, articles)
 
-        ad_column =  Article.published.filter(ad_property=2)
+        ad_column = ads.filter(ad_property=2)
         context = {
             'settings': settings,
             'bd_articles': Article.published.filter(is_broadcast=True),
@@ -80,9 +80,7 @@ class ArticleDetailView(DetailView):
 class ArticleListView(ListView):
     template_name = 'dashboard/category.html'
     context_object_name = 'articles'
-
-    # 页面类型，分类目录或标签列表等
-    page_type = ''
+    page_type = None
 
     def get_queryset(self):
         articles = self.get_queryset_data()
@@ -90,6 +88,13 @@ class ArticleListView(ListView):
 
     def get_context_data(self, **kwargs):
         kwargs['tag_name'] = self.name
+        if self.page_type == 'category':
+            item = Category.objects.get(name=self.name)
+        elif self.page_type == 'tag':
+            item = Tag.objects.get(name=self.name)
+        kwargs['head_title'] = item.head_title
+        kwargs['head_desc'] = item.head_desc
+        kwargs['head_keywords'] = item.head_keywords
 
         ad_column =  Article.published.filter(ad_property=3)
         if ad_column:
@@ -103,41 +108,25 @@ class ArticleListView(ListView):
 
 
 class ArchiveView(ArticleListView):
-    page_type = '帖文分类归档'
+    page_type = 'category'
 
     def get_queryset_data(self):
         slug = self.kwargs['category']
         category = get_object_or_404(Category, slug=slug)
         self.name = category.name
-        articles = Article.published.filter(category__name=category.name)
+        articles = Article.published.filter(category__name=category.name)\
+            .exclude(ad_property__in=[2,3])
         return articles
-
-    def get_context_data(self, **kwargs):
-        kwargs['page_type'] = ArchiveView.page_type
-
-        category = Category.objects.get(name=self.name)
-        kwargs['head_title'] = category.head_title
-        kwargs['head_desc'] = category.head_desc
-        kwargs['head_keywords'] = category.head_keywords
-        return super(ArchiveView, self).get_context_data(**kwargs)
 
 
 class TagDetailView(ArticleListView):
-    page_type = '标签归档'
+    page_type = 'tag'
 
     def get_queryset_data(self):
         slug = self.kwargs['tag']
         tag = get_object_or_404(Tag, slug=slug)
         self.name = tag.name
-        article_list = Article.published.filter(tags__name=tag.name, ad_property=0)
-        return article_list
-
-    def get_context_data(self, **kwargs):
-        kwargs['page_type'] = TagDetailView.page_type
-
-        tag = Tag.objects.get(name=self.name)
-        kwargs['head_title'] = tag.head_title
-        kwargs['head_desc'] = tag.head_desc
-        kwargs['head_keywords'] = tag.head_keywords,
-        return super(TagDetailView, self).get_context_data(**kwargs)
+        articles = Article.published.filter(tags__name=tag.name)\
+            .exclude(ad_property__in=[2,3])
+        return articles
 

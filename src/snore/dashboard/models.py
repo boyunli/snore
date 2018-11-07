@@ -128,7 +128,7 @@ class Article(models.Model):
     )
     title = models.CharField(max_length=150, verbose_name='标题', unique=True)
     category = models.ForeignKey(Category, verbose_name='类别', on_delete=models.CASCADE)
-    content = RichTextUploadingField(_('内容'), config_name='default', null=True, blank=True)
+    content = RichTextUploadingField(_('内容'), config_name='default')
     image = models.ImageField(_('广告图'),
                               help_text=(_('注：首页轮播图尺寸为:宽780*长370;广告栏图片尺寸为:宽728*长90; 其他图片尺寸为：宽280*长210')),
                               upload_to=datetime.datetime.now().strftime('article/ad/%Y/%m/%d'))

@@ -49,7 +49,7 @@ class IndexView(TemplateView):
 
     def get(self, request):
         ads = Article.published.filter(~Q(ad_property=0))
-        articles = Article.published.exclude(ad_property__in=[2,3])
+        articles = Article.published.exclude(ad_property__in=[1,2,3])
 
         page = int(request.GET.get('page', 1))
         particles, page_range = paging(page, articles)
@@ -134,7 +134,7 @@ class ArchiveView(ArticleListView):
         category = get_object_or_404(Category, slug=slug)
         self.name = category.name
         articles = Article.published.filter(category__name=category.name)\
-            .exclude(ad_property__in=[2,3])
+            .exclude(ad_property__in=[1,2,3])
         return articles
 
 
@@ -146,6 +146,6 @@ class TagDetailView(ArticleListView):
         tag = get_object_or_404(Tag, slug=slug)
         self.name = tag.name
         articles = Article.published.filter(tags__name=tag.name)\
-            .exclude(ad_property__in=[2,3])
+            .exclude(ad_property__in=[1,2,3])
         return articles
 

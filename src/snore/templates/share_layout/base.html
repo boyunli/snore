@@ -10,10 +10,8 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     {% block header %}
     {% endblock %}
-    {% if settings.favicon %}
-        <link rel="shortcut icon" href="{% buildfullurl settings.favicon.url %}">
-        <link rel="apple-touch-icon" sizes="114x114" href="{% buildfullurl settings.favicon.url %}" />
-    {% endif %}
+    <link rel="shortcut icon" href="{% buildfullurl settings.favicon.url %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% buildfullurl settings.favicon.url %}" />
     <!--[if lt IE 9]>
     <script src="fullstatic/js/html5_1.js"></script>
     <script src="fullstatic/js/css3-mediaqueries_1.js"></script>

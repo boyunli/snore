@@ -276,7 +276,19 @@ class SiteSettings(models.Model):
     @classmethod
     def load(cls):
         if cache.get(cls.__name__) is None:
-            obj, created = cls.objects.get_or_create(pk=1)
+            obj, created = cls.objects\
+                .get_or_create(pk=1,
+                               defaults={
+                                   'sitename': '测试',
+                                   'head_title': '测试',
+                                   'site_code': 'ceshi.jpg',
+                                   'favicon': 'ceshi.jpg',
+                                   'portrait': 'ceshi.jpg',
+                                   'qq_bar_code': 'ceshi.jpg',
+                                   'wechat_code': 'ceshi.jpg',
+                                   'wechat_pay_code': 'ceshi.jpg',
+                                   'alipay_code': 'ceshi.jpg',
+                               })
             if not created:
                 obj.set_cache()
         return cache.get(cls.__name__)

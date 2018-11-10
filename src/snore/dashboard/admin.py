@@ -6,6 +6,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 
 from snore.settings import MEDIA_ROOT
+from snore.utils import add_watermark
 from .models import Category, Article, Tag, Link, SiteSettings
 from .views import settings
 
@@ -68,6 +69,7 @@ class ArticleAdmin(admin.ModelAdmin):
                     os.remove(thumb)
                     img.thumbnail((img.width/1.5, img.height/1.5), Img.ANTIALIAS)
                     img.save(image_path, format='JPEG', optimize=True, quality=70)
+                    add_watermark(image_path, image_path)
         super(ArticleAdmin, self).save_model(request, obj, form, change)
 
     def preview(self, obj):

@@ -35,13 +35,13 @@
                      {% if ad.link  %}
                          <li>
                              <a href="{{ ad.link }}" rel=”nofollow” target="_blank" rel="bookmark">
-                                 <img src="{% buildfullurl ad.image_url %}" alt="{{ ad.title }}" />
+                                 <img src="{% buildfullurl ad.image.url %}" alt="{{ ad.title }}" />
                              </a>
                              <p class="slider-caption">{{ ad.title }}</p>
                          </li>
                      {% else %}
                          <li>
-                             <a href="{% buildfullurl ad.get_absolute_url %}" rel="bookmark"><img src="{% buildfullurl ad.image_url %}" alt="{{ ad.title }}" /></a>
+                             <a href="{% buildfullurl ad.get_absolute_url %}" rel="bookmark"><img src="{% buildfullurl ad.image.url %}" alt="{{ ad.title }}" /></a>
                              <p class="slider-caption">{{ ad.title }}</p>
                          </li>
                      {% endif %}
@@ -52,7 +52,13 @@
              {% for article in articles %}
              <article id="post-{{ article.id }}" class="wow fadeInUp post-{{ article.id }} post type-post status-publish format-standard hentry category-xinlingshou tag-{{ article.id }} ghi" data-wow-delay="0.3s">
                  <figure class="thumbnail">
-                     <a href="{{ article.id }}"><img src="{% buildfullurl article.image.url %}" alt="{{ article.title }}" /></a>
+                     {% if article.is_product %}
+                         <a href="{{ article.link }}" rel="external nofollow" target="_blank">
+                             <img src="{% buildfullurl article.image.url %}" alt="{{ article.title }}" />
+                         </a>
+                     {% else %}
+                         <a href="{{ article.id }}"><img src="{% buildfullurl article.image.url %}" alt="{{ article.title }}" /></a>
+                     {% endif %}
                      <span class="cat">
                          {% if article.is_product %}
                              <a href="{{ article.link }}" rel="external nofollow" target="_blank">{{ article.category.name }}</a>
@@ -64,7 +70,7 @@
                  <header class="entry-header">
                      <h2 class="entry-title">
                          {% if article.is_product %}
-                            <a href="{{ article.link }}" rel="bookmark" target="_blank">{{ article.title }}</a>
+                            <a href="{{ article.link }}" rel="bookmark external nofollow" target="_blank">{{ article.title }}</a>
                          {% else %}
                             <a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">{{ article.title }}</a>
                          {% endif %}
@@ -82,7 +88,7 @@
                  </div><!-- .entry-content -->
                  <span class="entry-more">
                     {% if article.is_product %}
-                        <a href="{{ article.link }}" rel="bookmark" target="_blank">阅读全文</a>
+                        <a href="{{ article.link }}" rel="bookmark external nofollow" target="_blank">阅读全文</a>
                     {% else %}
                         <a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">阅读全文</a>
                     {% endif %}

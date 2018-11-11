@@ -35,11 +35,13 @@
 	              </figure>
 
                 <header class="entry-header">
-                    {% if article.is_product %}
-                       <a href="{{ article.link }}" rel="bookmark" target="_blank">{{ article.title }}</a>
-                    {% else %}
-                       <a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">{{ article.title }}</a>
-                    {% endif %}
+                    <h2 class="entry-title">
+                        {% if article.is_product %}
+                           <a href="{{ article.link }}" rel="bookmark" target="_blank">{{ article.title }}</a>
+                        {% else %}
+                           <a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">{{ article.title }}</a>
+                        {% endif %}
+                    </h2>
                 </header><!-- .entry-header -->
 
                 <div class="entry-content">

@@ -59,17 +59,18 @@ class ArticleAdmin(admin.ModelAdmin):
             for image in images:
                 image_path = os.path.join(MEDIA_ROOT, image.split('/media/')[1])
                 thumb = '_thumb.'.join(image_path.split('.'))
-                if not os.path.exists(thumb):
+                if os.path.exists(thumb):
+                    os.remove(thumb)
+                    if os.path.getsize(image_path) > 300*1024:
+                        img = Img.open(image_path)
+                        if img.mode != 'RGB':
+                            img = img.convert('RGB')
+                        img.thumbnail((img.width/1.5, img.height/1.5), Img.ANTIALIAS)
+                        img.save(image_path, format='JPEG', optimize=True, quality=70)
+                    add_watermark(image_path, image_path)
+                else:
                     # 不进行重复 crop
                     continue
-                else:
-                    img = Img.open(image_path)
-                    if img.mode != 'RGB':
-                        img = img.convert('RGB')
-                    os.remove(thumb)
-                    img.thumbnail((img.width/1.5, img.height/1.5), Img.ANTIALIAS)
-                    img.save(image_path, format='JPEG', optimize=True, quality=70)
-                    add_watermark(image_path, image_path)
         super(ArticleAdmin, self).save_model(request, obj, form, change)
 
     def preview(self, obj):

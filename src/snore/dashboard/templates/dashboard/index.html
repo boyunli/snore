@@ -57,7 +57,7 @@
                              <img src="{% buildfullurl article.image.url %}" alt="{{ article.title }}" />
                          </a>
                      {% else %}
-                         <a href="{{ article.id }}"><img src="{% buildfullurl article.image.url %}" alt="{{ article.title }}" /></a>
+                         <a href="{% buildfullurl article.get_absolute_url %}"><img src="{% buildfullurl article.image.url %}" alt="{{ article.title }}" /></a>
                      {% endif %}
                      <span class="cat">
                          {% if article.is_product %}

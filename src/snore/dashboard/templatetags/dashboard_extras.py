@@ -8,7 +8,8 @@ register = template.Library()
 
 @register.simple_tag
 def highlight_query(title, query):
-    return format_html(title.replace(query,'<span class="highlighted">{}</span>'), query)
+    title = title.replace(query, '<span class="highlighted">{query}</span>')
+    return format_html(title, query=query)
 
 @register.filter
 def display_humantime(value):

@@ -8,8 +8,8 @@
     <meta http-equiv="Cache-Control" content="no-transform">
     <meta http-equiv="Cache-Control" content="no-siteapp">
     <title>搜索结果 - {{ settings.sitename }}|{{ settings.head_title }}</title>
-    <link rel="shortcut icon" href="{% fullstatic 'dashboard/images/favicon.jpg' %}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{% fullstatic 'dashboard/images/favicon.jpg' %}" />
+    <link rel="shortcut icon" href="{% buildfullurl settings.favicon.url %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% buildfullurl settings.favicon.url %}" />
 
     <link rel='stylesheet' id='bbp-default-css'  href="{% fullstatic 'dashboard/css/bbpress.css' %}" type='text/css' media='screen' />
     <link rel='stylesheet' id='BEEPRESSIMAGECSS-css' href="{% fullstatic 'dashboard/css/beepress-image.css' %}" type='text/css' media='screen' />

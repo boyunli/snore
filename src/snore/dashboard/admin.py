@@ -57,7 +57,10 @@ class ArticleAdmin(admin.ModelAdmin):
         if 'content' in form.changed_data:
             images = re.findall(r'src="(.*?)"', obj.content)
             for image in images:
-                image_path = os.path.join(MEDIA_ROOT, image.split('/media/')[1])
+                try:
+                    image_path = os.path.join(MEDIA_ROOT, image.split('/media/')[1])
+                except IndexError:
+                    continue
                 thumb = '_thumb.'.join(image_path.split('.'))
                 if os.path.exists(thumb):
                     os.remove(thumb)

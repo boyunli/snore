@@ -10653,3 +10653,17 @@ span.highlighted {
   color: red;
 }
 
+/** youku video **/
+.lxtx-video {
+    position:relative;
+    padding-bottom:56.25%;
+    height:0;
+    overflow:hidden;
+}
+.lxtx-video iframe,.lxtx-video object,.lxtx-video embed {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}

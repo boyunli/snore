@@ -97,8 +97,6 @@
                         {% endifequal %}
                     {% endfor %}
                     {% if articles.has_next %}
-                        <span class="page-numbers dots">…</span>
-                        <a class="page-numbers" href="?page={{ articles.paginator.num_pages}}"><span class="screen-reader-text">第 </span>{{ articles.paginator.num_pages}}<span class="screen-reader-text"> 页</span></a>
                         <a class="next page-numbers" href="?page={{ articles.next_page_number }}"><i class="be be-arrowright"></i></a>
                     {% endif %}
                 </div>

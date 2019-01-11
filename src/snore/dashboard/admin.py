@@ -36,13 +36,14 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    exclude = ('create_time', 'update_time')
-    list_display = ('title', 'category', 'ad_property',
-                    'is_product', 'link', 'is_published', 'preview')
+    list_display = ('id', 'stitle', 'category', 'ad_property',
+                    'is_published', 'update_time')
     list_editable = ['ad_property', 'is_published']
     list_filter = ('is_published', 'update_time', 'category',
                    'is_product', 'is_broadcast')
+    list_per_page = 20
 
+    exclude = ('create_time', 'update_time')
     fieldsets = (
         ('base info', {'fields': ['title', 'category',
                                   'image', 'ad_property',
@@ -51,6 +52,11 @@ class ArticleAdmin(admin.ModelAdmin):
         ("Content", {'fields':['content', 'tags']})
     )
     filter_horizontal=('tags',)
+
+    def stitle(self, obj):
+        return format_html('<a href="{}" target="_blank">{}</a>',
+                               obj.get_absolute_url(), obj.title)
+    stitle.short_description = '标题'
 
     def save_model(self, request, obj, form, change):
         # import pdb;pdb.set_trace()
@@ -75,11 +81,6 @@ class ArticleAdmin(admin.ModelAdmin):
                     # 不进行重复 crop
                     continue
         super(ArticleAdmin, self).save_model(request, obj, form, change)
-
-    def preview(self, obj):
-        return format_html('<a href="{}" target="_blank">{}</a>',
-                               obj.get_absolute_url(), obj.pk)
-    preview.short_description = "预览"
 
 
 @admin.register(Tag)

@@ -14,4 +14,6 @@ def add_watermark(input_image_path, output_image_path):
     w_width, w_height = watermark.size
 
     base_image.paste(watermark, (width-w_width, height-w_height), watermark)
+    if base_image.mode != 'RGB':
+        base_image = base_image.convert('RGB')
     base_image.save(output_image_path)

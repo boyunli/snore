@@ -39,7 +39,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display = ('id', 'stitle', 'category', 'ad_property',
                     'is_published', 'update_time')
     list_editable = ['ad_property', 'is_published']
-    list_filter = ('is_published', 'update_time', 'category',
+    list_filter = ('is_published', 'ad_property', 'update_time', 'category',
                    'is_product', 'is_broadcast')
     list_per_page = 20
 

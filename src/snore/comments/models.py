@@ -14,7 +14,7 @@ class Comment(models.Model):
 
     article = models.ForeignKey(Article, verbose_name='文章', on_delete=models.CASCADE)
     username = models.CharField(_('用户'), max_length=20)
-    qq = models.CharField(_('QQ'), max_length=20)
+    qq = models.CharField(_('微信'), max_length=20)
     parent_comment = models.ForeignKey('self', verbose_name="上级评论", blank=True, null=True, on_delete=models.CASCADE)
     content = models.TextField(_('正文'), max_length=500)
     is_enable = models.BooleanField(_('是否显示'), default=False, choices=BOOLEAN_CHOICES)

@@ -23,13 +23,13 @@ class CategoryAdmin(admin.ModelAdmin):
     fieldsets = (
         ('base info', {'fields': ['name', 'slug', 'icon', 'is_link',
                                   'link', 'sequence']}),
-        ("Content", {'fields':['head_title', 'head_desc', 'head_keywords']})
+        ("Content", {'fields': ['head_title', 'head_desc', 'head_keywords']})
     )
 
     def href(self, obj):
         if obj.link:
             return format_html('<a href="{}" target="_blank">{}</a>',
-                                   obj.link, obj.link)
+                               obj.link, obj.link)
         return obj.link
     href.short_description = '链接'
 
@@ -90,7 +90,7 @@ class TagAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('base info', {'fields': ['name', 'slug']}),
-        ("Content", {'fields':['head_title', 'head_desc', 'head_keywords']})
+        ("Content", {'fields': ['head_title', 'head_desc', 'head_keywords']})
     )
 
 

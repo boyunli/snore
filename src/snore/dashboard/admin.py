@@ -41,6 +41,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_editable = ['ad_property', 'is_published']
     list_filter = ('is_published', 'ad_property', 'update_time', 'category',
                    'is_product', 'is_broadcast')
+    search_fields = ('title',)
     list_per_page = 20
 
     exclude = ('create_time', 'update_time')

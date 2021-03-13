@@ -3,7 +3,11 @@
 {% load fullurl %}
 
 {% block header %}
-    <title>{{ settings.head_title}}-{{ settings.sitename }}</title>
+   {% ifequal page 1 %}
+       <title>{{ settings.head_title}}-{{ settings.sitename }}</title>
+   {% else %}
+       <title>{{ settings.head_title}}-第{{ page}}页|{{ settings.sitename }}</title>
+   {% endifequal %}
     <meta name="description" content="{{ settings.head_desc }}" />
     <meta name="keywords" content="{{ settings.head_keywords }}" />
 {% endblock %}

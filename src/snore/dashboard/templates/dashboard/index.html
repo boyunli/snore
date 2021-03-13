@@ -110,13 +110,21 @@
              <h2 class="screen-reader-text">文章导航</h2>
              <div class="nav-links">
                  {% if articles.has_previous %}
-                 <a class="prev page-numbers" href="{% fullurl 'dashboard:index'%}?page={{ articles.previous_page_number }}"><i class="be be-arrowleft"></i></a>
+                    {% ifequal articles.previous_page_number 1 %}
+                        <a class="prev page-numbers" href="{% fullurl 'dashboard:index'%}"><i class="be be-arrowleft"></i></a>
+                    {% else %}
+                        <a class="prev page-numbers" href="{% fullurl 'dashboard:index'%}?page={{ articles.previous_page_number }}"><i class="be be-arrowleft"></i></a>
+                    {% endifequal %}
                  {% endif %}
                  {% for p in page_range %}
                      {% ifequal p articles.number %}
-                         <span aria-current='page' class='page-numbers current'><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></span>
+                            <span aria-current='page' class='page-numbers current'><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></span>
                      {% else %}
-                         <a class="page-numbers" href="{% fullurl 'dashboard:index'%}?page={{ p }}"><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></a>
+                        {% ifequal p 1 %}
+                             <a class="page-numbers" href="{% fullurl 'dashboard:index'%}"><span class="screen-reader-text">第 </span>1<span class="screen-reader-text"> 页</span></a>
+                        {% else %}
+                             <a class="page-numbers" href="{% fullurl 'dashboard:index'%}?page={{ p }}"><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></a>
+                        {% endifequal %}
                      {% endifequal %}
                  {% endfor %}
                  {% if articles.has_next %}

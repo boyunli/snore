@@ -1,9 +1,11 @@
+{% spaceless %}
 {% load static %}
 {% load dashboard_extras %}
 {% load cache %}
 {% load fullurl %}
 {% load compress %}
 <!DOCTYPE html>
+{% endspaceless %}
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -57,11 +59,6 @@
         {% cache 3600 footer %}
             {% load_footer %}
         {% endcache %}
-        <!--
-        {% cache 3600 scroll %}
-            {% load_scroll %}
-        {% endcache %}
-        -->
     </div><!-- .site -->
     {% compress js %}
     <script type='text/javascript' src="{% static 'dashboard/js/jquery.min.js' %}"></script>

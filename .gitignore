@@ -111,3 +111,4 @@ whoosh_index/
 django_cache/
 CACHE/
 src/snore/static/
+*.ini

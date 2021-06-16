@@ -49,7 +49,7 @@ class IndexView(TemplateView):
 
     def get(self, request):
         ads = Article.published.filter(~Q(ad_property=0))
-        articles = Article.published.exclude(ad_property__in=[1,2,3])
+        articles = Article.published.exclude(ad_property__in=[1, 2, 3])
 
         page = int(request.GET.get('page', 1))
         particles, page_range = paging(page, articles)
@@ -63,6 +63,7 @@ class IndexView(TemplateView):
             'page_range': page_range,
             'ad_column': ad_column[0] if ad_column else None,
             'links': Link.objects.values('url', 'name'),
+            'page': page,
         }
         return render(request, self.template_class, context)
 
@@ -88,7 +89,7 @@ class ArticleDetailView(DetailView):
         kwargs['articles'] = Article.published.filter(ad_property=5)[:4]
 
         aprev = Article.published.filter(id__lt=self.object.id, is_product=False).order_by('-id')
-        kwargs['prev_article'] = aprev[0]  if aprev else ''
+        kwargs['prev_article'] = aprev[0] if aprev else ''
         anext = Article.published.filter(id__gt=self.object.id, is_product=False).order_by('id')
         kwargs['next_article'] = anext[0] if anext else ''
 
@@ -115,14 +116,15 @@ class ArticleListView(ListView):
         kwargs['head_desc'] = item.head_desc
         kwargs['head_keywords'] = item.head_keywords
 
-        ad_column =  Article.published.filter(ad_property=3)
+        ad_column = Article.published.filter(ad_property=3)
         if ad_column:
             kwargs['ad_column'] = ad_column[0]
         page = int(self.request.GET.get('page', 1))
         particles, page_range = paging(page, self.object_list)
-        kwargs['articles'] =  particles
-        kwargs['page_range'] =  page_range
+        kwargs['articles'] = particles
+        kwargs['page_range'] = page_range
         kwargs['settings'] = settings
+        kwargs['page'] = page
         return super(ArticleListView, self).get_context_data(**kwargs)
 
 

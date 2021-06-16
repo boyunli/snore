@@ -39,9 +39,6 @@
                     <li class="comment"><a href="{% buildfullurl article.get_absolute_url %}#comments" rel="external nofollow"><i class="be be-speechbubble"></i> 发表评论</a></li>
                     <li class="r-hide"><a href="#"><span class="off-side"></span></a></li>
                 </ul>
-                <ul id="fontsize">
-                    <li>A+</li>
-                </ul>
                 <div class="single-cat-tag">
                     <div class="single-cat">所属分类：<a href="{% buildfullurl article.category.get_absolute_url %}" rel="category tag">{{ article.category.name }}</a></div>
                 </div>
@@ -59,28 +56,12 @@
                         </span>
                         <div class="shang-p">
                             <div class="shang-empty"><span></span></div>
-                            <span class="tipso_style" id="tip-p" data-tipso="
-              				<span id=&quot;shang&quot;>
-              					<span class=&quot;shang-main&quot;>
-              						<h4><i class=&quot;be be-favorite&quot; aria-hidden=&quot;true&quot;></i> 您可以选择一种方式赞助本站</h4>															<span class=&quot;shang-img&quot;>
-                                        <img src=&quot;{% buildfullurl settings.alipay_code.url %}&quot; alt=&quot;alipay&quot;/>
-              					    <h4>支付宝扫一扫赞助</h4>
-                                    </span>
-
-              					<span class=&quot;shang-img&quot;>
-                                        <img src=&quot;{% buildfullurl settings.wechat_pay_code.url %}&quot; alt=&quot;weixin&quot;/>
-              						<h4>微信钱包扫描赞助</h4>
-                                    </span>
-
-                                    <span class=&quot;clear&quot;></span>
-              				</span>
-              				</span>">
                                 <span class="shang-s"><a title="赞助本站">赏</a></span>
                             </span>
                         </div>
                         <div class="share-sd">
                             <span class="share-s"><a href="javascript:void(0)" id="share-s" title="分享"><i class="be be-share"></i>分享</a></span>
-                            <div id="share" style="display: none;">
+<!--                             <div id="share" style="display: none;">
                                 <ul class="bdsharebuttonbox bdshare-button-style1-16" data-bd-bind="1532001266207">
                                     <li><a title="更多" class="bds_more be be-addbox" data-cmd="more" onclick="return false;" href="#"></a></li>
                                     <li><a title="分享到QQ空间" class="be be-qzone" data-cmd="qzone" onclick="return false;" href="#"></a></li>
@@ -89,7 +70,7 @@
                                     <li><a title="分享到人人网" class="be be-renren" data-cmd="renren" onclick="return false;" href="#"></a></li>
                                     <li><a title="分享到微信" class="be be-weixin" data-cmd="weixin" onclick="return false;" href="#"></a></li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="clear"></div>
                     </div>
@@ -160,9 +141,10 @@
         <div class="scroll-comments"></div>
 
         <div id="comments" class="comments-area">
-        {% cache 86400 comment %}
+
             {% include 'comments/comments.html' %}
-        {% endcache %}
+
+        </div>
         <!-- #comments -->
 
     </main><!-- .site-main -->

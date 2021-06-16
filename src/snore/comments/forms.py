@@ -11,7 +11,7 @@ class CommentForm(ModelForm):
         model = Comment
         fields = ['content', 'username', 'qq']
         widgets = {
-            'content': forms.Textarea(attrs={'rows': "4",  'tabindex': '1','name': 'comment', 'id': 'comment'}),
-            'username': forms.TextInput(attrs={'tabindex': '2','name': 'author', 'id': 'author', 'class': 'commenttext'}),
-            'qq': forms.TextInput(attrs={'tabindex': '3','name': 'qq', 'id': 'qq', 'class': 'commenttext'})
+            'content': forms.Textarea(attrs={'rows': "4",  'tabindex': '1', 'name': 'comment', 'id': 'comment'}),
+            'username': forms.TextInput(attrs={'tabindex': '2', 'name': 'author', 'id': 'author', 'class': 'commenttext'}),
+            'qq': forms.TextInput(attrs={'tabindex': '3', 'name': 'qq', 'id': 'qq', 'class': 'commenttext'})
         }

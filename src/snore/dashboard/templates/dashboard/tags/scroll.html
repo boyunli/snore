@@ -1,18 +1,24 @@
+        <!--
+        {% cache 3600 scroll %}
+            {% load_scroll %}
+        {% endcache %}
+        -->
+
 {% load fullurl %}
 <ul id="scroll">
     <li><a class="scroll-h" title="返回顶部"><i class="be be-arrowup"></i></a></li>
     <li><a class="scroll-b" title="转到底部"><i class="be be-arrowdown"></i></a></li>
     <li class="gb2-site"><a id="gb2big5" href="javascript:StranBody()" title="繁體"><span>繁</span></a></li>
-    <li class="phone-mobile"><a target="_blank" rel="external nofollow" href="tel:18520613361" title="18520613361"><i class="be be-phone"></i></a></li>
+    <li class="phone-mobile"><a target="_blank" rel="external nofollow" href="tel:{{ settings.phone }}" title="{{settings.phone}}"><i class="be be-phone"></i></a></li>
     <li class="qqonline">
-        <div class="online"><a href="javascript:void(0)"><i class="be be-qq"></i></a></div>
+        <div class="online"><a href="javascript:void(0)"><i class="be be-weixin"></i></a></div>
         <div class="qqonline-box" style="display: none;">
             <div class="qqonline-main">
                 <div class="nline-wiexin">
                     <h4>微信</h4>
                     <img title="微信" alt="微信" src="{% buildfullurl settings.wechat_code.url %}">
                 </div>
-                <div class="nline-qq"><a target="blank" href="http://wpa.qq.com/msgrd?V=3&amp;uin={{ settings.qq }}&amp;Site=QQ&amp;Menu=yes"><i class="be be-qq"></i>业务咨询</a></div>
+                <div class="nline-qq"><a target="blank" href="http://wpa.qq.com/msgrd?V=3&amp;uin={{ settings.qq }}&amp;Site=QQ&amp;Menu=yes"><i class="be be-qq"></i>腕表交流</a></div>
             </div>
             <span class="qq-arrow"></span>
         </div>

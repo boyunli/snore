@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
+from django.views.generic import TemplateView
 
 from snore.sitemap import StaticViewSitemap, ArticleSiteMap, \
     CategorySiteMap, TagSiteMap
@@ -32,6 +33,8 @@ urlpatterns = [
     path(r'ckeditor/', include('ckeditor_uploader.urls')),
     path(r'', include('dashboard.urls', namespace='dashboard')),
     path('', include('comments.urls', namespace='comments')),
+    path('tencent15876767698187748468.txt', TemplateView.as_view(
+        template_name='tencent15876767698187748468.txt', content_type="text/plain")),
     path(r'sitemap.xml', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
 ]

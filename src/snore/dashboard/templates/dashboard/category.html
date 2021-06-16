@@ -3,7 +3,11 @@
 {% load fullurl %}
 
 {% block header %}
-    <title> {{ head_title }}-{{ settings.sitename }}</title>
+   {% ifequal page 1 %}
+      <title> {{ head_title }}-{{ settings.sitename }}</title>
+   {% else %}
+      <title> {{ head_title }}-第{{ page}}页|{{ settings.sitename }}</title>
+   {% endifequal %}
     <meta name="description" content="{{ head_desc }}" />
     <meta name="keywords" content="{{ head_keywords }}" />
 {% endblock %}
@@ -87,18 +91,24 @@
                 <h2 class="screen-reader-text">文章导航</h2>
                 <div class="nav-links">
                     {% if articles.has_previous %}
-                    <a class="prev page-numbers" href="?page={{ articles.previous_page_number }}"><i class="be be-arrowleft"></i></a>
+                        {% ifequal articles.previous_page_number 1 %}
+                            <a class="prev page-numbers" href="{% buildfullurl category.get_absolute_url %}"><i class="be be-arrowleft"></i></a>
+                        {% else %}
+                            <a class="prev page-numbers" href="?page={{ articles.previous_page_number }}"><i class="be be-arrowleft"></i></a>
+                        {% endifequal %}
                     {% endif %}
                     {% for p in page_range %}
                         {% ifequal p articles.number %}
                             <span aria-current='page' class='page-numbers current'><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></span>
                         {% else %}
-                            <a class="page-numbers" href="?page={{ p }}"><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></a>
+                            {% ifequal p 1 %}
+                                 <a class="page-numbers" href="{% buildfullurl category.get_absolute_url %}"><span class="screen-reader-text">第 </span>1<span class="screen-reader-text"> 页</span></a>
+                            {% else %}
+                                <a class="page-numbers" href="?page={{ p }}"><span class="screen-reader-text">第 </span>{{ p }}<span class="screen-reader-text"> 页</span></a>
+                            {% endifequal %}
                         {% endifequal %}
                     {% endfor %}
                     {% if articles.has_next %}
-                        <span class="page-numbers dots">…</span>
-                        <a class="page-numbers" href="?page={{ articles.paginator.num_pages}}"><span class="screen-reader-text">第 </span>{{ articles.paginator.num_pages}}<span class="screen-reader-text"> 页</span></a>
                         <a class="next page-numbers" href="?page={{ articles.next_page_number }}"><i class="be be-arrowright"></i></a>
                     {% endif %}
                 </div>

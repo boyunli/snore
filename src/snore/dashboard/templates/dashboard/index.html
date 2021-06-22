@@ -19,7 +19,7 @@
             <div class="scrolltext">
                 <ul>
                     {% for article in bd_articles %}
-    	              	  <li class="scrolltext-title"><a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">{{ article.title }}</a></li>
+                    <li class="scrolltext-title"><a title="{{ article.title }}" href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">{{ article.title }}</a></li>
                     {% endfor %}
                 </ul>
             </div>
@@ -38,14 +38,14 @@
                  {% for ad in ad_left_up_round %}
                      {% if ad.link  %}
                          <li>
-                             <a href="{{ ad.link }}" rel=”nofollow” target="_blank" rel="bookmark">
+                             <a  title="{{ ad.title }}" href="{{ ad.link }}" rel=”nofollow” target="_blank" rel="bookmark">
                                  <img src="{% buildfullurl ad.image.url %}" alt="{{ ad.title }}" />
                              </a>
                              <p class="slider-caption">{{ ad.title }}</p>
                          </li>
                      {% else %}
                          <li>
-                             <a href="{% buildfullurl ad.get_absolute_url %}" rel="bookmark"><img src="{% buildfullurl ad.image.url %}" alt="{{ ad.title }}" /></a>
+                             <a title="{{ ad.title }}"  href="{% buildfullurl ad.get_absolute_url %}" rel="bookmark"><img src="{% buildfullurl ad.image.url %}" alt="{{ ad.title }}" /></a>
                              <p class="slider-caption">{{ ad.title }}</p>
                          </li>
                      {% endif %}
@@ -57,11 +57,11 @@
              <article id="post-{{ article.id }}" class="wow fadeInUp post-{{ article.id }} post type-post status-publish format-standard hentry category-xinlingshou tag-{{ article.id }} ghi" data-wow-delay="0.3s">
                  <figure class="thumbnail">
                      {% if article.is_product %}
-                         <a href="{{ article.link }}" rel="external nofollow" target="_blank">
+                         <a title="{{ article.title }}" href="{{ article.link }}" rel="external nofollow" target="_blank">
                              <img src="{% buildfullurl article.image.url %}" alt="{{ article.title }}" />
                          </a>
                      {% else %}
-                         <a href="{% buildfullurl article.get_absolute_url %}"><img src="{% buildfullurl article.image.url %}" alt="{{ article.title }}" /></a>
+                         <a title="{{ article.title }}" href="{% buildfullurl article.get_absolute_url %}"><img src="{% buildfullurl article.image.url %}" alt="{{ article.title }}" /></a>
                      {% endif %}
                      <span class="cat">
                          {% if article.is_product %}
@@ -74,9 +74,9 @@
                  <header class="entry-header">
                      <h2 class="entry-title">
                          {% if article.is_product %}
-                            <a href="{{ article.link }}" rel="bookmark external nofollow" target="_blank">{{ article.title }}</a>
+                            <a title="{{ article.title }}" href="{{ article.link }}" rel="bookmark external nofollow" target="_blank">{{ article.title }}</a>
                          {% else %}
-                            <a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">{{ article.title }}</a>
+                            <a title="{{ article.title }}" href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">{{ article.title }}</a>
                          {% endif %}
                      </h2>
                  </header><!-- .entry-header -->
@@ -91,9 +91,9 @@
                  </div><!-- .entry-content -->
                  <span class="entry-more">
                     {% if article.is_product %}
-                        <a href="{{ article.link }}" rel="bookmark external nofollow" target="_blank">阅读全文</a>
+                        <a title="{{ article.title }}" href="{{ article.link }}" rel="bookmark external nofollow" target="_blank">阅读全文</a>
                     {% else %}
-                        <a href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">阅读全文</a>
+                        <a title="{{ article.title }}" href="{% buildfullurl article.get_absolute_url %}" rel="bookmark">阅读全文</a>
                     {% endif %}
                  </span>
              </article><!-- #post -->

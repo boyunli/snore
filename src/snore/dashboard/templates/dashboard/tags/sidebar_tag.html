@@ -7,11 +7,11 @@
       <span class="title-i-b"></span>
       <span class="title-i-t"></span>
     </span>热门标签
-  </h3>	
+  </h3>
   <div id="tag_cloud_widget">
     {% for tag in sidebar_tags %}
-    <a href="{% buildfullurl tag.get_absolute_url %}" class="tag-cloud-link tag-link-{{ tag.id }} tag-link-position-{{ tag.id }}" style="font-size: 14px; left: 111.667px; top: 176.889px; z-index: 167; opacity: 3.1546;">{{ tag.name }}</a>
+        <a href="{% buildfullurl tag.get_absolute_url %}" class="tag-cloud-link tag-link-{{ tag.id }} tag-link-position-{{ tag.id }}" style="font-size: 14px; left: 111.667px; top: 176.889px; z-index: 167; opacity: 3.1546;">{{ tag.name }}</a>
     {% endfor %}
-	</div>
+  </div>
   <div class="clear"></div>
 </aside>

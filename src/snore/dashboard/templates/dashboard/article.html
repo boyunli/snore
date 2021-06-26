@@ -40,7 +40,11 @@
                     <li class="r-hide"><a href="#"><span class="off-side"></span></a></li>
                 </ul>
                 <div class="single-cat-tag">
-                    <div class="single-cat">所属分类：<a href="{% buildfullurl article.category.get_absolute_url %}" rel="category tag">{{ article.category.name }}</a></div>
+                    <div class="single-cat">
+                        所属分类:<a href="{% buildfullurl article.category.get_absolute_url %}" rel="category tag">{{ article.category.name }}</a>
+                        <i class="be be-schedule"></i>
+                        {{ article.update_time | date:'Y-m-d'}}
+                    </div>
                 </div>
                 <div class="single-content">
                     {{ article.content|safe }}

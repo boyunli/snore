@@ -90,7 +90,8 @@ class TagAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('base info', {'fields': ['name', 'slug']}),
-        ("Content", {'fields': ['head_title', 'head_desc', 'head_keywords']})
+        ("Content", {'fields': ['head_title', 'head_desc', 'head_keywords',
+                                'title', 'intro']})
     )
 
 

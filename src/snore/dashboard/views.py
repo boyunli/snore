@@ -109,10 +109,17 @@ class ArticleListView(ListView):
 
     def get_context_data(self, **kwargs):
         kwargs['tag_name'] = self.name
+        kwargs['has_intro'] = False
         if self.page_type == 'category':
             item = Category.objects.get(name=self.name)
         elif self.page_type == 'tag':
             item = Tag.objects.get(name=self.name)
+            if item.title != 'null':
+                kwargs['has_intro'] = True
+                kwargs['tag_title'] = item.title
+                kwargs['tag_intro'] = item.intro
+                kwargs['tag_date'] = item.update_time
+                kwargs['tag_count'] = item.article_set.count()
         kwargs['head_title'] = item.head_title
         kwargs['head_desc'] = item.head_desc
         kwargs['head_keywords'] = item.head_keywords

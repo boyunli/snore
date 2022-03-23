@@ -79,6 +79,8 @@ class Category(BaseModel):
 class Tag(BaseModel):
     """文章标签"""
     name = models.CharField('标签名', max_length=30, unique=True)
+    title = models.CharField(max_length=150, default='null', verbose_name='标题')
+    intro = RichTextUploadingField(_('简介'), default='null', config_name='default')
 
     def __str__(self):
         return self.name
@@ -155,7 +157,6 @@ class Article(models.Model):
         db_table = 'dashboard_article'
         verbose_name = verbose_name_plural = '文章列表'
 
-
     def clean(self):
         if self.is_product and not self.link:
             raise ValidationError('If is_product is True, Must provide link!')
@@ -195,15 +196,15 @@ class Article(models.Model):
             img = img.convert('RGB')
 
         if self.ad_property == self.POSITION1:
-            img = ImageOps.fit(img, (800,300), Img.ANTIALIAS)
+            img = ImageOps.fit(img, (800, 300), Img.ANTIALIAS)
         elif self.ad_property in (self.POSITION2, self.POSITION3):
-            img = ImageOps.fit(img, (728,90), Img.ANTIALIAS)
+            img = ImageOps.fit(img, (728, 90), Img.ANTIALIAS)
         else:
-            img = ImageOps.fit(img, (280,210), Img.ANTIALIAS)
-        output= BytesIO()
+            img = ImageOps.fit(img, (280, 210), Img.ANTIALIAS)
+        output = BytesIO()
         img.save(output, format='JPEG', optimize=True, quality=70)
-        self.image= InMemoryUploadedFile(output, 'ImageField', image.name,
-                                             'image/jpeg', output.getbuffer().nbytes, None)
+        self.image = InMemoryUploadedFile(output, 'ImageField', image.name,
+                                          'image/jpeg', output.getbuffer().nbytes, None)
         # 因为重写图片时会重新生成一张图片，所以删除原图以节约磁盘
         image_path = os.path.join(MEDIA_ROOT, image.name)
         if os.path.exists(image_path):

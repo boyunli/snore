@@ -22,8 +22,30 @@
 
 
 {% block primary %}
+
     <section id="primary" class="content-area">
         <main id="main" class="site-main" role="main">
+
+            {% if has_intro %}
+            <article id="post-13150" data-aos="fade-up" class="post bk da post-13150 page type-page status-publish hentry yepp">
+                <header class="entry-header">
+                    <h1 class="entry-title">{{ tag_title }}</h1>
+                </header><!-- .entry-header -->
+                <div class="entry-content">
+                    <div class="single-content">
+                        {{ tag_intro|safe }}
+                    </div>
+                    <div class="clear"></div>
+                </div><!-- .entry-content -->
+                <footer class="page-meta-zt" style="float: right">
+                    <div class="single-meta-zt begin-single-meta">
+                        <span class="my-date">{{ tag_date|date:"Y年m月d日" }}</span>
+                        <span><i class="be be-stack ri"></i>{{ tag_count }} 篇</span>
+                    </div>
+                </footer><!-- .entry-footer -->
+                <div class="clear"></div>
+            </article>
+            {% endif %}
 
             {% for article in articles %}
             <article id="post-{{ article.id }}" class="wow fadeInUp post-{{ article.id }} post type-post status-publish format-standard hentry category-news ghi" data-wow-delay="0.3s">

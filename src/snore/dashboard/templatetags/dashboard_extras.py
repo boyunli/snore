@@ -6,14 +6,17 @@ from django.utils.html import format_html
 
 register = template.Library()
 
+
 @register.simple_tag
 def highlight_query(title, query):
     title = title.replace(query, '<span class="highlighted">{query}</span>')
     return format_html(title, query=query)
 
+
 @register.filter
 def display_humantime(value):
     return value.strftime('%m-%d')
+
 
 @register.inclusion_tag('dashboard/tags/banner.html')
 def load_banner():
@@ -25,6 +28,7 @@ def load_banner():
         'settings': settings
     }
 
+
 @register.inclusion_tag('dashboard/tags/sidebar_tag.html')
 def load_sidebar_tag():
     '''
@@ -35,14 +39,27 @@ def load_sidebar_tag():
         'sidebar_tags': tags,
     }
 
+
+@register.inclusion_tag('dashboard/tags/sidebar_website_intro.html')
+def load_sidebar_website_intro():
+    '''
+    加载首页侧边栏 网站介绍
+    '''
+    return {
+        'site_intro_image': settings.site_intro_image,
+        'site_intro': settings.site_intro,
+    }
+
+
 @register.inclusion_tag('dashboard/tags/sidebar_hot.html')
 def load_sidebar_hot():
     '''
     加载首页侧边栏 热门文章
     '''
     return {
-        'hot_articles': Article.published.filter(ad_property=0).order_by('-views')[:10],
+        'hot_articles': Article.published.filter(ad_property=0).order_by('-views')[:5],
     }
+
 
 @register.inclusion_tag('dashboard/tags/sidebar_best_recomm.html')
 def load_sidebar_best_recomm():
@@ -52,6 +69,7 @@ def load_sidebar_best_recomm():
     return {
         'best_articles': Article.published.filter(ad_property=4)[:10]
     }
+
 
 @register.inclusion_tag('dashboard/tags/footer.html')
 def load_footer():
@@ -64,6 +82,7 @@ def load_footer():
         'settings': settings
     }
 
+
 @register.inclusion_tag('dashboard/tags/scroll.html')
 def load_scroll():
     '''
@@ -72,6 +91,7 @@ def load_scroll():
     return {
         'settings': settings
     }
+
 
 @register.simple_tag
 def query(qs, **kwargs):

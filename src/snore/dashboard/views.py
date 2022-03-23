@@ -9,8 +9,9 @@ from comments.forms import CommentForm
 
 settings = SiteSettings.load()
 
+
 def paging(page, items, display_amount=15,
-            after_range_num=5, bevor_range_num=4):
+           after_range_num=5, bevor_range_num=4):
     paginator = Paginator(items, display_amount)
     try:
         items = paginator.page(page)

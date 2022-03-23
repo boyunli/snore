@@ -48,11 +48,10 @@ class ArticleAdmin(admin.ModelAdmin):
     fieldsets = (
         ('base info', {'fields': ['title', 'category',
                                   'image', 'ad_property',
-                                  'is_broadcast', 'is_product',
-                                  'link']}),
-        ("Content", {'fields':['content', 'tags']})
+                                  'is_broadcast']}),
+        ("Content", {'fields': ['content', 'tags']})
     )
-    filter_horizontal=('tags',)
+    filter_horizontal = ('tags',)
 
     def stitle(self, obj):
         return format_html('<a href="{}" target="_blank">{}</a>',

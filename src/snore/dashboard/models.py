@@ -243,9 +243,12 @@ class SiteSettings(models.Model):
     head_title = models.TextField(_("首页标题"))
     head_desc = models.TextField(_("首页描述"))
     head_keywords = models.TextField(_("首页关键字"))
+
     site_code = models.ImageField(_('网站图标'), upload_to='site/site', help_text=_('图片大小220*50'))
     favicon = models.ImageField(_('Favicon'), upload_to='site/favicon')
     portrait = models.ImageField(_('头像'), upload_to='site/portrait', help_text=_('图片大小35*35'))
+    site_intro = models.TextField(_("网站介绍"), null=True)
+    site_intro_image = models.ImageField(_('网站介绍图'), upload_to='site/intro', help_text=_('图片大小 220*269'))
 
     qq_bar_code = models.ImageField(_('QQ二维码'), upload_to='site/qq')
     wechat_code = models.ImageField(_('微信二维码'), upload_to='site/wechat')
@@ -284,6 +287,7 @@ class SiteSettings(models.Model):
                                    'site_code': 'ceshi.jpg',
                                    'favicon': 'ceshi.jpg',
                                    'portrait': 'ceshi.jpg',
+                                   'site_intro_image': 'ceshi.jpg',
                                    'qq_bar_code': 'ceshi.jpg',
                                    'wechat_code': 'ceshi.jpg',
                                    'wechat_pay_code': 'ceshi.jpg',

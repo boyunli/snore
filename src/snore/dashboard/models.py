@@ -36,7 +36,7 @@ class BaseModel(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug or self.slug == 'no-slug' or not self.id:
-            slug = self.title if 'title' in self.__dict__ else self.name
+            slug = self.name if 'name' in self.__dict__ else self.title
             self.slug = slugify(slug)
         super().save(*args, **kwargs)
 

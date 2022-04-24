@@ -35,12 +35,6 @@ urlpatterns = [
     path('', include('comments.urls', namespace='comments')),
     path('tencent15876767698187748468.txt', TemplateView.as_view(
         template_name='sogousiteverification.txt', content_type="text/plain")),
-    path('7eafcccfdf6f5d458ba95d4fdebf7366.txt', TemplateView.as_view(
-        template_name='7eafcccfdf6f5d458ba95d4fdebf7366.txt', content_type="text/plain")),
-    path('ByteDanceVerify.html', TemplateView.as_view(
-        template_name='ByteDanceVerify.html', content_type="text/plain")),
-    path('shenma-site-verification.txt', TemplateView.as_view(
-        template_name='shenma-site-verification.txt', content_type="text/plain")),
     path(r'sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
 ]

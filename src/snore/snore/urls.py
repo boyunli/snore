@@ -34,7 +34,9 @@ urlpatterns = [
     path(r'', include('dashboard.urls', namespace='dashboard')),
     path('', include('comments.urls', namespace='comments')),
     path('tencent15876767698187748468.txt', TemplateView.as_view(
-        template_name='tencent15876767698187748468.txt', content_type="text/plain")),
+        template_name='sogousiteverification.txt', content_type="text/plain")),
+    path('sogousiteverification.txt', TemplateView.as_view(
+        template_name='sogousiteverification.txt', content_type="text/plain")),
     path(r'sitemap.xml', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
 ]

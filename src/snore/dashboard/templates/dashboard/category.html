@@ -72,8 +72,9 @@
 
                 <div class="entry-content">
                     <div class="archive-content">{{ article.content|striptags|slice:'150'|safe }}... </div>
+                    <div class="clear"></div>
                     <span class="title-l"></span>
-                    <span class="entry-meta-no">
+                    <span class="entry-meta">
                         <span class="date"><i class="be be-calendar2"></i> {{ article.update_time|date:"m/j" }}</span>
                         <span class="format-cat"><i class="be be-folder"></i> 
                             <a href="{% buildfullurl article.tag.get_absolute_url %}">{{ tag_name }}</a>

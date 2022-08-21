@@ -33,6 +33,8 @@ urlpatterns = [
     path(r'ckeditor/', include('ckeditor_uploader.urls')),
     path(r'', include('dashboard.urls', namespace='dashboard')),
     path('', include('comments.urls', namespace='comments')),
+    path('renzheng_fwolcn.html', TemplateView.as_view(
+        template_name='renzheng_fwolcn.html', content_type="text/plain")),
     path('tencent15876767698187748468.txt', TemplateView.as_view(
         template_name='sogousiteverification.txt', content_type="text/plain")),
     path(r'sitemap.xml', sitemap, {'sitemaps': sitemaps},

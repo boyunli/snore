@@ -26,6 +26,10 @@ def paging(page, items, display_amount=15,
     return items, page_range
 
 
+def page_not_found(request, **kwargs):
+    return render(request, '404.html')
+
+
 class SearchView(TemplateView):
     template_class = 'search/search.html'
 

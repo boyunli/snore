@@ -1,0 +1,74 @@
+{% extends 'share_layout/base.html' %}
+{% load dashboard_extras %}
+{% load fullurl %}
+
+{% block header %}
+   {% ifequal page 1 %}
+      <title> {{ head_title }}-{{ settings.sitename }}</title>
+   {% else %}
+      <title> {{ head_title }}-第{{ page}}页|{{ settings.sitename }}</title>
+   {% endifequal %}
+    <meta name="description" content="{{ head_desc }}" />
+    <meta name="keywords" content="{{ head_keywords }}" />
+{% endblock %}
+
+{% block breadcrumb %}
+    <nav class="breadcrumb">
+        <a class="crumbs" href="{% fullurl 'dashboard:index' %}"><i class="be be-home"></i>首页</a>
+	    <i class="be be-arrowright"></i>404
+	</nav>
+{% endblock %}
+
+
+{% block primary %}
+<div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+        <section class="error-404 not-found page bk da">
+            <header class="entry-header">
+                <h1 class="page-title">亲，你迷路了！</h1>
+            </header><!-- .page-header -->
+            <div class="single-content" style="text-align: center;height: 100vh;">
+                <div style="text-align: center;">亲，该网页可能搬家了！<br>
+                </div>
+                <div style="text-align: center;margin: 30px 0;">
+                    <span>将于</span>
+                    <span id="sec-text">6</span>
+                    <span> 秒之后，返回腕尚名表首页。</span>
+                </div>
+                <script>
+                var t = 10;
+
+                function countDown() {
+                    t -= 1;
+                    document.getElementById('sec-text').innerHTML = t;
+                    if (t == 0) {location.href = '{% fullurl 'dashboard:index' %}';
+                    }
+                    setTimeout("countDown()", 1000);
+                }
+                countDown();
+                </script>
+                <!-- <div class="searchbar da">
+	<form method="get" id="searchform" action="https://blog.ysboke.cn/">
+		<span class="search-input">
+			<input type="text" value="" name="s" id="s" class="bk da" placeholder="输入搜索内容" required />
+			<button type="submit" id="searchsubmit" class="bk da"><i class="be be-search"></i></button>
+		</span>
+		<div class="clear"></div>
+	</form>
+</div> -->
+                <br><br><br><br><br><br><br><br><br>
+            </div>
+        </section>
+    </main>
+</div>
+
+
+{% endblock %}
+
+{% block sidebar %}
+    <div id="sidebar" class="widget-area all-sidebar">
+         {% load_sidebar_best_recomm %}
+         {% load_sidebar_tag %}
+    </div>
+{% endblock %}
+

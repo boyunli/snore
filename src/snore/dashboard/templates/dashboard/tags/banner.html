@@ -6,8 +6,8 @@
                 <div class="logo-site">
                     <div class="site-title">
                         <a href="{% fullurl 'dashboard:index' %}">
-                            <img src="{% buildfullurl settings.site_code.url %}" title="{{ settings.head_title }}|{{ settings.sitename }}" alt="{{ settings.head_title }}|{{ settings.sitename }}" rel="home" />
-                            <span class="site-name">{{ settings.sitename }}|{{ settings.head_title }}</span>
+                            <img src="{% buildfullurl settings.site_code.url %}" title="{{ settings.head_title }}-{{ settings.sitename }}" alt="{{ settings.head_title }}-{{ settings.sitename }}" rel="home" />
+                            <span class="site-name">{{ settings.head_title }}-{{ settings.sitename }}</span>
                         </a>
 				    </div>
                 </div><!-- .logo-site -->

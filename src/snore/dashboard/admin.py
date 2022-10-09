@@ -48,7 +48,7 @@ class ArticleAdmin(admin.ModelAdmin):
     fieldsets = (
         ('base info', {'fields': ['title', 'category',
                                   'image', 'ad_property',
-                                  'is_broadcast']}),
+                                  'is_home_display', 'is_broadcast']}),
         ("Content", {'fields': ['content', 'tags']})
     )
     filter_horizontal = ('tags',)

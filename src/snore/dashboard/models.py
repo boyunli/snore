@@ -137,6 +137,7 @@ class Article(models.Model):
     tags = models.ManyToManyField(Tag, verbose_name='标签', blank=True)
     views = models.PositiveIntegerField(_('阅读量'), default=0)
     ad_property = models.IntegerField(_('广告属性'), choices=POSITION_CHOICES, default=POSITION0)
+    is_home_display = models.BooleanField(_('首页展示'), choices=BOOLEAN_CHOICES, default=True)
     is_product = models.BooleanField(_('是否产品'), choices=BOOLEAN_CHOICES, default=False)
     link = models.URLField(_('外链'), help_text=_('若设置成产品，请提供外链!'), null=True, blank=True)
 

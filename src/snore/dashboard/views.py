@@ -54,7 +54,7 @@ class IndexView(TemplateView):
 
     def get(self, request):
         ads = Article.published.filter(~Q(ad_property=0))
-        articles = Article.published.exclude(ad_property__in=[1, 2, 3])
+        articles = Article.published.exclude(ad_property__in=[1, 2, 3]).filter(is_home_display=True)
 
         page = int(request.GET.get('page', 1))
         particles, page_range = paging(page, articles)

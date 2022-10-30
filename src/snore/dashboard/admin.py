@@ -55,7 +55,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
     def stitle(self, obj):
         return format_html('<a href="{}" target="_blank">{}</a>',
-                               obj.get_absolute_url(), obj.title)
+                           obj.get_absolute_url(), obj.title)
     stitle.short_description = '标题'
 
     def save_model(self, request, obj, form, change):
@@ -87,6 +87,7 @@ class ArticleAdmin(admin.ModelAdmin):
 class TagAdmin(admin.ModelAdmin):
     exclude = ('create_time', 'update_time')
     list_display = ('name', 'slug')
+    search_fields = ('name',)
     list_per_page = 20
 
     fieldsets = (

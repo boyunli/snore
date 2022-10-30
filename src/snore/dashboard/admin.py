@@ -87,6 +87,7 @@ class ArticleAdmin(admin.ModelAdmin):
 class TagAdmin(admin.ModelAdmin):
     exclude = ('create_time', 'update_time')
     list_display = ('name', 'slug')
+    list_per_page = 20
 
     fieldsets = (
         ('base info', {'fields': ['name', 'slug']}),

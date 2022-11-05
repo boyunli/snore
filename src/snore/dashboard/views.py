@@ -27,7 +27,7 @@ def paging(page, items, display_amount=15,
 
 
 def page_not_found(request, **kwargs):
-    return render(request, '404.html')
+    return render(request, 'share_layout/404.html', context={'settings': settings}, status=404)
 
 
 class SearchView(TemplateView):

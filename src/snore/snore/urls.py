@@ -35,6 +35,8 @@ urlpatterns = [
     path('', include('comments.urls', namespace='comments')),
     path('tencent15876767698187748468.txt', TemplateView.as_view(
         template_name='sogousiteverification.txt', content_type="text/plain")),
+    path('baidu_verify_codeva-Og9HFO7roE.html', TemplateView.as_view(
+        template_name='baidu_verify_codeva-Og9HFO7roE.html', content_type="text/plain")),
     path(r'sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
 ]
